@@ -1,0 +1,455 @@
+/* ═══════════════════════════════════════════════════════════════
+   SHARED TOKENS · Atelier + Terminal
+   Used by all 14 pages of Prashant Kashyap's portfolio.
+   Theme switching via [data-theme="terminal"] on <html>.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* DEFAULT — Atelier theme */
+:root {
+  /* Surfaces */
+  --plastic-cream: #FAF7F0;
+  --plastic-cream-deep: #F2EEE4;
+  --plastic-charcoal: #1A1814;
+
+  /* Text */
+  --ink-mid: #4A4640;
+  --ink-muted: #7A756D;
+  --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10);
+  --ink-rule: rgba(26, 24, 20, 0.06);
+
+  /* Accent */
+  --pixel-red: #E8513D;
+  --pixel-red-soft: rgba(232, 81, 61, 0.06);
+
+  /* Fonts */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing (unchanged between themes) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px; --s-12: 192px;
+
+  /* Scanline layer (invisible in Atelier) */
+  --scanline-opacity: 0;
+}
+
+/* TERMINAL theme — triggered by [data-theme="terminal"] on <html> */
+html[data-theme="terminal"] {
+  /* Surfaces — deep phosphor-tube black */
+  --plastic-cream: #0A0E0B;
+  --plastic-cream-deep: #12181A;
+  --plastic-charcoal: #C8E6D0;
+
+  /* Text — phosphor green family */
+  --ink-mid: #7FDBA8;
+  --ink-muted: #5A9873;
+  --ink-faint: #3E6651;
+  --ink-hairline: rgba(127, 219, 168, 0.15);
+  --ink-rule: rgba(127, 219, 168, 0.08);
+
+  /* Accent — terminal red */
+  --pixel-red: #FF5F5F;
+  --pixel-red-soft: rgba(255, 95, 95, 0.1);
+
+  /* Fonts — mono-first */
+  --font-display: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'JetBrains Mono', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* CRT scanline */
+  --scanline-opacity: 0.03;
+}
+
+/* THEME TRANSITION — smooth swap */
+html {
+  transition: background-color 0.4s ease;
+}
+
+html[data-theme="terminal"] body,
+html:not([data-theme="terminal"]) body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* CRT SCANLINE OVERLAY — only visible in Terminal theme */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, var(--scanline-opacity)) 0px,
+    rgba(0, 0, 0, var(--scanline-opacity)) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* Terminal theme — additional aesthetic tweaks */
+html[data-theme="terminal"] body {
+  text-shadow: 0 0 6px rgba(127, 219, 168, 0.15);
+}
+
+/* Terminal theme — accent text glow */
+html[data-theme="terminal"] [class*="breadcrumb-status"],
+html[data-theme="terminal"] [class*="status--active"]::before {
+  text-shadow: 0 0 12px rgba(255, 95, 95, 0.6);
+}
+
+/* Terminal theme — dashed borders get slightly warmer */
+html[data-theme="terminal"] .image-slot__frame,
+html[data-theme="terminal"] .photo-slot__frame,
+html[data-theme="terminal"] .before-after__frame,
+html[data-theme="terminal"] .draft-wrap {
+  border-color: rgba(127, 219, 168, 0.25);
+}
+
+html[data-theme="terminal"] .image-slot__frame::before,
+html[data-theme="terminal"] .photo-slot__frame::before,
+html[data-theme="terminal"] .photo-slot__frame::after {
+  background-image: linear-gradient(45deg, rgba(127, 219, 168, 0.15) 25%, transparent 25%, transparent 75%, rgba(127, 219, 168, 0.15) 75%, rgba(127, 219, 168, 0.15)),
+                    linear-gradient(45deg, rgba(127, 219, 168, 0.15) 25%, transparent 25%, transparent 75%, rgba(127, 219, 168, 0.15) 75%, rgba(127, 219, 168, 0.15));
+}
+
+/* Terminal theme — nav backdrop stays dark */
+html[data-theme="terminal"] .nav {
+  background: rgba(10, 14, 11, 0.85);
+}
+
+/* Terminal theme — dark CTAs invert (since they were already dark) */
+html[data-theme="terminal"] .deep-cta {
+  background: var(--plastic-cream-deep);
+  color: var(--ink-mid);
+  border: 1px solid var(--ink-hairline);
+}
+html[data-theme="terminal"] .deep-cta__title,
+html[data-theme="terminal"] .deep-cta__arrow {
+  color: var(--plastic-charcoal);
+}
+html[data-theme="terminal"] .deep-cta__label,
+html[data-theme="terminal"] .deep-cta__subtitle {
+  color: var(--ink-muted);
+}
+
+/* Terminal theme — header action buttons adjust */
+html[data-theme="terminal"] .header-btn--primary {
+  background: var(--pixel-red);
+  color: var(--plastic-cream);
+  border-color: var(--pixel-red);
+}
+
+/* Terminal theme — pulsing dots glow */
+html[data-theme="terminal"] .meta-cell__value--status::before,
+html[data-theme="terminal"] .status-label__dot--active {
+  box-shadow: 0 0 8px rgba(255, 95, 95, 0.6);
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { transition: none; }
+  body, html[data-theme="terminal"] body { transition: none; }
+  body::before { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME TOGGLE BUTTON — blinking cursor on locked state
+   ═══════════════════════════════════════════════════════════════ */
+.theme-toggle__blink {
+  color: var(--pixel-red);
+  display: inline-block;
+  animation: terminal-blink 1.1s step-end infinite;
+  font-family: var(--font-mono);
+  line-height: 1;
+  margin-right: 2px;
+}
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.theme-toggle--locked:hover .theme-toggle__blink {
+  color: var(--pixel-red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__blink { animation: none; opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOAD ANIMATION STAGE PALETTES (Atelier + Terminal)
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Atelier load journey — warm-earth gradient to plastic-cream */
+  --a-stage-0-bg: #1A1410;
+  --a-stage-0-dot: #E8513D;
+  --a-stage-1-bg: #2D1B13;
+  --a-stage-1-dot: #C95A3C;
+  --a-stage-2-bg: #5A3A28;
+  --a-stage-2-dot: #E8513D;
+  --a-stage-3-bg: #FAF7F0;
+  --a-stage-3-dot: #E8513D;
+
+  /* Terminal load journey — phosphor + warm red */
+  --t-stage-0-bg: #0A0E0B;
+  --t-stage-0-dot: #7FDBA8;
+  --t-stage-1-bg: #0F1A14;
+  --t-stage-1-dot: #5A9873;
+  --t-stage-2-bg: #1A2B22;
+  --t-stage-2-dot: #7FDBA8;
+  --t-stage-3-bg: #0A0E0B;
+  --t-stage-3-dot: #FF5F5F;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOAD OVERLAY
+   ═══════════════════════════════════════════════════════════════ */
+
+.load-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--a-stage-0-bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background-color 220ms ease-out, opacity 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.load-overlay[data-palette="atelier"][data-stage="0"] { background: var(--a-stage-0-bg); }
+.load-overlay[data-palette="atelier"][data-stage="1"] { background: var(--a-stage-1-bg); }
+.load-overlay[data-palette="atelier"][data-stage="2"] { background: var(--a-stage-2-bg); }
+.load-overlay[data-palette="atelier"][data-stage="3"] { background: var(--a-stage-3-bg); }
+.load-overlay[data-palette="atelier"][data-stage="reveal"] {
+  background: var(--a-stage-3-bg);
+  transition: background-color 700ms cubic-bezier(0.65, 0, 0.35, 1), opacity 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.load-overlay[data-palette="terminal"][data-stage="0"] { background: var(--t-stage-0-bg); }
+.load-overlay[data-palette="terminal"][data-stage="1"] { background: var(--t-stage-1-bg); }
+.load-overlay[data-palette="terminal"][data-stage="2"] { background: var(--t-stage-2-bg); }
+.load-overlay[data-palette="terminal"][data-stage="3"] { background: var(--t-stage-3-bg); }
+.load-overlay[data-palette="terminal"][data-stage="reveal"] {
+  background: var(--t-stage-0-bg);
+  transition: background-color 700ms cubic-bezier(0.65, 0, 0.35, 1), opacity 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.load-overlay.hidden { opacity: 0; pointer-events: none; }
+
+.load-overlay__vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.35) 100%);
+  opacity: 0; transition: opacity 400ms ease-out; z-index: 1;
+}
+.load-overlay.bouncing .load-overlay__vignette { opacity: 1; }
+
+.load-stage {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: baseline;
+  transform-origin: 0 100%;
+  will-change: transform;
+}
+
+.load-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(40px, 7vw, 96px);
+  letter-spacing: -0.02em;
+  color: #FAF7F0;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline-flex; align-items: baseline;
+  position: relative;
+}
+
+.load-overlay[data-palette="terminal"] .load-name {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 500;
+}
+
+.load-overlay[data-palette="atelier"][data-stage="3"] .load-name { color: #1A1814; }
+.load-overlay[data-palette="atelier"][data-stage="reveal"] .load-name { color: #1A1814; }
+.load-overlay[data-palette="terminal"] .load-name { color: #C8E6D0; }
+
+.load-letter {
+  display: inline-block;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 80ms ease-out;
+}
+.load-letter.visible { opacity: 1; }
+.load-space { display: inline-block; width: 0.28em; }
+
+.load-dot-wrap {
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.load-dot {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--a-stage-0-dot);
+  left: 50%; top: -40px;
+  transform: translateX(-50%);
+  will-change: transform, top, left, background-color, border-radius, width, height, opacity;
+  z-index: 2;
+}
+
+.load-dot.cursor-blink { animation: cursor-blink 0.85s step-end infinite; }
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.load-dot-shadow {
+  position: absolute;
+  width: 22px; height: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+  filter: blur(3px);
+  left: 50%; top: 50%;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  will-change: transform, opacity, width;
+  z-index: 1;
+}
+
+.load-dot.breathing { animation: period-breath 280ms cubic-bezier(0.4, 0, 0.6, 1) 1; }
+@keyframes period-breath {
+  0% { scale: 1 1; }
+  45% { scale: 1.3 1.3; }
+  100% { scale: 1 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .load-overlay { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO CANVAS CONTAINER (Atelier dot field / Terminal threads)
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero__canvas-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TERMINAL THEME — hero title typography override
+   JetBrains Mono is wider than Fraunces, so reduce size significantly
+   to maintain the 2-line wrap and overall visual balance
+   ═══════════════════════════════════════════════════════════════ */
+html[data-theme="terminal"] .hero__title {
+  font-size: clamp(36px, 5.5vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+html[data-theme="terminal"] .hero__title .em {
+  font-style: normal;
+  color: var(--terminal-red);
+}
+
+/* Case study + page heading overrides for Terminal to prevent wrapping */
+html[data-theme="terminal"] .case-hero__title,
+html[data-theme="terminal"] .case-study__title,
+html[data-theme="terminal"] .page__title,
+html[data-theme="terminal"] .also-hero__title {
+  font-size: clamp(28px, 4.2vw, 56px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+}
+
+html[data-theme="terminal"] h1,
+html[data-theme="terminal"] h2 {
+  letter-spacing: -0.005em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV THEME BUTTON — consistent styling across all pages
+   ═══════════════════════════════════════════════════════════════ */
+.nav__theme-btn {
+  background: transparent;
+  border: 1px solid var(--ink-hairline);
+  color: var(--ink-mid);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  line-height: 1;
+}
+.nav__theme-btn:hover {
+  border-color: var(--pixel-red);
+  color: var(--pixel-red);
+}
+.nav__theme-blink {
+  color: var(--pixel-red);
+  animation: nav-blink 1s ease-in-out infinite !important;
+  font-family: var(--font-mono);
+  line-height: 1;
+  font-size: 12px;
+  display: inline-block;
+  font-weight: 600;
+}
+@keyframes nav-blink {
+  0%, 45% { opacity: 1; }
+  55%, 95% { opacity: 0.15; }
+  100% { opacity: 1; }
+}
+
+html[data-theme="terminal"] .nav__theme-btn {
+  border-color: rgba(127, 219, 168, 0.3);
+  color: var(--terminal-fg);
+}
+html[data-theme="terminal"] .nav__theme-btn:hover {
+  border-color: var(--terminal-red);
+  color: var(--terminal-red);
+}
+html[data-theme="terminal"] .nav__theme-blink {
+  color: var(--terminal-red);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REMOVE TEMPLATE NOTES from final build
+   ═══════════════════════════════════════════════════════════════ */
+.template-note { display: none !important; }
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV WORDMARK FONT — Fraunces in Atelier, Mono in Terminal
+   Matches the load animation name so tuck visually merges
+   ═══════════════════════════════════════════════════════════════ */
+.nav__wordmark {
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.01em !important;
+  font-variation-settings: "opsz" 48;
+}
+html[data-theme="terminal"] .nav__wordmark {
+  font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}

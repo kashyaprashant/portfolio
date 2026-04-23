@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASAP - Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0;
+  --plastic-cream-deep: #F2EEE4;
+  --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640;
+  --ink-muted: #7A756D;
+  --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10);
+  --ink-rule: rgba(26, 24, 20, 0.06);
+
+  --pixel-red: #E8513D;
+  --pixel-red-soft: rgba(232, 81, 61, 0.06);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px; --s-12: 192px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--plastic-cream);
+  color: var(--plastic-charcoal);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--s-8);
+}
+
+.container--wide { max-width: 1280px; }
+
+@media (max-width: 720px) {
+  .container, .container--wide { padding: 0 var(--s-5); }
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--s-5) 0;
+  background: rgba(250, 247, 240, 0.85);
+  backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--ink-hairline);
+}
+
+.nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+
+.nav__links { display: flex; gap: var(--s-5); align-items: center; list-style: none; margin: 0; padding: 0; }
+.nav__links li { list-style: none; }
+.nav__wordmark {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--plastic-charcoal);
+  text-decoration: none;
+}
+
+.nav__back {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav__back:hover { color: var(--pixel-red); }
+
+/* PROGRESS */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--pixel-red);
+  z-index: 101;
+  width: 0%;
+  transition: width 0.08s linear;
+}
+
+/* HERO */
+.hero {
+  padding: var(--s-11) 0 var(--s-9);
+  border-bottom: 1px solid var(--ink-hairline);
+}
+
+.hero__breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-6);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.hero__breadcrumb a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.hero__breadcrumb a:hover { color: var(--pixel-red); }
+.hero__breadcrumb-sep { color: var(--ink-faint); }
+.hero__breadcrumb-status { color: var(--pixel-red); }
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 9vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--plastic-charcoal);
+  margin-bottom: var(--s-5);
+  font-variation-settings: "opsz" 144;
+}
+
+.hero__title .em { font-style: italic; font-weight: 400; }
+
+.hero__subtitle {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.3;
+  color: var(--ink-mid);
+  max-width: 40ch;
+  margin-bottom: var(--s-9);
+  font-variation-settings: "opsz" 72;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--s-5) var(--s-6);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.meta-cell { display: flex; flex-direction: column; gap: 4px; }
+
+.meta-cell__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.meta-cell__value {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--plastic-charcoal);
+  line-height: 1.3;
+}
+
+.meta-cell__value--status {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.meta-cell__value--status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--pixel-red);
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 81, 61, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(232, 81, 61, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-cell__value--status::before { animation: none; }
+}
+
+@media (max-width: 860px) { .meta-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .meta-grid { grid-template-columns: 1fr 1fr; gap: var(--s-4); } }
+
+/* ═══════════════════════════════════════════════════════
+   QUICK MAP — NEW: scannable at-a-glance summary
+   ═══════════════════════════════════════════════════════ */
+.quick-map {
+  padding: var(--s-9) 0;
+  background: var(--plastic-cream-deep);
+}
+
+.quick-map__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pixel-red);
+  font-weight: 500;
+  margin-bottom: var(--s-6);
+  text-align: center;
+}
+
+.quick-map__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-7);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.quick-fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  text-align: center;
+  padding: 0 var(--s-3);
+}
+
+.quick-fact__value {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--plastic-charcoal);
+  font-variation-settings: "opsz" 96;
+}
+
+.quick-fact__value .em { font-style: italic; }
+
+.quick-fact__value .unit {
+  font-family: var(--font-body);
+  font-size: 0.4em;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0;
+  margin-left: 4px;
+  font-style: normal;
+  text-transform: lowercase;
+}
+
+.quick-fact__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  max-width: 22ch;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .quick-map__grid { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+/* TL;DR */
+.tldr {
+  padding: var(--s-9) 0;
+}
+
+.tldr__card {
+  background: var(--plastic-cream-deep);
+  border-left: 2px solid var(--pixel-red);
+  padding: var(--s-7);
+  max-width: 820px;
+}
+
+.tldr__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pixel-red);
+  font-weight: 500;
+  margin-bottom: var(--s-4);
+}
+
+.tldr__body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--plastic-charcoal);
+  max-width: 64ch;
+}
+
+.tldr__body em {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--plastic-charcoal);
+}
+
+/* SECTIONS */
+.section {
+  padding: var(--s-9) 0;
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.section__header {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: var(--s-5);
+  align-items: baseline;
+  margin-bottom: var(--s-7);
+}
+
+.section__number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-faint);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--plastic-charcoal);
+  font-variation-settings: "opsz" 72;
+}
+
+.section__title .em { font-style: italic; }
+
+.prose {
+  margin-left: calc(60px + var(--s-5));
+  max-width: 64ch;
+}
+
+@media (max-width: 720px) {
+  .section__header { grid-template-columns: 40px 1fr; gap: var(--s-3); }
+  .prose { margin-left: 0; }
+}
+
+.prose p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-mid);
+  margin-bottom: var(--s-5);
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+.prose p.lead {
+  color: var(--plastic-charcoal);
+  font-size: 20px;
+  line-height: 1.55;
+  margin-bottom: var(--s-6);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  background: var(--plastic-cream-deep);
+  color: var(--ink-mid);
+  border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PULL QUOTE — NEW: breaks prose rhythm
+   ═══════════════════════════════════════════════════════ */
+.pull-quote {
+  margin: var(--s-8) 0;
+  padding: var(--s-7) var(--s-8);
+  position: relative;
+  max-width: 780px;
+}
+
+.pull-quote::before {
+  content: '"';
+  position: absolute;
+  top: var(--s-4);
+  left: var(--s-4);
+  font-family: var(--font-display);
+  font-size: 88px;
+  font-weight: 400;
+  color: var(--pixel-red);
+  line-height: 1;
+  font-variation-settings: "opsz" 144;
+  opacity: 0.3;
+}
+
+.pull-quote__body {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.3;
+  color: var(--plastic-charcoal);
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72;
+  max-width: 48ch;
+}
+
+.pull-quote__attribution {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--ink-hairline);
+  display: inline-block;
+  padding-right: var(--s-6);
+}
+
+@media (max-width: 720px) {
+  .pull-quote { padding: var(--s-5) var(--s-5) var(--s-5) var(--s-6); }
+  .pull-quote::before { font-size: 60px; top: 0; left: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   IMAGE SLOT — NEW: placeholder for screenshots
+   ═══════════════════════════════════════════════════════ */
+.image-slot {
+  margin: var(--s-8) calc(-1 * var(--s-8));
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.image-slot__frame {
+  aspect-ratio: 16 / 9;
+  background: var(--plastic-cream-deep);
+  border: 1px dashed var(--ink-hairline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--s-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.image-slot__frame::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 40px; height: 40px;
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)),
+                    linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline));
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.image-slot__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-align: center;
+  z-index: 1;
+  padding: var(--s-2) var(--s-4);
+  background: var(--plastic-cream-deep);
+  position: relative;
+}
+
+.image-slot__caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0 var(--s-8);
+}
+
+.image-slot__caption .number {
+  color: var(--pixel-red);
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .image-slot { margin: var(--s-6) calc(-1 * var(--s-5)); }
+  .image-slot__caption { padding: 0 var(--s-5); }
+}
+
+/* DECISION CALLOUTS */
+.decision {
+  margin: var(--s-7) 0;
+  padding: var(--s-6) var(--s-7);
+  border-left: 2px solid var(--ink-hairline);
+  transition: border-color 0.3s ease;
+}
+
+.decision:hover { border-left-color: var(--pixel-red); }
+
+.decision__number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pixel-red);
+  margin-bottom: var(--s-3);
+}
+
+.decision__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--plastic-charcoal);
+  margin-bottom: var(--s-4);
+  font-variation-settings: "opsz" 48;
+}
+
+.decision__body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+}
+
+.decision__body p + p { margin-top: var(--s-4); }
+
+/* SIGNATURE MOVES GRID */
+.moves {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-5);
+  margin: var(--s-5) 0;
+}
+
+.move {
+  padding: var(--s-6);
+  border: 1px solid var(--ink-hairline);
+  background: var(--plastic-cream);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.move:hover {
+  border-color: var(--pixel-red);
+  transform: translateY(-2px);
+}
+
+.move__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-2);
+}
+
+.move__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--plastic-charcoal);
+  margin-bottom: var(--s-3);
+  font-variation-settings: "opsz" 48;
+}
+
+.move__body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-mid);
+}
+
+@media (max-width: 720px) { .moves { grid-template-columns: 1fr; } }
+
+/* STATUS TABLE */
+.status-table { margin: var(--s-5) 0; }
+
+.status-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s-5);
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--ink-hairline);
+  align-items: baseline;
+}
+
+.status-row:last-child { border-bottom: 1px solid var(--ink-hairline); }
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.status-label__dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-label__dot--done { background: var(--ink-faint); }
+.status-label__dot--active { background: var(--pixel-red); }
+.status-label__dot--upcoming { background: transparent; border: 1px solid var(--ink-faint); }
+
+.status-value {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--plastic-charcoal);
+}
+
+@media (max-width: 720px) {
+  .status-row { grid-template-columns: 1fr; gap: var(--s-1); padding: var(--s-3) 0; }
+}
+
+/* TARGETING TABLE */
+.targeting {
+  margin: var(--s-5) 0;
+  border: 1px solid var(--ink-hairline);
+}
+
+.targeting__persona { border-top: 1px solid var(--ink-hairline); }
+.targeting__persona:first-child { border-top: none; }
+
+.targeting__persona-header {
+  padding: var(--s-4) var(--s-5);
+  background: var(--plastic-cream-deep);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--plastic-charcoal);
+  font-weight: 500;
+}
+
+.targeting__metric {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--ink-rule);
+  gap: var(--s-4);
+  align-items: baseline;
+  font-size: 14px;
+}
+
+.targeting__metric-name {
+  font-family: var(--font-body);
+  color: var(--ink-mid);
+}
+
+.targeting__metric-from {
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+.targeting__metric-to {
+  font-family: var(--font-mono);
+  color: var(--plastic-charcoal);
+  font-weight: 500;
+  text-align: right;
+}
+
+.targeting__metric-to::before {
+  content: '→ ';
+  color: var(--pixel-red);
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .targeting__metric { grid-template-columns: 1fr; gap: var(--s-1); }
+  .targeting__metric-from, .targeting__metric-to { text-align: left; }
+}
+
+/* WHAT I'D CHANGE */
+.change {
+  margin: var(--s-5) 0;
+  padding: var(--s-5) var(--s-6);
+  background: var(--pixel-red-soft);
+  border-left: 2px solid var(--pixel-red);
+}
+
+.change__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--plastic-charcoal);
+  margin-bottom: var(--s-2);
+}
+
+.change__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+}
+
+/* FOOT NAV */
+.foot {
+  padding: var(--s-10) 0 var(--s-8);
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.foot__intro {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-5);
+}
+
+.foot-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+}
+
+.foot-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-6);
+  border: 1px solid var(--ink-hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.foot-link:hover {
+  border-color: var(--pixel-red);
+  background-color: var(--plastic-cream-deep);
+}
+
+.foot-link__meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.foot-link__title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--plastic-charcoal);
+  font-variation-settings: "opsz" 72;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.foot-link__title .em { font-style: italic; }
+
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+
+.foot-link--next { text-align: right; }
+
+@media (max-width: 520px) {
+  .foot-nav { grid-template-columns: 1fr; }
+  .foot-link--next { text-align: left; }
+}
+
+.footer {
+  border-top: 1px solid var(--ink-hairline);
+  padding: var(--s-6) 0;
+}
+
+.footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s-8);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+
+.template-note {
+  max-width: 980px;
+  margin: var(--s-6) auto 0;
+  padding: var(--s-4) var(--s-5);
+  background: rgba(232, 81, 61, 0.06);
+  border-left: 2px solid var(--pixel-red);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.template-note strong {
+  color: var(--pixel-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  font-size: 10px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+
+/* SUBTLE HERO BACKGROUND — dot field / threads at 30% opacity */
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-canvas canvas,
+.hero-bg-canvas > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.hero { position: relative; }
+.hero > *:not(.hero-bg-canvas) { position: relative; z-index: 1; }
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <ul class="nav__links"><li><a href="../index.html#work" class="nav__back">← All work</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="../game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+  </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg-canvas" data-subtle="true" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__breadcrumb">
+      <a href="../index.html">Work</a>
+      <span class="hero__breadcrumb-sep">/</span>
+      <span class="hero__breadcrumb-status">● Oracle · Current</span>
+    </div>
+
+    <h1 class="hero__title">ASAP</h1>
+    <p class="hero__subtitle">Moving Oracle's twenty-year-old service-activation platform onto Redwood, redesigned around the three people who use it every day.</p>
+
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <div class="meta-cell__label">Role</div>
+        <div class="meta-cell__value">Sole UX Designer</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-cell__label">Team</div>
+        <div class="meta-cell__value">PM, engineering</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-cell__label">Timeline</div>
+        <div class="meta-cell__value">4-6 months</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-cell__label">Platform</div>
+        <div class="meta-cell__value">Desktop web · Redwood DS</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-cell__label">Status</div>
+        <div class="meta-cell__value meta-cell__value--status">In engineering</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK MAP - NEW: scannable at-a-glance -->
+<section class="quick-map">
+  <div class="container">
+    <div class="quick-map__label">The case at a glance</div>
+    <div class="quick-map__grid">
+      <div class="quick-fact">
+        <div class="quick-fact__value">20<span class="unit">yr</span></div>
+        <div class="quick-fact__label">Legacy platform replaced</div>
+      </div>
+      <div class="quick-fact">
+        <div class="quick-fact__value">3<span class="unit">personas</span></div>
+        <div class="quick-fact__label">CSR · Admin · Manager, one shared data spine</div>
+      </div>
+      <div class="quick-fact">
+        <div class="quick-fact__value">4<span class="unit">flows</span></div>
+        <div class="quick-fact__label">Smart Search · Order Details · Dashboard · Guided Creation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TL;DR -->
+<section class="tldr">
+  <div class="container">
+    <div class="tldr__card">
+      <div class="tldr__label">TL;DR</div>
+      <p class="tldr__body">
+        ASAP - Automated Service Activation Platform - is Oracle Communications' provisioning engine, translating customer work orders into the commands that turn services on. For two decades the operator's window into ASAP has been OCA, a Java applet whose design vocabulary predates the web. Oracle's decision was <em>a full redesign, not a reskin.</em> I joined as the sole UX designer on a team that had never worked with a UX process before. The hardest work wasn't picking which screens to build - it was bringing the engineering team into a UX process they hadn't previously used, and earning the trust to drive IA and pattern decisions from that process.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATION -->
+<section class="section" id="situation">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">01</div>
+      <h2 class="section__title">The <span class="em">situation</span></h2>
+    </div>
+    <div class="prose">
+      <p>OCA's landing page is an empty session log. Its search requires users to fill in ten or more technical fields. Fallouts surface as raw switch commands like <code>SEND 'NEW $ 6742727 236 1 REM1...'</code>. CSDL Information, Global Parameters, and Work Order Details each open as blank tabs with no guidance about what to do next. The UI is recognizably the product of twenty years of engineering-era feature additions, layered on a Java applet whose interaction vocabulary predates most of the web.</p>
+
+      <!-- IMAGE SLOT: OCA screenshot -->
+      <div class="image-slot">
+        <div class="image-slot__frame">
+          <div class="image-slot__label">OCA legacy UI · before</div>
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 01</span> · The OCA interface CSRs and Admins lived inside for two decades.</div>
+      </div>
+
+      <p>Three very different people rely on this tool every day. A Customer Service Representative answers a call about a delayed broadband activation and needs to say something truthful within thirty seconds. A combined Network Operations Engineer / Order Admin sits inside the system for hours, diagnosing fallouts, editing parameters, retrying CSDLs. An Operations Manager wants a single screen that tells her whether the activation business is healthy today. In OCA, all three see the same engineer-era UI.</p>
+
+      <p>The business driver for the rebuild is architectural: Redwood is where Oracle's product surface is heading, and two decades of accreted UI patterns need to be rethought from the user outward, not retrofitted.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE 1 -->
+<div class="container">
+  <div class="pull-quote">
+    <div class="pull-quote__body">
+      All three users see the same engineer-era UI. The CSR has to learn CSDL vocabulary to answer a customer question.
+    </div>
+    <div class="pull-quote__attribution">From the situation</div>
+  </div>
+</div>
+
+<!-- DECISIONS -->
+<section class="section" id="decisions">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">02</div>
+      <h2 class="section__title">The decisions that <span class="em">mattered</span></h2>
+    </div>
+    <div class="prose">
+      <p class="lead">ASAP is a solo UX project within its immediate team. My peer review happened externally at Oracle's quarterly Industry UX All-Hands. Inside the project, most calls below weren't argued against a competing UX position - they were calls I made because the team didn't have context to frame the tradeoffs, and then trusted the rationale once I made the reasoning visible.</p>
+
+      <div class="decision">
+        <div class="decision__number">Decision 01</div>
+        <div class="decision__title">One product that behaves like three, not three products.</div>
+        <div class="decision__body">
+          <p>Three personas, three very different jobs. The obvious-looking answer was to build three apps. I argued against it. Three apps would fragment one product into three, create downstream cost in engineering and training, and force the business to maintain three roadmaps against one data model. The answer I arrived at was one product with a shared data spine and three persona-specific surfaces on top - same work orders, same CSDL data, but three different first screens and three default views into the same truth.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__number">Decision 02</div>
+        <div class="decision__title">Shape of Data as an explicit deliverable.</div>
+        <div class="decision__body">
+          <p>Most teams jump from personas to wireframes. I inserted a step in between. For each persona I wrote a question-and-answer document defining the quantitative shape of their screens: fields per card (5-7 for CSR), work orders per search page (20 typical, 200 cap), Admin worklist size before grouping (50 typical), Manager KPIs on a dashboard (4-8, grouped Volume/Quality/Speed/Risk), default time window for trends (7 days with 24h, 30d, 90d alternates), max events per minute before UI groups them (60).</p>
+          <p>These numbers determine whether a screen feels calm or chaotic. By making Shape of Data an explicit artifact, the team acquired shared vocabulary for density decisions. Engineering could build against the numbers; PM could scope with confidence.</p>
+        </div>
+      </div>
+
+      <!-- IMAGE SLOT: Shape of Data artifact -->
+      <div class="image-slot">
+        <div class="image-slot__frame">
+          <div class="image-slot__label">Shape of Data · artifact</div>
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 02</span> · The persona Shape of Data reference, used as engineering handoff.</div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__number">Decision 03</div>
+        <div class="decision__title">Success criteria benchmarked against OCA.</div>
+        <div class="decision__body">
+          <p>Three performance and three satisfaction criteria per persona, each with a benchmark from observed OCA behavior and a target for the new build. These are design hypotheses, not shipped metrics - but they force every subsequent decision to answer: does this move the benchmark?</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__number">Decision 04</div>
+        <div class="decision__title">Collapsing NOE and Order Admin into one persona.</div>
+        <div class="decision__body">
+          <p>An earlier persona set treated Network Operations Engineer and Order Admin as two separate people. Engineering - who had lived with this product for years - surfaced that in practice they are the same user with overlapping access and lifecycle responsibilities. The collapse simplified role-based access control and gave the user a single coherent surface. Design leadership on domain-heavy products depends on listening to the team that has lived inside the data for years.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE 2 -->
+<div class="container">
+  <div class="pull-quote">
+    <div class="pull-quote__body">
+      Most teams jump from personas to wireframes. I inserted a step in between: Shape of Data.
+    </div>
+    <div class="pull-quote__attribution">Decision 02</div>
+  </div>
+</div>
+
+<!-- SIGNATURE MOVES -->
+<section class="section" id="moves">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">03</div>
+      <h2 class="section__title">Four signature design <span class="em">moves</span></h2>
+    </div>
+    <div class="prose">
+      <p>The IA rests on four principles: Stepwise Journey, Information Grouping, Guided Decision-Making, Operational Awareness. From those came four hi-fi design decisions.</p>
+
+      <div class="moves">
+        <div class="move">
+          <div class="move__label">01 · Smart Search</div>
+          <div class="move__title">From ten fields to one.</div>
+          <div class="move__body">Replaces OCA's ten-field dialog with a single input and chip-based filters. Users type what they know; the system offers refinements as chips.</div>
+        </div>
+
+        <div class="move">
+          <div class="move__label">02 · Unified Order Details</div>
+          <div class="move__title">Scannable spine, contextual side panel.</div>
+          <div class="move__body">Turns the CSDL list into a scannable spine with a contextual side panel - parameters, history, properties, impact - rather than scattered tabs.</div>
+        </div>
+
+        <div class="move">
+          <div class="move__label">03 · System Dashboard</div>
+          <div class="move__title">A 24-hour pulse for the Admin.</div>
+          <div class="move__body">Failed orders, oldest fallout age, retry success rate, SLA breach status. No Excel pivots required. One glance, one truth.</div>
+        </div>
+
+        <div class="move">
+          <div class="move__label">04 · Guided Order Creation</div>
+          <div class="move__title">Five-step Redwood Guided Process.</div>
+          <div class="move__body">Replaces the empty-tab New Work Order with: General Information, CSDL Information, Global Parameters, Extended Properties, Review and Release.</div>
+        </div>
+      </div>
+
+      <!-- IMAGE SLOT: Signature moves composite -->
+      <div class="image-slot">
+        <div class="image-slot__frame">
+          <div class="image-slot__label">Signature moves · after</div>
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 03</span> · The four anchor flows, in hi-fi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNINGS -->
+<section class="section" id="learnings">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">04</div>
+      <h2 class="section__title">What I learned that changed <span class="em">how I designed</span></h2>
+    </div>
+    <div class="prose">
+      <p>The engineering team had never worked with a UX process before ASAP. My job wasn't only to produce screens - it was to bring the team into a way of working that didn't previously exist inside the product. I ran collaborative working sessions where engineers and I walked through each persona's day. I introduced Redwood not just as a component library but as a shared language - conventions for guided processes, smart search, data tables, page shells that the team could build against confidently.</p>
+      <p>The co-ownership is what made the process hold. Because the team was inside the work from day one, internal alignment wasn't adversarial. Conversations focused on content feasibility rather than whether the IA was right. The team trusted UX to own those calls; my job was to earn that trust by making rationale visible at every step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE 3 -->
+<div class="container">
+  <div class="pull-quote">
+    <div class="pull-quote__body">
+      Primary goals, Shape of Data, Success Criteria, IA, wireframes, and hi-fis - built with the team in the room, not handed over a wall.
+    </div>
+    <div class="pull-quote__attribution">Design leadership on a UX-naive team</div>
+  </div>
+</div>
+
+<!-- VALIDATION -->
+<section class="section" id="validation">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">05</div>
+      <h2 class="section__title">Validation</h2>
+    </div>
+    <div class="prose">
+      <p>Validation happened in two loops. Internally, regular communication syncups with PM and engineering captured feedback and iterated on rationale. Externally, Oracle's quarterly Industry UX All-Hands - where designers across Oracle's industry portfolio reviewed the work - forced me to defend the Shape of Data numbers, the IA principles, and the four signature decisions to designers who hadn't been inside the project. Each round sharpened the rationale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="section" id="status">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">06</div>
+      <h2 class="section__title">Status</h2>
+    </div>
+    <div class="prose">
+      <div class="status-table">
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot status-label__dot--done"></span>Complete</div>
+          <div class="status-value">Hi-fi prototype covering all four signature flows plus three persona-specific landing surfaces.</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot status-label__dot--done"></span>Complete</div>
+          <div class="status-value">Reference document with goals, Shape of Data tables, and Success Criteria per persona, benchmarked against OCA.</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot status-label__dot--done"></span>Complete</div>
+          <div class="status-value">As-is and future-state storyboards in panel format for each persona, with named signature moments.</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot status-label__dot--active"></span>In flight</div>
+          <div class="status-value">Active engineering development with iterative content refinement.</div>
+        </div>
+      </div>
+
+      <!-- IMAGE SLOT: Engineering handoff / storyboards -->
+      <div class="image-slot">
+        <div class="image-slot__frame">
+          <div class="image-slot__label">Persona storyboards · handoff</div>
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 04</span> · As-is and future-state storyboards for Frank, Stephanie, and Parker.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGETING -->
+<section class="section" id="targeting">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">07</div>
+      <h2 class="section__title">What the design is <span class="em">targeting</span></h2>
+    </div>
+    <div class="prose">
+      <p>Design hypotheses grounded in observed OCA behavior, not measured outcomes. They become real metrics when the build reaches customers.</p>
+
+      <div class="targeting">
+        <div class="targeting__persona">
+          <div class="targeting__persona-header">CSR · Frank Thomas</div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Time to find the correct work order</div>
+            <div class="targeting__metric-from">90-120 sec</div>
+            <div class="targeting__metric-to">30 sec</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Time to answer "what's the status"</div>
+            <div class="targeting__metric-from">2-3 min</div>
+            <div class="targeting__metric-to">1 min</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">First-contact resolution</div>
+            <div class="targeting__metric-from">40-50%</div>
+            <div class="targeting__metric-to">70-80%</div>
+          </div>
+        </div>
+
+        <div class="targeting__persona">
+          <div class="targeting__persona-header">Admin · Stephanie Kim</div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Diagnosis time per fallout</div>
+            <div class="targeting__metric-from">10-15 min</div>
+            <div class="targeting__metric-to">5 min</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Correction-and-release cycle</div>
+            <div class="targeting__metric-from">15-20 min</div>
+            <div class="targeting__metric-to">5-10 min</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">First-retry success rate</div>
+            <div class="targeting__metric-from">60-65%</div>
+            <div class="targeting__metric-to">80-85%</div>
+          </div>
+        </div>
+
+        <div class="targeting__persona">
+          <div class="targeting__persona-header">Manager · Parker Gauthier</div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Health-check time</div>
+            <div class="targeting__metric-from">20-30 min</div>
+            <div class="targeting__metric-to">&lt; 5 min</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Spike investigation</div>
+            <div class="targeting__metric-from">1-2 hr</div>
+            <div class="targeting__metric-to">15-20 min</div>
+          </div>
+          <div class="targeting__metric">
+            <div class="targeting__metric-name">Reporting cycle effort</div>
+            <div class="targeting__metric-from">2-3 hr</div>
+            <div class="targeting__metric-to">&lt; 30 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I'D CHANGE -->
+<section class="section" id="change">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">08</div>
+      <h2 class="section__title">What I'd <span class="em">change</span></h2>
+    </div>
+    <div class="prose">
+      <div class="change">
+        <div class="change__title">Structured user testing with real users, earlier.</div>
+        <div class="change__body">The Success Criteria benchmarks are drawn from observing OCA behavior and interviewing engineering. That's defensible but indirect. Moderated testing with actual CSRs, Admins, and Managers would have tightened the density and hierarchy decisions on the Admin worklist in particular, and given direct evidence for the Manager dashboard's 7-day default window.</div>
+      </div>
+
+      <div class="change">
+        <div class="change__title">More time with downstream product teams.</div>
+        <div class="change__body">ASAP sits between upstream order-capture and the network. The product lives in an ecosystem I didn't fully map at the start - OSM, UIM, CRM upstream, the switch fabric downstream. Understanding where design decisions cascade into adjacent systems would have caught a few interaction assumptions I had to revisit mid-project.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="foot">
+  <div class="container">
+    <div class="foot__intro">Next case study →</div>
+    <div class="foot-nav">
+      <a href="../index.html#work" class="foot-link">
+        <div class="foot-link__meta">← All work</div>
+        <div class="foot-link__title">Back to portfolio</div>
+      </a>
+      <a href="../case-studies/unified-assurance.html" class="foot-link foot-link--next">
+        <div class="foot-link__meta">Next · Oracle · Current</div>
+        <div class="foot-link__title">Unified <span class="em">Assurance</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>Case study · 01 / 04</div>
+  </div>
+</footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = (scrollTop / docHeight) * 100;
+    progress.style.width = percent + '%';
+  };
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+</script>
+
+<script src="../shared/theme.js"></script>
+<script src="../shared/hero-backgrounds.js"></script>
+</body>
+</html>

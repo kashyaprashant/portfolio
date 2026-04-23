@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play · Terminal Theme Unlock · Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/tokens.css">
+
+<style>
+/* This page is ALWAYS Terminal-themed regardless of global state.
+   It's the unlock page, so it shows off what Terminal looks like. */
+html { background: #0A0E0B; }
+body { background: #0A0E0B; color: #7FDBA8; font-family: 'JetBrains Mono', monospace; line-height: 1.6; min-height: 100vh; text-shadow: 0 0 6px rgba(127, 219, 168, 0.15); }
+
+/* Scanline */
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 3px);
+  pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+.nav { position: sticky; top: 0; z-index: 100; padding: 20px 0; background: rgba(10, 14, 11, 0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(127, 219, 168, 0.15); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+.nav__wordmark { font-weight: 500; font-size: 14px; color: #C8E6D0; text-decoration: none; }
+.nav__back { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #7FDBA8; text-decoration: none; transition: color 0.2s ease; }
+.nav__back:hover { color: #FF5F5F; }
+
+/* HERO */
+.hero { padding: 64px 0 32px; text-align: center; }
+.hero__prompt { font-size: 12px; letter-spacing: 0.2em; color: #FF5F5F; text-transform: uppercase; margin-bottom: 16px; font-weight: 500; }
+.hero__title { font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.02em; color: #C8E6D0; margin-bottom: 16px; font-weight: 500; line-height: 1.15; text-shadow: 0 0 20px rgba(127, 219, 168, 0.2); }
+.hero__title span { color: #FF5F5F; text-shadow: 0 0 20px rgba(255, 95, 95, 0.4); }
+.hero__subtitle { font-size: 14px; color: #7FDBA8; max-width: 58ch; margin: 0 auto 8px; line-height: 1.65; }
+.hero__hint { font-size: 11px; color: #5A9873; letter-spacing: 0.1em; margin-top: 12px; }
+
+/* STATUS */
+.status { margin: 32px auto; max-width: 680px; padding: 16px 24px; border: 1px solid rgba(127, 219, 168, 0.2); background: rgba(127, 219, 168, 0.03); text-align: center; }
+.status__label { font-size: 10px; letter-spacing: 0.2em; color: #5A9873; text-transform: uppercase; margin-bottom: 6px; }
+.status__state { font-size: 14px; color: #7FDBA8; font-weight: 500; letter-spacing: 0.1em; }
+.status__state--unlocked { color: #FF5F5F; }
+.status__state .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 8px currentColor; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* GAME */
+.game-section { padding: 16px 0 64px; }
+.game-wrap { max-width: 720px; margin: 0 auto; }
+.game-frame { position: relative; background: #0A0E0B; border: 1px solid rgba(127, 219, 168, 0.3); aspect-ratio: 4 / 3; max-width: 100%; }
+.game-frame canvas { display: block; width: 100%; height: 100%; }
+
+.game-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 12px; font-size: 11px; letter-spacing: 0.1em; color: #5A9873; }
+.game-pellets { display: flex; gap: 8px; flex-wrap: wrap; }
+.pellet { padding: 4px 10px; border: 1px solid rgba(127, 219, 168, 0.3); color: #5A9873; font-size: 10px; letter-spacing: 0.15em; transition: all 0.3s ease; }
+.pellet.eaten { background: #7FDBA8; color: #0A0E0B; border-color: #7FDBA8; text-decoration: line-through; }
+.game-keys { display: flex; gap: 8px; align-items: center; }
+.game-keys kbd { display: inline-block; padding: 2px 6px; background: rgba(127, 219, 168, 0.1); border: 1px solid rgba(127, 219, 168, 0.2); border-radius: 2px; font-size: 10px; color: #7FDBA8; min-width: 18px; text-align: center; line-height: 1.4; }
+
+/* Message overlay on game */
+.game-message { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; background: rgba(10, 14, 11, 0.95); pointer-events: none; opacity: 0; transition: opacity 0.3s ease; z-index: 2; padding: 24px; }
+.game-message.visible { opacity: 1; pointer-events: auto; }
+.game-message h2 { color: #FF5F5F; font-size: 20px; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(255, 95, 95, 0.4); margin: 0; font-weight: 500; text-align: center; }
+.game-message p { color: #7FDBA8; font-size: 12px; letter-spacing: 0.1em; max-width: 44ch; text-align: center; line-height: 1.7; margin: 0; }
+.game-message button { background: #FF5F5F; border: none; color: #0A0E0B; font-family: inherit; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding: 12px 24px; cursor: pointer; font-weight: 500; margin-top: 8px; transition: transform 0.15s ease; }
+.game-message button:hover { transform: translateY(-2px); }
+.game-message a { color: #7FDBA8; font-size: 11px; letter-spacing: 0.15em; text-decoration: none; border-bottom: 1px solid rgba(127, 219, 168, 0.3); padding-bottom: 2px; text-transform: uppercase; }
+.game-message a:hover { color: #FF5F5F; border-bottom-color: #FF5F5F; }
+
+/* Play button (only shown before game starts) */
+.play-btn { display: block; margin: 16px auto 0; background: #FF5F5F; color: #0A0E0B; border: none; padding: 14px 40px; font-family: inherit; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.2s ease; }
+.play-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255, 95, 95, 0.4); }
+
+/* INFO SECTION */
+.info { padding: 48px 0; border-top: 1px solid rgba(127, 219, 168, 0.15); }
+.info__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.info__cell { }
+.info__cell-label { font-size: 10px; letter-spacing: 0.2em; color: #FF5F5F; text-transform: uppercase; margin-bottom: 12px; font-weight: 500; }
+.info__cell-body { font-size: 13px; color: #7FDBA8; line-height: 1.65; }
+@media (max-width: 720px) { .info__grid { grid-template-columns: 1fr; gap: 24px; } }
+
+/* FOOTER */
+.footer { padding: 24px 0; border-top: 1px solid rgba(127, 219, 168, 0.15); }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.1em; color: #5A9873; }
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { display: none; }
+  .status__state .dot { animation: none; }
+}
+
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+  .game-controls { font-size: 10px; }
+}
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+
+/* SUBTLE HERO BACKGROUND — dot field / threads at 30% opacity */
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-canvas canvas,
+.hero-bg-canvas > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.hero { position: relative; }
+.hero > *:not(.hero-bg-canvas) { position: relative; z-index: 1; }
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <a href="index.html" class="nav__back">← Back to portfolio</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="hero">
+  <div class="hero-bg-canvas" data-subtle="true" aria-hidden="true"></div>
+    <div class="hero__prompt">◐ Terminal theme · unlock</div>
+    <h1 class="hero__title">Eat the <span>four case studies</span><br>to unlock Terminal mode.</h1>
+    <p class="hero__subtitle">A small reward for the curious. Win once; the theme stays unlocked across the site, toggleable from the nav. Lose; play again.</p>
+    <p class="hero__hint">Arrow keys to move · swipe on mobile · ESC to exit</p>
+  </section>
+
+  <div class="status">
+    <div class="status__label">Current status</div>
+    <div class="status__state" id="unlock-status"><span class="dot"></span>Locked</div>
+  </div>
+
+  <section class="game-section">
+    <div class="game-wrap">
+      <div class="game-frame">
+        <canvas id="game-canvas" width="720" height="540"></canvas>
+        <div class="game-message visible" id="game-message">
+          <h2 id="message-title">Ready</h2>
+          <p id="message-body">Four pellets will appear, one per case study. Eat all four without hitting the walls or yourself. The snake speeds up as you eat.</p>
+          <button class="play-btn" id="message-btn">Start game</button>
+        </div>
+      </div>
+
+      <div class="game-controls">
+        <div class="game-pellets" id="pellet-display">
+          <div class="pellet" data-label="ASAP">ASAP</div>
+          <div class="pellet" data-label="UA">UA</div>
+          <div class="pellet" data-label="XD">XD</div>
+          <div class="pellet" data-label="KEXP">KEXP</div>
+        </div>
+        <div class="game-keys">
+          <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
+          <span>or swipe</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="info__grid">
+      <div class="info__cell">
+        <div class="info__cell-label">What unlocks</div>
+        <p class="info__cell-body">Winning the game applies a Terminal theme across all 14 pages of the portfolio — phosphor green palette, JetBrains Mono everywhere, subtle CRT scanline. Same content, different skin.</p>
+      </div>
+      <div class="info__cell">
+        <div class="info__cell-label">How it persists</div>
+        <p class="info__cell-body">Unlock state is stored in localStorage. It survives reloads and navigation. Clearing site data resets the unlock. Unlock is per-browser, not per-device.</p>
+      </div>
+      <div class="info__cell">
+        <div class="info__cell-label">Also unlocked via</div>
+        <p class="info__cell-body">The Konami code works too. Type <kbd style="background: rgba(127, 219, 168, 0.1); border: 1px solid rgba(127, 219, 168, 0.2); padding: 1px 4px; border-radius: 2px;">↑↑↓↓←→←→BA</kbd> anywhere on the site to open this game in an overlay.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>/ game</div>
+  </div>
+</footer>
+
+<script src="shared/theme.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  const CASE_STUDIES = [
+    { label: 'ASAP', color: '#E8513D' },
+    { label: 'UA', color: '#FF8A6B' },
+    { label: 'XD', color: '#7FDBA8' },
+    { label: 'KEXP', color: '#F4C78A' },
+  ];
+
+  const canvas = document.getElementById('game-canvas');
+  const ctx = canvas.getContext('2d');
+  const messageEl = document.getElementById('game-message');
+  const messageTitle = document.getElementById('message-title');
+  const messageBody = document.getElementById('message-body');
+  const messageBtn = document.getElementById('message-btn');
+  const unlockStatus = document.getElementById('unlock-status');
+
+  // Update unlock status indicator
+  function refreshStatus() {
+    const unlocked = window.__pkTheme && window.__pkTheme.isUnlocked();
+    if (unlocked) {
+      unlockStatus.className = 'status__state status__state--unlocked';
+      unlockStatus.innerHTML = '<span class="dot"></span>Unlocked · Terminal theme available';
+    }
+  }
+  refreshStatus();
+
+  const GRID = 20;
+  let COLS, ROWS;
+  function resizeCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    const w = Math.floor(rect.width / GRID) * GRID;
+    const h = Math.floor((rect.width * 0.75) / GRID) * GRID;
+    canvas.width = Math.min(w, 720);
+    canvas.height = Math.min(h, 540);
+    COLS = Math.floor(canvas.width / GRID);
+    ROWS = Math.floor(canvas.height / GRID);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let snake, direction, nextDirection, pellets, eatenLabels, gameOver, won, playing, lastTick, tickMs, rafId;
+
+  function initGame() {
+    const midY = Math.floor(ROWS / 2);
+    snake = [
+      { x: 5, y: midY },
+      { x: 4, y: midY },
+      { x: 3, y: midY },
+    ];
+    direction = { x: 1, y: 0 };
+    nextDirection = { x: 1, y: 0 };
+    pellets = [];
+    eatenLabels = [];
+    gameOver = false;
+    won = false;
+    lastTick = 0;
+    tickMs = 120;
+    CASE_STUDIES.forEach(cs => {
+      let pos, attempts = 0;
+      do {
+        pos = {
+          x: 2 + Math.floor(Math.random() * (COLS - 4)),
+          y: 2 + Math.floor(Math.random() * (ROWS - 4)),
+        };
+        attempts++;
+      } while (
+        attempts < 50 &&
+        (snake.some(s => s.x === pos.x && s.y === pos.y) ||
+         pellets.some(p => p.x === pos.x && p.y === pos.y))
+      );
+      pellets.push({ ...pos, label: cs.label, color: cs.color });
+    });
+    updatePelletIndicators();
+  }
+
+  function updatePelletIndicators() {
+    document.querySelectorAll('#pellet-display .pellet').forEach(el => {
+      el.classList.toggle('eaten', eatenLabels.includes(el.getAttribute('data-label')));
+    });
+  }
+
+  function showMessage(title, body, btnText, onBtn, extraLink) {
+    messageTitle.textContent = title;
+    messageBody.textContent = body;
+    
+    // Hide the button entirely if no btnText (e.g., for auto-redirect celebration)
+    if (btnText === null || btnText === undefined) {
+      messageBtn.style.display = 'none';
+    } else {
+      messageBtn.style.display = '';
+      messageBtn.textContent = btnText;
+      messageBtn.onclick = onBtn;
+    }
+
+    // Clear any previous extra link
+    const existingExtra = messageEl.querySelector('.message-extra');
+    if (existingExtra) existingExtra.remove();
+
+    if (extraLink) {
+      const a = document.createElement('a');
+      a.href = extraLink.href;
+      a.textContent = extraLink.text;
+      a.className = 'message-extra';
+      messageEl.appendChild(a);
+    }
+
+    messageEl.classList.add('visible');
+  }
+
+  function hideMessage() {
+    messageEl.classList.remove('visible');
+  }
+
+  function startGame() {
+    initGame();
+    playing = true;
+    hideMessage();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  messageBtn.addEventListener('click', () => {
+    if (!playing) startGame();
+  });
+
+  function loop(ts) {
+    if (!playing) return;
+    if (gameOver || won) return;
+    if (ts - lastTick >= tickMs) {
+      tick();
+      lastTick = ts;
+    }
+    draw();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function tick() {
+    direction = nextDirection;
+    const head = {
+      x: snake[0].x + direction.x,
+      y: snake[0].y + direction.y,
+    };
+    if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS) {
+      gameOver = true; playing = false;
+      return handleGameOver();
+    }
+    if (snake.some(s => s.x === head.x && s.y === head.y)) {
+      gameOver = true; playing = false;
+      return handleGameOver();
+    }
+    snake.unshift(head);
+    const eaten = pellets.find(p => p.x === head.x && p.y === head.y);
+    if (eaten) {
+      eatenLabels.push(eaten.label);
+      pellets = pellets.filter(p => p !== eaten);
+      updatePelletIndicators();
+      tickMs = Math.max(70, tickMs - 8);
+      if (pellets.length === 0) {
+        won = true; playing = false;
+        return handleWin();
+      }
+    } else {
+      snake.pop();
+    }
+  }
+
+  function draw() {
+    ctx.fillStyle = '#0A0E0B';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(127, 219, 168, 0.04)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < COLS; x++) {
+      ctx.beginPath();
+      ctx.moveTo(x * GRID, 0);
+      ctx.lineTo(x * GRID, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y < ROWS; y++) {
+      ctx.beginPath();
+      ctx.moveTo(0, y * GRID);
+      ctx.lineTo(canvas.width, y * GRID);
+      ctx.stroke();
+    }
+    pellets.forEach(p => {
+      ctx.fillStyle = p.color;
+      ctx.shadowColor = p.color;
+      ctx.shadowBlur = 12;
+      ctx.fillRect(p.x * GRID + 2, p.y * GRID + 2, GRID - 4, GRID - 4);
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#0A0E0B';
+      ctx.font = 'bold 8px JetBrains Mono, monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.label, p.x * GRID + GRID / 2, p.y * GRID + GRID / 2);
+    });
+    snake.forEach((seg, i) => {
+      const isHead = i === 0;
+      ctx.fillStyle = isHead ? '#7FDBA8' : `rgba(127, 219, 168, ${Math.max(0.3, 1 - i * 0.04)})`;
+      if (isHead) {
+        ctx.shadowColor = '#7FDBA8';
+        ctx.shadowBlur = 8;
+      }
+      ctx.fillRect(seg.x * GRID + 1, seg.y * GRID + 1, GRID - 2, GRID - 2);
+      ctx.shadowBlur = 0;
+    });
+  }
+
+  function handleGameOver() {
+    const eaten = eatenLabels.length;
+    showMessage(
+      eaten === 0 ? 'Game over' : `Ate ${eaten} of 4`,
+      eaten === 0
+        ? 'The snake went down early. Try again.'
+        : `${CASE_STUDIES.filter(c => !eatenLabels.includes(c.label)).map(c => c.label).join(', ')} got away. Eat all four to unlock.`,
+      'Play again',
+      startGame
+    );
+  }
+
+  function handleWin() {
+    // Unlock terminal + switch theme
+    if (window.__pkTheme) {
+      window.__pkTheme.setUnlocked();
+      window.__pkTheme.setTheme('terminal');
+    }
+    
+    // Clear the load-animation cache so it replays when we redirect
+    // This makes the load animation run in Terminal palette (phosphor journey)
+    localStorage.removeItem('pk-loaded-once');
+    
+    refreshStatus();
+    
+    // Brief celebration overlay, then auto-redirect to portfolio
+    showMessage(
+      'Terminal unlocked',
+      'Taking you back to the portfolio…',
+      null,
+      null,
+      null
+    );
+    
+    // Auto-redirect after brief pause so user sees the confirmation
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1400);
+  }
+
+  // Input
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { window.location.href = 'index.html'; return; }
+    if (!playing) {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); startGame(); return; }
+    }
+    const d = { ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1}, ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0} }[e.key];
+    if (d && playing) {
+      if (d.x !== -direction.x || d.y !== -direction.y) nextDirection = d;
+      e.preventDefault();
+    }
+  });
+
+  let touchStart = null;
+  canvas.addEventListener('touchstart', (e) => {
+    if (!playing) return;
+    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  });
+  canvas.addEventListener('touchend', (e) => {
+    if (!playing || !touchStart) return;
+    const dx = e.changedTouches[0].clientX - touchStart.x;
+    const dy = e.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      const d = dx > 0 ? {x:1,y:0} : {x:-1,y:0};
+      if (d.x !== -direction.x) nextDirection = d;
+    } else {
+      const d = dy > 0 ? {x:0,y:1} : {x:0,y:-1};
+      if (d.y !== -direction.y) nextDirection = d;
+    }
+    touchStart = null;
+    e.preventDefault();
+  });
+
+  // Draw initial state
+  initGame();
+  draw();
+})();
+</script>
+
+<script src="shared/hero-backgrounds.js"></script>
+</body>
+</html>

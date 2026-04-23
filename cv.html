@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0; --plastic-cream-deep: #F2EEE4; --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640; --ink-muted: #7A756D; --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10); --ink-rule: rgba(26, 24, 20, 0.06);
+  --pixel-red: #E8513D; --pixel-red-soft: rgba(232, 81, 61, 0.06);
+  --font-display: 'Fraunces', Georgia, serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px; --s-11: 160px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; }
+.nav__link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__link:hover { color: var(--pixel-red); }
+.nav__link--active { color: var(--pixel-red); }
+
+.page-header { padding: var(--s-11) 0 var(--s-7); border-bottom: 1px solid var(--ink-hairline); }
+.page-header__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-4); }
+.page-header__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-5); font-variation-settings: "opsz" 144; }
+.page-header__title .em { font-style: italic; }
+.page-header__intro { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.4; color: var(--ink-mid); max-width: 52ch; font-variation-settings: "opsz" 72; margin-bottom: var(--s-6); }
+
+/* Download actions row */
+.page-header__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
+.header-btn { display: inline-flex; align-items: center; gap: var(--s-3); padding: var(--s-4) var(--s-5); text-decoration: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s ease; border: 1px solid var(--ink-hairline); color: var(--plastic-charcoal); background: transparent; }
+.header-btn:hover { border-color: var(--pixel-red); color: var(--pixel-red); }
+.header-btn--primary { background: var(--plastic-charcoal); color: var(--plastic-cream); border-color: var(--plastic-charcoal); }
+.header-btn--primary:hover { background: var(--pixel-red); border-color: var(--pixel-red); color: var(--plastic-cream); }
+.header-btn__icon { font-size: 14px; line-height: 1; }
+
+@media print {
+  .nav, .page-header__actions, .foot, .footer { display: none; }
+  body { background: white; color: black; }
+  .xp-row__case-study-link { display: none; }
+}
+
+/* SECTION */
+.section { padding: var(--s-9) 0; border-top: 1px solid var(--ink-hairline); }
+.section:first-of-type { border-top: none; }
+.section__header { margin-bottom: var(--s-7); display: grid; grid-template-columns: 180px 1fr; gap: var(--s-5); align-items: baseline; }
+.section__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); padding-top: var(--s-2); }
+.section__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.025em; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; }
+.section__title .em { font-style: italic; }
+@media (max-width: 720px) { .section__header { grid-template-columns: 1fr; gap: var(--s-2); } }
+
+/* EXPERIENCE ROW */
+.xp-row { display: grid; grid-template-columns: 180px 1fr; gap: var(--s-5); padding: var(--s-5) 0; border-top: 1px solid var(--ink-hairline); }
+.xp-row:first-of-type { border-top: none; }
+.xp-row__dates { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; color: var(--ink-muted); padding-top: var(--s-1); line-height: 1.5; }
+.xp-row__dates .duration { display: block; color: var(--ink-faint); font-size: 11px; margin-top: 2px; }
+.xp-row__content { display: flex; flex-direction: column; gap: var(--s-2); }
+.xp-row__role { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.2; color: var(--plastic-charcoal); font-variation-settings: "opsz" 48; letter-spacing: -0.01em; }
+.xp-row__role .em { font-style: italic; font-weight: 400; }
+.xp-row__meta { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.xp-row__meta .dot { color: var(--ink-faint); }
+.xp-row__meta .tag { display: inline-block; padding: 2px 8px; border: 1px solid var(--ink-hairline); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.05em; color: var(--ink-mid); }
+.xp-row__meta .tag--current { border-color: var(--pixel-red); color: var(--pixel-red); }
+.xp-row__meta .tag--venture { border-color: var(--ink-mid); color: var(--ink-mid); background: rgba(26, 24, 20, 0.04); }
+.xp-row__summary { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: var(--ink-mid); max-width: 64ch; margin-top: var(--s-2); }
+.xp-row__case-study-link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pixel-red); text-decoration: none; margin-top: var(--s-2); display: inline-flex; align-items: center; gap: var(--s-2); transition: letter-spacing 0.3s ease; width: fit-content; border-bottom: 1px solid var(--pixel-red); padding-bottom: 2px; }
+.xp-row__case-study-link:hover { letter-spacing: 0.15em; }
+@media (max-width: 720px) { .xp-row { grid-template-columns: 1fr; gap: var(--s-2); } }
+
+/* EDUCATION - similar rows */
+.edu-row { display: grid; grid-template-columns: 180px 1fr; gap: var(--s-5); padding: var(--s-5) 0; border-top: 1px solid var(--ink-hairline); }
+.edu-row:first-of-type { border-top: none; }
+.edu-row__dates { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); padding-top: var(--s-1); }
+.edu-row__content { display: flex; flex-direction: column; gap: var(--s-2); }
+.edu-row__title { font-family: var(--font-display); font-weight: 500; font-size: 20px; line-height: 1.2; color: var(--plastic-charcoal); font-variation-settings: "opsz" 36; }
+.edu-row__title .em { font-style: italic; font-weight: 400; }
+.edu-row__institution { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); }
+.edu-row__note { font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: var(--ink-mid); max-width: 64ch; }
+@media (max-width: 720px) { .edu-row { grid-template-columns: 1fr; gap: var(--s-2); } }
+
+/* CERT GRID */
+.certs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.cert { padding: var(--s-4) var(--s-5); border: 1px solid var(--ink-hairline); background: var(--plastic-cream); display: flex; flex-direction: column; gap: var(--s-1); transition: border-color 0.3s ease; }
+.cert:hover { border-color: var(--pixel-red); }
+.cert--featured { border-color: var(--pixel-red); }
+.cert__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.cert__label--featured { color: var(--pixel-red); font-weight: 500; }
+.cert__name { font-family: var(--font-display); font-weight: 500; font-size: 16px; line-height: 1.25; color: var(--plastic-charcoal); font-variation-settings: "opsz" 24; }
+.cert__issuer { font-family: var(--font-body); font-size: 13px; color: var(--ink-muted); }
+.certs-footnote { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--ink-hairline); font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+@media (max-width: 720px) { .certs { grid-template-columns: 1fr; } }
+
+/* HONORS */
+.honor { padding: var(--s-4) 0; border-top: 1px solid var(--ink-hairline); display: grid; grid-template-columns: 180px 1fr; gap: var(--s-5); align-items: baseline; }
+.honor:first-of-type { border-top: none; padding-top: 0; }
+.honor__year { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); padding-top: var(--s-1); }
+.honor__content { display: flex; flex-direction: column; gap: var(--s-1); }
+.honor__name { font-family: var(--font-display); font-weight: 500; font-size: 18px; line-height: 1.2; color: var(--plastic-charcoal); font-variation-settings: "opsz" 36; }
+.honor__issuer { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); }
+@media (max-width: 720px) { .honor { grid-template-columns: 1fr; gap: var(--s-2); } }
+
+/* PUBLICATION / PUBLIC WORK */
+.public-work { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-5); }
+.work-card { padding: var(--s-5) var(--s-6); border: 1px solid var(--ink-hairline); background: var(--plastic-cream); display: flex; flex-direction: column; gap: var(--s-3); transition: border-color 0.3s ease, background-color 0.3s ease; }
+.work-card:hover { border-color: var(--pixel-red); background: var(--plastic-cream-deep); }
+.work-card__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.work-card__title { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.2; color: var(--plastic-charcoal); font-variation-settings: "opsz" 48; letter-spacing: -0.01em; }
+.work-card__title .em { font-style: italic; }
+.work-card__dates { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-muted); }
+.work-card__description { font-family: var(--font-body); font-size: 14px; line-height: 1.55; color: var(--ink-mid); }
+@media (max-width: 720px) { .public-work { grid-template-columns: 1fr; } }
+
+/* LANGUAGES */
+.langs { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.lang { padding: var(--s-3) var(--s-5); border: 1px solid var(--ink-hairline); }
+.lang__name { font-family: var(--font-display); font-weight: 500; font-size: 16px; color: var(--plastic-charcoal); }
+.lang__level { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; display: block; }
+
+/* FOOT */
+.foot { padding: var(--s-10) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__intro { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-5); }
+.foot-nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-6); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.05; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; letter-spacing: -0.02em; transition: color 0.2s ease; }
+.foot-link__title .em { font-style: italic; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot-nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+
+51%, 100% { opacity: 0; }
+}
+
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <div class="nav__links">
+      <a href="index.html#work" class="nav__link">Work</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="cv.html" class="nav__link nav__link--active">CV</a>
+      <a id="pkThemeBtn" class="nav__theme-btn" href="game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="page-header">
+    <div class="page-header__label">Full CV · updated April 2026</div>
+    <h1 class="page-header__title">Curriculum <span class="em">vitae</span></h1>
+    <p class="page-header__intro">Thirteen years of enterprise UX, two co-founded ventures, one animal-education platform, a publication on AI &amp; UX, and a quiet belief that the hardest design work happens inside tools people can't quit.</p>
+
+    <div class="page-header__actions">
+      <button onclick="window.print()" class="header-btn header-btn--primary" style="cursor: pointer; font: inherit;">
+        <span class="header-btn__icon">↓</span>
+        <span>Save as PDF</span>
+      </button>
+      <a href="https://www.linkedin.com/in/kashyaprashant/" target="_blank" rel="noopener" class="header-btn">
+        <span class="header-btn__icon">↗</span>
+        <span>View on LinkedIn</span>
+      </a>
+    </div>
+  </header>
+</div>
+
+<!-- EXPERIENCE -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Experience</div>
+      <h2 class="section__title">Thirteen <span class="em">years</span>.</h2>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Oct 2024 - Present<span class="duration">1 yr 7 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Senior UX Designer · <span class="em">Communication-Monetization</span></div>
+        <div class="xp-row__meta">Oracle <span class="dot">·</span> Pune, India <span class="dot">·</span> Hybrid <span class="tag tag--current">Current</span></div>
+        <div class="xp-row__summary">Lead UX work for Oracle Communications' Monetization products. Spans design strategy, product-design alignment with Redwood UX guidelines, and delivering intuitive user journeys. Currently leading ASAP (Automated Service Activation Platform) and Unified Assurance as sole UX designer.</div>
+        <a href="case-studies/asap.html" class="xp-row__case-study-link">→ ASAP case study</a>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">May 2022 - Oct 2024<span class="duration">2 yrs 6 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Senior UX Designer · <span class="em">Enterprise Risk &amp; Finance</span></div>
+        <div class="xp-row__meta">Oracle <span class="dot">·</span> India</div>
+        <div class="xp-row__summary">Led UX design initiatives within Oracle's ERF solutions. Implemented Oracle's Redwood design language within the ERF team, championing its adoption within the global community.</div>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Mar 2020 - Apr 2022<span class="duration">2 yrs 2 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Senior UX Designer · <span class="em">Smart Buildings</span></div>
+        <div class="xp-row__meta">Siemens Technology India <span class="dot">·</span> Pune, India</div>
+        <div class="xp-row__summary">Applied design thinking methodologies with Product Owner, Project Manager, and Development team partnerships. Developed components for Siemens' cross-portfolio Element Design System - designing Progress indicators, Spinner, and File Uploader behaviors used across SI BP products.</div>
+        <a href="also-pages/04-siemens-element.html" class="xp-row__case-study-link">→ Element DS page</a>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Mar 2019 - Mar 2020<span class="duration">1 yr 1 mo</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Senior UX Designer</div>
+        <div class="xp-row__meta">McDermott International Inc. <span class="dot">·</span> Pune Division, India</div>
+        <div class="xp-row__summary">Led design for Project XD - a cloud-based digital tool revolutionizing subsea project delivery and project management - bringing 3D rendering technology into offshore oil &amp; gas operations.</div>
+        <a href="case-studies/project-xd.html" class="xp-row__case-study-link">→ Project XD case study</a>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Sep 2016 - Dec 2019<span class="duration">3 yrs 4 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Co-Founder</div>
+        <div class="xp-row__meta">Exaltic Nutrition <span class="dot">·</span> Pune Division, India <span class="tag tag--venture">Venture · concurrent</span></div>
+        <div class="xp-row__summary">Co-founded Shredz Sports Nutrition (brand: Exaltic Nutrition), providing comprehensive fitness products designed to enhance physical stamina, muscle development, and post-workout recovery. Served strategic partnerships with IPL and Indian State Cricket players. Wore multiple hats: marketing, technical operator, developer, salesperson, accountant. Ran concurrently with InfoBeans design role.</div>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Feb 2016 - Mar 2019<span class="duration">3 yrs 2 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Lead UX / UI Designer</div>
+        <div class="xp-row__meta">InfoBeans <span class="dot">·</span> Pune Area, India</div>
+        <div class="xp-row__summary">Spearheaded enterprise business applications, transforming user requirements into interactive products through design thinking and rigorous usability testing. Also provided guidance and mentorship to designers and researchers, ensuring alignment with business objectives.</div>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Apr 2015 - Feb 2016<span class="duration">11 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">Graphic / UX Designer</div>
+        <div class="xp-row__meta">Mobisoft Infotech <span class="dot">·</span> Pune Division, India</div>
+        <div class="xp-row__summary">Worked across hospitality, fashion, and security domains. Led design for two standout initiatives - Traveller (co-passenger social platform) and The Stylist (luxury fashion), establishing their design foundations.</div>
+        <a href="also-pages/08-traveller.html" class="xp-row__case-study-link">→ Traveller · Stylist pages</a>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Oct 2014 - Apr 2015<span class="duration">7 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">UI / UX Evangelist · <span class="em">founding designer</span></div>
+        <div class="xp-row__meta">Conexstra Technologies Pvt. Ltd. <span class="dot">·</span> Wakad, Pune <span class="tag">Startup</span></div>
+        <div class="xp-row__summary">Founding designer - employee #7. Spearheaded UI/UX initiatives contributing to the company's recognition as one of India's top 20 hottest startups by NDTV. Led UX research, design, brand identity, and user research with students and teachers for the Kexplora education platform.</div>
+        <a href="case-studies/kexplora.html" class="xp-row__case-study-link">→ Kexplora case study</a>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Nov 2013 - Oct 2014<span class="duration">1 yr</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">User Experience Designer</div>
+        <div class="xp-row__meta">Amura Marketing Technologies <span class="dot">·</span> Pune Area, India</div>
+        <div class="xp-row__summary">Designed for real estate marketing - managed web design projects for 14 prominent real estate clients including Kolte-Patil, Nirmal, DSK, Teerth, and Gera. Also designed a logo for a Google Conference on Real Estate Marketing.</div>
+      </div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-row__dates">Nov 2012 - Sep 2013<span class="duration">11 mos</span></div>
+      <div class="xp-row__content">
+        <div class="xp-row__role">UI / UX Designer · <span class="em">first design role</span></div>
+        <div class="xp-row__meta">QuadNode Technologies Pvt. Ltd. <span class="dot">·</span> Pune Area, India</div>
+        <div class="xp-row__summary">Inaugural UX role. Worked on a product focused on children's security. Led design for consistent and effective Android and iOS applications, prioritizing usability and intuitive interaction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Education</div>
+      <h2 class="section__title">How I <span class="em">learned</span> this work.</h2>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-row__dates">Nov 2019 - Jun 2022</div>
+      <div class="edu-row__content">
+        <div class="edu-row__title">User Experience <span class="em">program</span></div>
+        <div class="edu-row__institution">IxDF — The Interaction Design Foundation</div>
+        <div class="edu-row__note">Completed Become a UX Designer from Scratch, Human-Computer Interaction, Gestalt Psychology and Web Design, Design Thinking Beginner's Guide, and UX Foundations series. Structured UX education from a non-profit organization focused on democratizing design education.</div>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-row__dates">Mar 2022 - Apr 2022</div>
+      <div class="edu-row__content">
+        <div class="edu-row__title">Certified Usability Analyst <span class="em">(CUA™)</span></div>
+        <div class="edu-row__institution">Human Factors International</div>
+        <div class="edu-row__note">HFI CUA covers four core competencies through hands-on exercises. The industry's gold-standard certification in UX credentialing, validating comprehensive user research and usability methodology.</div>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-row__dates">2008 - 2012</div>
+      <div class="edu-row__content">
+        <div class="edu-row__title">Bachelor of Engineering · <span class="em">Electrical Engineering</span></div>
+        <div class="edu-row__institution">Pune Vidhyarthi Griha's College of Engineering and Technology, Pune</div>
+        <div class="edu-row__note">Foundation in analytical problem-solving, systems thinking, and technical documentation through circuit analysis, control systems, and signal processing. Translated later into UX strategy and qualitative and quantitative research methodologies.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Certifications</div>
+      <h2 class="section__title">Featured <span class="em">credentials</span>.</h2>
+    </div>
+
+    <div class="certs">
+      <div class="cert cert--featured">
+        <div class="cert__label cert__label--featured">Industry-standard · featured</div>
+        <div class="cert__name">Certified Usability Analyst (CUA™)</div>
+        <div class="cert__issuer">Human Factors International · 2022</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">UX foundation</div>
+        <div class="cert__name">Foundations of User Experience (UX) Design</div>
+        <div class="cert__issuer">Google · 2025</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">AI · enterprise</div>
+        <div class="cert__name">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</div>
+        <div class="cert__issuer">Oracle · 2025</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">AI · enterprise</div>
+        <div class="cert__name">OCI 2025 Certified AI Foundations Associate</div>
+        <div class="cert__issuer">Oracle · 2025</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">Enterprise</div>
+        <div class="cert__name">Oracle Sales Business Process Certified Foundations Associate</div>
+        <div class="cert__issuer">Oracle · 2024</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">HCI</div>
+        <div class="cert__name">Human-Computer Interaction (HCI)</div>
+        <div class="cert__issuer">IxDF · 2022</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">Design systems</div>
+        <div class="cert__name">Figma Essential Training + Collaboration + Figma for UX</div>
+        <div class="cert__issuer">LinkedIn · 2024</div>
+      </div>
+
+      <div class="cert">
+        <div class="cert__label">Leadership</div>
+        <div class="cert__name">Emotional Intelligence series (4 programs)</div>
+        <div class="cert__issuer">PMI · LinkedIn · 2024</div>
+      </div>
+    </div>
+
+    <div class="certs-footnote">
+      Plus 30+ additional certifications across UX research, storytelling for designers, design thinking, gestalt psychology, AI/ML foundations, financial literacy for designers, persuasive selling, and UX for agile teams. Full list on <a href="https://www.linkedin.com/in/kashyaprashant/details/certifications/" style="color: var(--ink-mid); border-bottom: 1px solid var(--ink-hairline); padding-bottom: 1px; text-decoration: none;">LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HONORS -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Recognition</div>
+      <h2 class="section__title">Honors &amp; <span class="em">awards</span>.</h2>
+    </div>
+
+    <div class="honor">
+      <div class="honor__year">2015</div>
+      <div class="honor__content">
+        <div class="honor__name">NDTV Top 20 Hottest Startups in India</div>
+        <div class="honor__issuer">National recognition · awarded to Conexstra for Kexplora</div>
+      </div>
+    </div>
+
+    <div class="honor">
+      <div class="honor__year">Oct 2018</div>
+      <div class="honor__content">
+        <div class="honor__name">People's Choice Award</div>
+        <div class="honor__issuer">Eternus Solutions / InfoBeans · peer-voted for collaboration and project impact</div>
+      </div>
+    </div>
+
+    <div class="honor">
+      <div class="honor__year">Oct 2017</div>
+      <div class="honor__content">
+        <div class="honor__name">Stellar Performer of the Year</div>
+        <div class="honor__issuer">Eternus Solutions Pvt Ltd / InfoBeans · top individual contributor</div>
+      </div>
+    </div>
+
+    <div class="honor">
+      <div class="honor__year">Dec 2016</div>
+      <div class="honor__content">
+        <div class="honor__name">Debut Award</div>
+        <div class="honor__issuer">Eternus Solutions Pvt Ltd / InfoBeans · recognition for rapid ramp-up and early contribution</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC WORK & VENTURES -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Public work</div>
+      <h2 class="section__title">Beyond the <span class="em">day job</span>.</h2>
+    </div>
+
+    <div class="public-work">
+      <div class="work-card">
+        <div class="work-card__label">Venture · co-founded</div>
+        <div class="work-card__title">Exaltic <span class="em">Nutrition</span></div>
+        <div class="work-card__dates">Sep 2016 - Dec 2019</div>
+        <div class="work-card__description">Sports nutrition brand (Shredz Sports Nutrition). Served strategic partnerships with IPL and Indian State Cricket players. Co-founded and ran concurrently with a full-time design role.</div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card__label">Project · founded</div>
+        <div class="work-card__title">Prajati · <span class="em">Know Species</span></div>
+        <div class="work-card__dates">Jul 2018 - Present</div>
+        <div class="work-card__description">Educational platform celebrating the rich diversity of life on our planet, emphasizing the emotional intelligence of various species. Instagram, YouTube, and podcast channels sharing animal science.</div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card__label">Project · founded</div>
+        <div class="work-card__title">Tube <span class="em">Stage</span></div>
+        <div class="work-card__dates">Sep 2025 - Present</div>
+        <div class="work-card__description">YouTube channel translating complex tech news, AI breakthroughs, and investment trends into concise, high-energy video summaries for busy professionals.</div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-card__label">Publication</div>
+        <div class="work-card__title">Echoes of <span class="em">Innovation</span></div>
+        <div class="work-card__dates">Dec 2023</div>
+        <div class="work-card__description">"AI &amp; UX Synergy - Chronicles of Digiville Town." A narrative exploration of artificial intelligence and user experience as symbiotic forces shaping the digital realm.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="container">
+  <div class="section">
+    <div class="section__header">
+      <div class="section__label">Languages</div>
+      <h2 class="section__title">Two <span class="em">working languages</span>.</h2>
+    </div>
+
+    <div class="langs">
+      <div class="lang">
+        <div class="lang__name">English</div>
+        <span class="lang__level">Professional working</span>
+      </div>
+      <div class="lang">
+        <div class="lang__name">Hindi</div>
+        <span class="lang__level">Professional working</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="foot">
+  <div class="container">
+    <div class="foot__intro">Elsewhere on this site →</div>
+    <div class="foot-nav">
+      <a href="about.html" class="foot-link">
+        <div class="foot-link__meta">← About</div>
+        <div class="foot-link__title">Back to About</div>
+      </a>
+      <a href="index.html#work" class="foot-link foot-link--next">
+        <div class="foot-link__meta">Work</div>
+        <div class="foot-link__title">Selected <span class="em">work</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>CV · updated April 2026</div>
+  </div>
+</footer>
+
+<script src="shared/theme.js"></script>
+</body>
+</html>

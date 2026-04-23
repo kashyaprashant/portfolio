@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project XD - Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0; --plastic-cream-deep: #F2EEE4; --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640; --ink-muted: #7A756D; --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10); --ink-rule: rgba(26, 24, 20, 0.06);
+  --pixel-red: #E8513D; --pixel-red-soft: rgba(232, 81, 61, 0.06);
+  --font-display: 'Fraunces', Georgia, serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px; --s-11: 160px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; list-style: none; margin: 0; padding: 0; }
+.nav__links li { list-style: none; }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__back { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__back:hover { color: var(--pixel-red); }
+
+.progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--pixel-red); z-index: 101; width: 0%; transition: width 0.08s linear; }
+
+.hero { padding: var(--s-11) 0 var(--s-9); border-bottom: 1px solid var(--ink-hairline); }
+.hero__breadcrumb { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-6); display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.hero__breadcrumb a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.hero__breadcrumb a:hover { color: var(--pixel-red); }
+.hero__breadcrumb-sep { color: var(--ink-faint); }
+.hero__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-5); font-variation-settings: "opsz" 144; }
+.hero__title .em { font-style: italic; font-weight: 400; }
+.hero__subtitle { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.3; color: var(--ink-mid); max-width: 40ch; margin-bottom: var(--s-9); font-variation-settings: "opsz" 72; }
+
+.meta-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-5) var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.meta-cell { display: flex; flex-direction: column; gap: 4px; }
+.meta-cell__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.meta-cell__value { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--plastic-charcoal); line-height: 1.3; }
+@media (max-width: 860px) { .meta-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .meta-grid { grid-template-columns: 1fr 1fr; gap: var(--s-4); } }
+
+.quick-map { padding: var(--s-9) 0; background: var(--plastic-cream-deep); }
+.quick-map__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-6); text-align: center; }
+.quick-map__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-7); max-width: 880px; margin: 0 auto; }
+.quick-fact { display: flex; flex-direction: column; gap: var(--s-2); text-align: center; padding: 0 var(--s-3); }
+.quick-fact__value { font-family: var(--font-display); font-weight: 400; font-size: clamp(36px, 4.5vw, 56px); line-height: 1; letter-spacing: -0.03em; color: var(--plastic-charcoal); font-variation-settings: "opsz" 96; }
+.quick-fact__value .em { font-style: italic; }
+.quick-fact__value .unit { font-family: var(--font-body); font-size: 0.4em; font-weight: 500; color: var(--ink-muted); letter-spacing: 0; margin-left: 4px; font-style: normal; text-transform: lowercase; }
+.quick-fact__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); max-width: 24ch; margin: 0 auto; line-height: 1.4; }
+@media (max-width: 720px) { .quick-map__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
+
+.tldr { padding: var(--s-9) 0; }
+.tldr__card { background: var(--plastic-cream-deep); border-left: 2px solid var(--pixel-red); padding: var(--s-7); max-width: 820px; }
+.tldr__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-4); }
+.tldr__body { font-family: var(--font-body); font-size: 18px; line-height: 1.6; color: var(--plastic-charcoal); max-width: 64ch; }
+.tldr__body em { font-family: var(--font-display); font-size: 19px; font-style: italic; font-weight: 400; color: var(--plastic-charcoal); }
+
+.section { padding: var(--s-9) 0; border-top: 1px solid var(--ink-hairline); }
+.section__header { display: grid; grid-template-columns: 60px 1fr; gap: var(--s-5); align-items: baseline; margin-bottom: var(--s-7); }
+.section__number { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: var(--ink-faint); }
+.section__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.025em; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; }
+.section__title .em { font-style: italic; }
+.prose { margin-left: calc(60px + var(--s-5)); max-width: 64ch; }
+@media (max-width: 720px) { .section__header { grid-template-columns: 40px 1fr; gap: var(--s-3); } .prose { margin-left: 0; } }
+.prose p { font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--ink-mid); margin-bottom: var(--s-5); }
+.prose p:last-child { margin-bottom: 0; }
+.prose p.lead { color: var(--plastic-charcoal); font-size: 20px; line-height: 1.55; margin-bottom: var(--s-6); }
+
+.pull-quote { margin: var(--s-8) 0; padding: var(--s-7) var(--s-8); position: relative; max-width: 780px; }
+.pull-quote::before { content: '"'; position: absolute; top: var(--s-4); left: var(--s-4); font-family: var(--font-display); font-size: 88px; font-weight: 400; color: var(--pixel-red); line-height: 1; font-variation-settings: "opsz" 144; opacity: 0.3; }
+.pull-quote__body { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; color: var(--plastic-charcoal); letter-spacing: -0.015em; font-variation-settings: "opsz" 72; max-width: 48ch; }
+.pull-quote__attribution { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-top: var(--s-4); padding-top: var(--s-3); border-top: 1px solid var(--ink-hairline); display: inline-block; padding-right: var(--s-6); }
+@media (max-width: 720px) { .pull-quote { padding: var(--s-5) var(--s-5) var(--s-5) var(--s-6); } .pull-quote::before { font-size: 60px; top: 0; left: 0; } }
+
+.image-slot { margin: var(--s-8) calc(-1 * var(--s-8)); display: flex; flex-direction: column; gap: var(--s-3); }
+.image-slot__frame { aspect-ratio: 16 / 9; background: var(--plastic-cream-deep); border: 1px dashed var(--ink-hairline); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: var(--s-2); position: relative; overflow: hidden; }
+.image-slot__frame::before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translate(-50%, -50%); background-image: linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)), linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)); background-size: 10px 10px; background-position: 0 0, 5px 5px; border-radius: 50%; opacity: 0.4; }
+.image-slot__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); text-align: center; z-index: 1; padding: var(--s-2) var(--s-4); background: var(--plastic-cream-deep); position: relative; }
+.image-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 0 var(--s-8); }
+.image-slot__caption .number { color: var(--pixel-red); font-weight: 500; }
+@media (max-width: 720px) { .image-slot { margin: var(--s-6) calc(-1 * var(--s-5)); } .image-slot__caption { padding: 0 var(--s-5); } }
+
+/* Case study actions button */
+.case-actions { margin-top: var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.case-btn { display: inline-flex; align-items: center; gap: var(--s-3); padding: var(--s-4) var(--s-5); text-decoration: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s ease; background: var(--plastic-charcoal); color: var(--plastic-cream); border: 1px solid var(--plastic-charcoal); }
+.case-btn:hover { background: var(--pixel-red); border-color: var(--pixel-red); color: var(--plastic-cream); }
+.case-btn__icon { font-size: 14px; line-height: 1; }
+
+/* XD signature element: Before/After split */
+.before-after { margin: var(--s-7) 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.before-after__panel { display: flex; flex-direction: column; gap: var(--s-3); }
+.before-after__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+.before-after__label--before { color: var(--ink-muted); }
+.before-after__label--after { color: var(--pixel-red); }
+.before-after__frame { aspect-ratio: 4 / 3; background: var(--plastic-cream-deep); border: 1px dashed var(--ink-hairline); display: flex; align-items: center; justify-content: center; position: relative; }
+.before-after__frame--after { border-color: var(--pixel-red); border-style: dashed; }
+.before-after__frame-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); padding: var(--s-2) var(--s-4); background: var(--plastic-cream-deep); }
+.before-after__caption { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: var(--ink-mid); }
+.before-after__overall { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); text-align: center; margin-top: var(--s-5); }
+.before-after__overall .number { color: var(--pixel-red); font-weight: 500; }
+@media (max-width: 720px) { .before-after { grid-template-columns: 1fr; } }
+
+.decision { margin: var(--s-7) 0; padding: var(--s-6) var(--s-7); border-left: 2px solid var(--ink-hairline); transition: border-color 0.3s ease; }
+.decision:hover { border-left-color: var(--pixel-red); }
+.decision__number { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); margin-bottom: var(--s-3); }
+.decision__title { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.25; letter-spacing: -0.015em; color: var(--plastic-charcoal); margin-bottom: var(--s-4); font-variation-settings: "opsz" 48; }
+.decision__body { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--ink-mid); }
+.decision__body p + p { margin-top: var(--s-4); }
+
+.status-table { margin: var(--s-5) 0; }
+.status-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--s-5); padding: var(--s-4) 0; border-top: 1px solid var(--ink-hairline); align-items: baseline; }
+.status-row:last-child { border-bottom: 1px solid var(--ink-hairline); }
+.status-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); display: flex; align-items: center; gap: var(--s-2); }
+.status-label__dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: var(--ink-faint); }
+.status-value { font-family: var(--font-body); font-size: 16px; line-height: 1.5; color: var(--plastic-charcoal); }
+@media (max-width: 720px) { .status-row { grid-template-columns: 1fr; gap: var(--s-1); padding: var(--s-3) 0; } }
+
+.change { margin: var(--s-5) 0; padding: var(--s-5) var(--s-6); background: var(--pixel-red-soft); border-left: 2px solid var(--pixel-red); }
+.change__title { font-family: var(--font-body); font-weight: 600; font-size: 16px; color: var(--plastic-charcoal); margin-bottom: var(--s-2); }
+.change__body { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink-mid); }
+
+.foot { padding: var(--s-10) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__intro { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-5); }
+.foot-nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-6); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.05; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; letter-spacing: -0.02em; transition: color 0.2s ease; }
+.foot-link__title .em { font-style: italic; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot-nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+
+/* SUBTLE HERO BACKGROUND — dot field / threads at 30% opacity */
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-canvas canvas,
+.hero-bg-canvas > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.hero { position: relative; }
+.hero > *:not(.hero-bg-canvas) { position: relative; z-index: 1; }
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <ul class="nav__links"><li><a href="../index.html#work" class="nav__back">← All work</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="../game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg-canvas" data-subtle="true" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__breadcrumb">
+      <a href="../index.html">Work</a>
+      <span class="hero__breadcrumb-sep">/</span>
+      <span>McDermott · 2019</span>
+    </div>
+
+    <h1 class="hero__title">Project <span class="em">XD</span></h1>
+    <p class="hero__subtitle">A global project tracking platform for offshore oil &amp; gas operations. Replaced Excel-driven workflows for executives, engineers, and field managers.</p>
+
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-cell__label">Role</div><div class="meta-cell__value">Sole UX Designer</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Team</div><div class="meta-cell__value">1 PM, 4 engineers</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Timeline</div><div class="meta-cell__value">~6 months</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Platform</div><div class="meta-cell__value">Desktop web · Global rollout</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Status</div><div class="meta-cell__value">Shipped</div></div>
+    </div>
+
+    <div class="case-actions">
+      <a href="https://www.figma.com/proto/64KGt6giqA9bsp2BFGAVbl/Portfolio?node-id=25822-1506&t=BYvf4vGQwRfBChri-0&scaling=contain&content-scaling=fixed&starting-point-node-id=25822%3A1506" target="_blank" rel="noopener noreferrer" class="case-btn">
+        <span class="case-btn__icon">→</span>
+        <span>View detailed process in Figma</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="quick-map">
+  <div class="container">
+    <div class="quick-map__label">The case at a glance</div>
+    <div class="quick-map__grid">
+      <div class="quick-fact">
+        <div class="quick-fact__value">5<span class="unit">×</span></div>
+        <div class="quick-fact__label">Task speedup, usability testing</div>
+      </div>
+      <div class="quick-fact">
+        <div class="quick-fact__value">3<span class="unit">personas</span></div>
+        <div class="quick-fact__label">Executives · Engineers · Field Managers</div>
+      </div>
+      <div class="quick-fact">
+        <div class="quick-fact__value">1<span class="unit">globe</span></div>
+        <div class="quick-fact__label">View that survived executive pushback on data tables</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tldr">
+  <div class="container">
+    <div class="tldr__card">
+      <div class="tldr__label">TL;DR</div>
+      <p class="tldr__body">
+        McDermott is a global engineering and construction company. Their offshore oil &amp; gas projects span months and continents - Qatar to Mexico, Australia to the Gulf of Mexico. I was sole UX on a 1-PM / 4-engineer team building XD: a project tracking platform replacing fragmented Excel workflows for executives, engineers, and field managers. <em>The project shipped globally and produced a 5× task speedup in usability testing.</em> The instinct was to treat this as a business problem; the real lesson was that I'd left engineers out of the discovery and had to course-correct mid-project.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATION -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">01</div>
+      <h2 class="section__title">The <span class="em">situation</span></h2>
+    </div>
+    <div class="prose">
+      <p>McDermott runs dozens of large engineering-and-construction projects concurrently - offshore platforms, subsea pipelines, onshore terminals - each staffed by hundreds of engineers and managed from regional offices. Before XD, project tracking lived in Excel: status reports emailed weekly, rolled up by hand, broken into regional sheets that diverged from each other by the time leadership reviewed them on Mondays.</p>
+      <p>Three very different people relied on that weekly ritual. Executives needed to see portfolio health at a glance - which projects were on track, which were slipping, which needed intervention. Engineers needed to report status without it eating into the engineering work they were actually paid to do. Field managers sat between those two, translating between the engineers' granular reality and the executives' portfolio view.</p>
+      <p>My brief from the PM was clear: replace Excel, give executives a dashboard, speed up the reporting cycle. The brief didn't mention engineers' workflow - and that turned out to matter.</p>
+
+      <div class="image-slot">
+        <div class="image-slot__frame"><div class="image-slot__label">Before · Excel status reports</div></div>
+        <div class="image-slot__caption"><span class="number">Fig. 01</span> · The paper-trail reality XD replaced.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="pull-quote">
+    <div class="pull-quote__body">
+      I treated this as a business problem for the first six weeks. Executives and managers were front and center. Engineers were not. I had to course-correct.
+    </div>
+    <div class="pull-quote__attribution">What I got wrong first</div>
+  </div>
+</div>
+
+<!-- DECISIONS -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">02</div>
+      <h2 class="section__title">The decisions that <span class="em">mattered</span></h2>
+    </div>
+    <div class="prose">
+      <p class="lead">XD had three design decisions where a less experienced designer might have gone a different way. Two I made cleanly; one I got pushback on and ultimately made the harder call.</p>
+
+      <div class="decision">
+        <div class="decision__number">Decision 01</div>
+        <div class="decision__title">Globe view for executives, not a data table.</div>
+        <div class="decision__body">
+          <p>The obvious dashboard for portfolio health is a data table - rows of projects, columns of metrics, sort and filter. I designed a rotating globe instead, with projects represented as nodes sized by scale and colored by status. Executives could see the whole portfolio geographically at a glance - "that region is red, why?" - before drilling into any project's detail.</p>
+          <p>Pushback came from engineers ("this isn't a useful tool") and from a few managers ("a table would be faster"). But executives loved it precisely because it wasn't a table. Tables are for specialists. The globe was for busy people with twelve minutes between meetings.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__number">Decision 02</div>
+        <div class="decision__title">Templates, not Excel-in-browser.</div>
+        <div class="decision__body">
+          <p>Engineers needed to file status updates. The fastest path was to put Excel in the browser - familiar UI, zero retraining. I argued against it. If we replicated Excel, we'd replicate Excel's problems: free-form entry, inconsistent data across teams, no structured feedback to executives. I built template-driven status filing instead - structured fields, validated inputs, a clear weekly cadence.</p>
+          <p>This was the decision engineers pushed back on hardest. "I know Excel. I don't want to learn your templates." The resolution came from involving engineers in template design - they helped shape the templates so the templates matched how they actually thought about status, not how I thought they did.</p>
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__number">Decision 03</div>
+        <div class="decision__title">Approval gates vs. unfiltered-with-audit-trail.</div>
+        <div class="decision__body">
+          <p>The PM wanted engineers' status updates to flow through manager approval before reaching executives. "Data quality matters. Executives shouldn't see unreviewed numbers." My counter: approval gates slow the reporting cycle, which was the whole point of the product. I argued for unfiltered flow with a clear audit trail - every edit timestamped and attributed, every status change reviewable after the fact.</p>
+          <p>We went back and forth for two weeks. I won on data-integrity grounds: audit trails produce better discipline than approval gates, because engineers know their work is visible rather than hidden behind a manager's sign-off. The product shipped that way and it worked.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- XD SIGNATURE: BEFORE/AFTER -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">03</div>
+      <h2 class="section__title">The executive view, <span class="em">before and after</span></h2>
+    </div>
+    <div class="prose">
+      <p>The clearest evidence of Decision 01 is what executives actually saw. Before XD, they saw a spreadsheet. After XD, they saw a rotating globe with portfolio health at a glance.</p>
+
+      <div class="before-after">
+        <div class="before-after__panel">
+          <div class="before-after__label before-after__label--before">Before · spreadsheet</div>
+          <div class="before-after__frame"><div class="before-after__frame-label">Excel rollup</div></div>
+          <div class="before-after__caption">Weekly Excel rollup assembled by hand, sent as an attachment to a Monday email, frequently divergent between regions.</div>
+        </div>
+        <div class="before-after__panel">
+          <div class="before-after__label before-after__label--after">After · XD globe</div>
+          <div class="before-after__frame before-after__frame--after"><div class="before-after__frame-label">XD globe view</div></div>
+          <div class="before-after__caption">Real-time globe visualization with projects sized by scale, colored by status. Executives see portfolio health in one view.</div>
+        </div>
+      </div>
+
+      <div class="before-after__overall"><span class="number">Fig. 02</span> · The decision that survived pushback from engineers, managers, and my own second-guessing.</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="pull-quote">
+    <div class="pull-quote__body">
+      Tables are for specialists. The globe was for busy people with twelve minutes between meetings.
+    </div>
+    <div class="pull-quote__attribution">Decision 01</div>
+  </div>
+</div>
+
+<!-- LEARNINGS -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">04</div>
+      <h2 class="section__title">What I got <span class="em">wrong</span></h2>
+    </div>
+    <div class="prose">
+      <p>For the first six weeks of XD, I treated the project as a business problem. The brief was "replace Excel, speed up the reporting cycle." I anchored my discovery on executives and managers - the people whose pain was loudest and most visible.</p>
+      <p>Engineers got included late. When I finally ran engineer interviews - partly because the template design argument forced me to - I realized I'd misunderstood the product's core constraint. The bottleneck wasn't executive reporting; it was the fact that engineers were already overwhelmed, and a reporting tool that added friction would be sabotaged at the source. No executive dashboard works if engineers don't file.</p>
+      <p>The product recovered because I course-corrected - involving engineers in template design, weighting their feedback heavily, re-sequencing the build so their experience mattered as much as the executive view. But the six weeks I lost early are the clearest "what I'd do differently" on this project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">05</div>
+      <h2 class="section__title">Outcomes</h2>
+    </div>
+    <div class="prose">
+      <div class="status-table">
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot"></span>Shipped</div>
+          <div class="status-value">Global rollout across McDermott's project portfolio in 2019.</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot"></span>Measured</div>
+          <div class="status-value">5× task speedup in moderated usability testing, comparing XD against the Excel baseline for common reporting and lookup tasks.</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label"><span class="status-label__dot"></span>Observed</div>
+          <div class="status-value">Engineers' weekly status-filing time dropped from a reported 2-3 hours to under 30 minutes. Executive portfolio review shifted from Monday mornings to available-on-demand.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I'D CHANGE -->
+<section class="section">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__number">06</div>
+      <h2 class="section__title">What I'd <span class="em">change</span></h2>
+    </div>
+    <div class="prose">
+      <div class="change">
+        <div class="change__title">Pull in engineers on day one, not week six.</div>
+        <div class="change__body">The product recovered because engineers eventually shaped it. But the first six weeks were wasted. On the next comparable project, the engineer interview happens in week one, alongside executive interviews - not after executive priorities have already defined scope.</div>
+      </div>
+      <div class="change">
+        <div class="change__title">Visit an actual rig.</div>
+        <div class="change__body">I designed XD from meeting rooms in Chennai and from video calls with field managers. I never visited an offshore rig or a major onshore construction site. Watching an engineer file a status report in the actual context they file them in - after 14 hours of heat and diesel and real problems - would have shaped the product's tempo in ways I can only guess at now.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="foot">
+  <div class="container">
+    <div class="foot__intro">Next case study →</div>
+    <div class="foot-nav">
+      <a href="../case-studies/unified-assurance.html" class="foot-link">
+        <div class="foot-link__meta">← Previous · Oracle · Current</div>
+        <div class="foot-link__title">Unified <span class="em">Assurance</span></div>
+      </a>
+      <a href="../case-studies/kexplora.html" class="foot-link foot-link--next">
+        <div class="foot-link__meta">Next · Conexstra · 2014-2015</div>
+        <div class="foot-link__title">Kexplora</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>Case study · 03 / 04</div>
+  </div>
+</footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (scrollTop / docHeight * 100) + '%';
+  };
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+</script>
+
+<script src="../shared/theme.js"></script>
+<script src="../shared/hero-backgrounds.js"></script>
+</body>
+</html>

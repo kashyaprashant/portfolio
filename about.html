@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Prashant Kashyap</title>
+<meta name="description" content="Prashant Kashyap - Senior UX Designer at Oracle Communications. Thirteen years designing enterprise software for the people who can't quit it.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0; --plastic-cream-deep: #F2EEE4; --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640; --ink-muted: #7A756D; --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10); --ink-rule: rgba(26, 24, 20, 0.06);
+  --pixel-red: #E8513D; --pixel-red-soft: rgba(232, 81, 61, 0.06);
+  --font-display: 'Fraunces', Georgia, serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px; --s-11: 160px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; }
+.nav__link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__link:hover { color: var(--pixel-red); }
+.nav__link--active { color: var(--pixel-red); }
+
+.page-header { padding: var(--s-11) 0 var(--s-8); }
+.page-header__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-4); }
+.page-header__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-5); font-variation-settings: "opsz" 144; }
+.page-header__title .em { font-style: italic; }
+
+.about-body { padding-bottom: var(--s-10); }
+.about-layout { display: grid; grid-template-columns: 1fr 260px; gap: var(--s-9); align-items: start; }
+@media (max-width: 720px) { .about-layout { grid-template-columns: 1fr; gap: var(--s-7); } }
+
+.about-prose p { font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--plastic-charcoal); margin-bottom: var(--s-5); }
+.about-prose p:last-child { margin-bottom: 0; }
+.about-prose p.lead { font-family: var(--font-display); font-size: clamp(24px, 3vw, 32px); font-weight: 400; font-style: italic; line-height: 1.3; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; letter-spacing: -0.01em; margin-bottom: var(--s-7); }
+
+.photo-slot { display: flex; flex-direction: column; gap: var(--s-3); position: sticky; top: calc(var(--s-11) - var(--s-5)); }
+.photo-slot__frame { aspect-ratio: 4 / 5; background: var(--plastic-cream-deep); border: 1px dashed var(--ink-hairline); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.photo-slot__frame::before { content: ''; position: absolute; top: 35%; left: 50%; width: 60px; height: 60px; transform: translate(-50%, -50%); border-radius: 50%; border: 2px dashed var(--ink-hairline); opacity: 0.5; }
+.photo-slot__frame::after { content: ''; position: absolute; bottom: 20%; left: 50%; width: 120px; height: 50px; transform: translateX(-50%); border-top-left-radius: 60px; border-top-right-radius: 60px; border: 2px dashed var(--ink-hairline); border-bottom: none; opacity: 0.5; }
+.photo-slot__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); text-align: center; z-index: 1; padding: var(--s-2) var(--s-3); background: var(--plastic-cream-deep); position: relative; }
+.photo-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-muted); line-height: 1.5; }
+@media (max-width: 720px) { .photo-slot { position: static; max-width: 260px; } }
+
+.contact { margin-top: var(--s-8); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.contact__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-4); }
+.contact__list { display: flex; flex-wrap: wrap; gap: var(--s-5) var(--s-7); font-family: var(--font-mono); font-size: 13px; color: var(--ink-mid); }
+.contact__list a { color: var(--ink-mid); text-decoration: none; border-bottom: 1px solid var(--ink-hairline); transition: color 0.2s ease, border-color 0.2s ease; padding-bottom: 2px; }
+.contact__list a:hover { color: var(--pixel-red); border-bottom-color: var(--pixel-red); }
+
+/* DEEP CTA BUTTON — prominent dark call-to-action used for CV link. */
+.deep-cta { margin-top: var(--s-5); padding: var(--s-6) var(--s-7); background: var(--plastic-charcoal); color: var(--plastic-cream); display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); text-decoration: none; transition: background 0.25s ease, transform 0.25s ease; position: relative; overflow: hidden; }
+.deep-cta:first-of-type { margin-top: var(--s-8); }
+.deep-cta::before { content: ''; position: absolute; inset: 0; background: var(--pixel-red); transform: translateX(-101%); transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); z-index: 0; }
+.deep-cta:hover::before { transform: translateX(0); }
+.deep-cta > * { position: relative; z-index: 1; }
+.deep-cta__text { display: flex; flex-direction: column; gap: var(--s-1); }
+.deep-cta__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250, 247, 240, 0.6); font-weight: 500; }
+.deep-cta__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.5vw, 28px); line-height: 1.15; letter-spacing: -0.015em; color: var(--plastic-cream); font-variation-settings: "opsz" 48; }
+.deep-cta__title .em { font-style: italic; }
+.deep-cta__subtitle { font-family: var(--font-body); font-size: 13px; color: rgba(250, 247, 240, 0.7); line-height: 1.4; margin-top: 2px; }
+.deep-cta__arrow { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--plastic-cream); line-height: 1; transition: transform 0.25s ease; flex-shrink: 0; }
+.deep-cta:hover .deep-cta__arrow { transform: translateX(8px); }
+@media (max-width: 520px) { .deep-cta { padding: var(--s-5); } .deep-cta__arrow { font-size: 24px; } }
+
+.foot { padding: var(--s-10) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__intro { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-5); }
+.foot-nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-6); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.05; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; letter-spacing: -0.02em; transition: color 0.2s ease; }
+.foot-link__title .em { font-style: italic; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot-nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+
+51%, 100% { opacity: 0; }
+}
+
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <div class="nav__links">
+      <a href="index.html#work" class="nav__link">Work</a>
+      <a href="about.html" class="nav__link nav__link--active">About</a>
+      <a href="cv.html" class="nav__link">CV</a>
+      <a id="pkThemeBtn" class="nav__theme-btn" href="game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="page-header">
+    <div class="page-header__label">About</div>
+    <h1 class="page-header__title">Prashant <span class="em">Kashyap</span>.</h1>
+  </header>
+
+  <section class="about-body">
+    <div class="about-layout">
+      <div class="about-prose">
+        <p class="lead">I design enterprise software for the people who can't quit it.</p>
+
+        <p>Customers of consumer apps have infinite alternatives. A Customer Service Representative who sits inside Oracle's service-activation platform for eight hours a day does not. She learns the quirks, endures the misfires, and develops workarounds her manager will never see. My work is about noticing what she's carrying and redesigning the system underneath it.</p>
+
+        <p>Currently I'm a Senior UX Designer at Oracle Communications, leading UX for two Redwood modernizations — ASAP (service activation) and Unified Assurance (network monitoring). Before Oracle I spent two years in Siemens' Smart Buildings division designing components for the Element design system; a year at McDermott on offshore oil &amp; gas project tracking; and, earlier, roles at InfoBeans, Mobisoft, and the startup Conexstra — where Kexplora made NDTV's Top 20 Hottest Startups list in 2015.</p>
+
+        <p>Alongside the design work I co-founded Exaltic Nutrition, a sports-nutrition brand that served IPL and Indian state-level cricket players from 2016 to 2019. Running a company while holding a full-time design role teaches you things a design career alone cannot — what it costs to ship, what it means to own an outcome, how to lead across functions that don't share your vocabulary.</p>
+
+        <p>I'm IxDF-trained, HFI Certified Usability Analyst, and based in Pune. I work in English and Hindi, and I'm open to global roles.</p>
+
+        <a href="cv.html" class="deep-cta">
+          <div class="deep-cta__text">
+            <div class="deep-cta__label">For recruiters</div>
+            <div class="deep-cta__title">View full <span class="em">CV</span></div>
+            <div class="deep-cta__subtitle">13 years · 10 roles · education &amp; certifications · downloadable as PDF</div>
+          </div>
+          <div class="deep-cta__arrow">→</div>
+        </a>
+
+        <div class="contact">
+          <div class="contact__label">Get in touch</div>
+          <div class="contact__list">
+            <a href="mailto:prashantkashyap91@outlook.com">prashantkashyap91@outlook.com</a>
+            <a href="https://www.linkedin.com/in/kashyaprashant/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="photo-slot">
+        <div class="photo-slot__frame">
+          <div class="photo-slot__label">Photo · workspace</div>
+        </div>
+        <div class="photo-slot__caption">Replace with a natural-light workspace photo — not a LinkedIn headshot.</div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<section class="foot">
+  <div class="container">
+    <div class="foot__intro">Keep reading →</div>
+    <div class="foot-nav">
+      <a href="index.html#work" class="foot-link">
+        <div class="foot-link__meta">← Work</div>
+        <div class="foot-link__title">Selected <span class="em">work</span></div>
+      </a>
+      <a href="cv.html" class="foot-link foot-link--next">
+        <div class="foot-link__meta">Next →</div>
+        <div class="foot-link__title">Full <span class="em">CV</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>About</div>
+  </div>
+</footer>
+
+<script src="shared/theme.js"></script>
+</body>
+</html>

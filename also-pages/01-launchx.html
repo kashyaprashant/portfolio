@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaunchX - Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0;
+  --plastic-cream-deep: #F2EEE4;
+  --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640;
+  --ink-muted: #7A756D;
+  --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10);
+  --ink-rule: rgba(26, 24, 20, 0.06);
+  --pixel-red: #E8513D;
+  --pixel-red-soft: rgba(232, 81, 61, 0.06);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; list-style: none; margin: 0; padding: 0; }
+.nav__links li { list-style: none; }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__back { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__back:hover { color: var(--pixel-red); }
+.header { padding: var(--s-11) 0 var(--s-9); border-bottom: 1px solid var(--ink-hairline); }
+.header__breadcrumb { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-6); display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.header__breadcrumb a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.header__breadcrumb a:hover { color: var(--pixel-red); }
+.header__breadcrumb-sep { color: var(--ink-faint); }
+.header__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-4); font-variation-settings: "opsz" 144; }
+.header__subtitle { font-family: var(--font-body); font-weight: 400; font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.4; color: var(--ink-mid); margin-bottom: var(--s-8); max-width: 52ch; }
+.meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-5) var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.meta-cell { display: flex; flex-direction: column; gap: 4px; }
+.meta-cell__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.meta-cell__value { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--plastic-charcoal); line-height: 1.3; }
+@media (max-width: 720px) { .meta-grid { grid-template-columns: 1fr 1fr; gap: var(--s-4); } }
+.body { padding: var(--s-9) 0 var(--s-8); }
+.block { padding: var(--s-7) 0; border-top: 1px solid var(--ink-hairline); display: grid; grid-template-columns: 180px 1fr; gap: var(--s-7); }
+.block:first-child { border-top: none; padding-top: 0; }
+.block__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); padding-top: var(--s-1); }
+.block__content { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--plastic-charcoal); }
+.block__content p + p { margin-top: var(--s-4); }
+.block__content p { color: var(--ink-mid); }
+.block__content ul { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+.block__content li { position: relative; padding-left: var(--s-5); color: var(--ink-mid); }
+.block__content li::before { content: '—'; position: absolute; left: 0; color: var(--ink-faint); font-family: var(--font-mono); }
+@media (max-width: 720px) { .block { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-5) 0; } .block__content { font-size: 16px; } }
+.block--context .block__content { font-family: var(--font-body); font-size: 18px; line-height: 1.6; color: var(--plastic-charcoal); max-width: 56ch; }
+.decision-list { display: flex; flex-direction: column; gap: var(--s-5); }
+.decision-item { padding-left: var(--s-5); border-left: 2px solid var(--ink-hairline); transition: border-color 0.3s ease; }
+.decision-item:hover { border-left-color: var(--pixel-red); }
+.decision-item__title { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 18px; line-height: 1.3; color: var(--plastic-charcoal); margin-bottom: var(--s-2); font-variation-settings: "opsz" 36; }
+.decision-item__body { font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: var(--ink-mid); }
+.takeaway { padding: var(--s-5) var(--s-6); background: var(--pixel-red-soft); border-left: 2px solid var(--pixel-red); }
+.takeaway__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-2); }
+.takeaway__body { font-family: var(--font-display); font-size: 18px; font-weight: 400; font-style: italic; line-height: 1.5; color: var(--plastic-charcoal); font-variation-settings: "opsz" 36; }
+.draft-wrap { position: relative; border: 2px dashed var(--pixel-red); border-radius: 4px; padding: var(--s-5); background: rgba(232, 81, 61, 0.03); margin: 0; }
+.draft-wrap::before { content: 'DRAFT · REPLACE WITH YOUR WORDS'; position: absolute; top: -12px; left: var(--s-4); font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.15em; color: var(--pixel-red); background: var(--plastic-cream); padding: 2px 8px; border: 1px solid var(--pixel-red); border-radius: 2px; }
+.tools { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
+.tool-chip { display: inline-flex; align-items: center; padding: 6px var(--s-3); border: 1px solid var(--ink-hairline); border-radius: 2px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-mid); transition: border-color 0.2s ease, color 0.2s ease; }
+.tool-chip:hover { border-color: var(--ink-faint); color: var(--plastic-charcoal); }
+.foot { padding: var(--s-9) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-5); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 24px; font-weight: 400; line-height: 1.1; color: var(--plastic-charcoal); font-variation-settings: "opsz" 48; transition: color 0.2s ease; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot__nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+.template-note { max-width: 880px; margin: var(--s-5) auto 0; padding: var(--s-4) var(--s-5); background: rgba(232, 81, 61, 0.06); border-left: 2px solid var(--pixel-red); font-family: var(--font-mono); font-size: 12px; line-height: 1.5; color: var(--ink-mid); }
+.template-note strong { color: var(--pixel-red); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; font-size: 10px; display: block; margin-bottom: 4px; }
+
+/* IMAGE SLOT */
+.image-slot { margin: var(--s-7) 0 var(--s-5); display: flex; flex-direction: column; gap: var(--s-3); }
+.image-slot__frame { position: relative; border-radius: 4px; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%; --spotlight-color: rgba(232, 81, 61, 0.12); }
+.image-slot__frame::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 80%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 1; }
+.image-slot__frame:hover::before { opacity: 1; }
+.image-slot__frame img { width: 100%; display: block; border-radius: 4px; cursor: pointer; position: relative; z-index: 0; }
+.image-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.image-slot__caption .number { color: var(--pixel-red); font-weight: 500; }
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+
+/* SUBTLE HERO BACKGROUND — dot field / threads at 30% opacity */
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-canvas canvas,
+.hero-bg-canvas > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.header { position: relative; }
+.header > *:not(.hero-bg-canvas) { position: relative; z-index: 1; }
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <ul class="nav__links"><li><a href="../index.html#beyond" class="nav__back">← Back to beyond the four</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="../game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+  </div>
+</nav>
+<header class="header">
+  <div class="hero-bg-canvas" data-subtle="true" aria-hidden="true"></div>
+  <div class="container">
+    <div class="header__breadcrumb">
+      <a href="../index.html">Work</a>
+      <span class="header__breadcrumb-sep">/</span>
+      <a href="../index.html#beyond">Beyond the four</a>
+      <span class="header__breadcrumb-sep">/</span>
+      <span>LaunchX</span>
+    </div>
+
+    <h1 class="header__title">LaunchX</h1>
+    <p class="header__subtitle">Product Offering Management Platform. Automating the end-to-end lifecycle of telecom product offerings across five personas.</p>
+
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-cell__label">Company</div><div class="meta-cell__value">Oracle</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Year</div><div class="meta-cell__value">2022-2024</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Role</div><div class="meta-cell__value">Lead UX Designer</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Personas</div><div class="meta-cell__value">5 telecom roles</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="body">
+  <div class="container">
+
+    <div class="image-slot">
+      <div class="image-slot__frame" id="launchx-img">
+        <img src="../images/launchx-dashboard.png" alt="LaunchX offer creation workflow">
+      </div>
+      <div class="image-slot__caption"><span class="number">Fig. 01</span> · The core interaction: a Product Manager configuring a new telecom offering.</div>
+    </div>
+
+    <div class="block block--context">
+      <div class="block__label">Context</div>
+      <div class="block__content">
+        <p>Telecom operators launch dozens of offerings a year - broadband, IPTV, mobile add-ons - across fragmented tools and teams. LaunchX reimagined this as a single, end-to-end platform where Product Managers can configure, validate, and release offers in one cohesive UX.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Goal</div>
+      <div class="block__content">
+        <ul>
+          <li>Automate the end-to-end lifecycle of telecom product offerings.</li>
+          <li>Reduce launch times from days to hours and eliminate manual errors.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">My role</div>
+      <div class="block__content">
+        <ul>
+          <li>Led user research across 5 distinct telecom personas to map goals.</li>
+          <li>Redesigned the core offer creation workflow to improve efficiency.</li>
+          <li>Owned the end-to-end design, from journey mapping to final UI.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Key decisions</div>
+      <div class="block__content">
+        <div class="decision-list">
+          <div class="decision-item">
+            <div class="decision-item__title">Unified workflow, role-aware surfaces</div>
+            <div class="decision-item__body">Launch brings Product Managers, Marketing Managers, Catalog Administrators, Product Specialists, and Business Users into one offer lifecycle, while tailoring access, work areas, and actions to each role's needs.</div>
+          </div>
+          <div class="decision-item">
+            <div class="decision-item__title">Journey-based navigation, not menu-based</div>
+            <div class="decision-item__body">I restructured the IA around the offer itself, pairing guided steps with status-based actions so users see the right controls at the right moment in the lifecycle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+    <div class="image-slot">
+      <div class="image-slot__frame" id="launchx-img-2">
+        <img src="../images/PM_Initiative-Offerings_Summary.png" alt="LaunchX PM initiative summary">
+      </div>
+      <div class="image-slot__caption"><span class="number">Fig. 02</span> · Initiative summary view showing offering lifecycle stages.</div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Impact</div>
+      <div class="block__content">
+        <ul>
+          <li>Reduced average product configuration time by over 50%.</li>
+          <li>Eliminated unnecessary screen navigation, enhancing productivity.</li>
+          <li>Received strong endorsement from stakeholders for improved clarity.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Takeaway</div>
+      <div class="block__content">
+        <div class="takeaway">
+          <div class="takeaway__label">What I took forward</div>
+          <div class="takeaway__body">A strong enterprise workflow aligns the product's structure with how users think about the job to be done, rather than how the organization is arranged behind the scenes.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Tools &amp; methods</div>
+      <div class="block__content">
+        <div class="tools">
+          <span class="tool-chip">Figma</span>
+          <span class="tool-chip">Oracle Redwood DS</span>
+          <span class="tool-chip">Persona Workshops</span>
+          <span class="tool-chip">Clarity of Purpose</span>
+          <span class="tool-chip">User Journey Mapping</span>
+          <span class="tool-chip">IA</span>
+          <span class="tool-chip">Wireframe & Hi-Fi</span>
+          <span class="tool-chip">Prototyping</span>
+          <span class="tool-chip">Usability Testing</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<section class="foot">
+  <div class="container">
+    <div class="foot__nav">
+      <a href="../index.html#beyond" class="foot-link">
+        <div class="foot-link__label">← Back</div>
+        <div class="foot-link__title">Beyond the four</div>
+      </a>
+      <a href="../also-pages/02-brm-sms.html" class="foot-link foot-link--next">
+        <div class="foot-link__label">Next →</div>
+        <div class="foot-link__title">BRM-SMS</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>Also — 01 / 08</div>
+  </div>
+</footer>
+
+<script src="../shared/theme.js"></script>
+<script src="../shared/hero-backgrounds.js"></script>
+<script>
+// Spotlight effect
+const spotlightFrames = document.querySelectorAll('.image-slot__frame');
+spotlightFrames.forEach(frame => {
+  frame.addEventListener('mousemove', (e) => {
+    const rect = frame.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    frame.style.setProperty('--mouse-x', `${x}px`);
+    frame.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traveller - Prashant Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0;
+  --plastic-cream-deep: #F2EEE4;
+  --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640;
+  --ink-muted: #7A756D;
+  --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10);
+  --ink-rule: rgba(26, 24, 20, 0.06);
+  --pixel-red: #E8513D;
+  --pixel-red-soft: rgba(232, 81, 61, 0.06);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 880px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; list-style: none; margin: 0; padding: 0; }
+.nav__links li { list-style: none; }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__back { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__back:hover { color: var(--pixel-red); }
+.header { padding: var(--s-11) 0 var(--s-9); border-bottom: 1px solid var(--ink-hairline); }
+.header__breadcrumb { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-6); display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.header__breadcrumb a { color: var(--ink-muted); text-decoration: none; transition: color 0.2s ease; }
+.header__breadcrumb a:hover { color: var(--pixel-red); }
+.header__breadcrumb-sep { color: var(--ink-faint); }
+.header__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-4); font-variation-settings: "opsz" 144; }
+.header__subtitle { font-family: var(--font-body); font-weight: 400; font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.4; color: var(--ink-mid); margin-bottom: var(--s-8); max-width: 52ch; }
+.meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-5) var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.meta-cell { display: flex; flex-direction: column; gap: 4px; }
+.meta-cell__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.meta-cell__value { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--plastic-charcoal); line-height: 1.3; }
+@media (max-width: 720px) { .meta-grid { grid-template-columns: 1fr 1fr; gap: var(--s-4); } }
+.body { padding: var(--s-9) 0 var(--s-8); }
+.block { padding: var(--s-7) 0; border-top: 1px solid var(--ink-hairline); display: grid; grid-template-columns: 180px 1fr; gap: var(--s-7); }
+.block:first-child { border-top: none; padding-top: 0; }
+.block__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); padding-top: var(--s-1); }
+.block__content { font-family: var(--font-body); font-size: 17px; line-height: 1.65; color: var(--plastic-charcoal); }
+.block__content p + p { margin-top: var(--s-4); }
+.block__content p { color: var(--ink-mid); }
+.block__content ul { list-style: none; display: flex; flex-direction: column; gap: var(--s-3); }
+.block__content li { position: relative; padding-left: var(--s-5); color: var(--ink-mid); }
+.block__content li::before { content: '—'; position: absolute; left: 0; color: var(--ink-faint); font-family: var(--font-mono); }
+@media (max-width: 720px) { .block { grid-template-columns: 1fr; gap: var(--s-3); padding: var(--s-5) 0; } .block__content { font-size: 16px; } }
+.block--context .block__content { font-family: var(--font-body); font-size: 18px; line-height: 1.6; color: var(--plastic-charcoal); max-width: 56ch; }
+.decision-list { display: flex; flex-direction: column; gap: var(--s-5); }
+.decision-item { padding-left: var(--s-5); border-left: 2px solid var(--ink-hairline); transition: border-color 0.3s ease; }
+.decision-item:hover { border-left-color: var(--pixel-red); }
+.decision-item__title { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 18px; line-height: 1.3; color: var(--plastic-charcoal); margin-bottom: var(--s-2); font-variation-settings: "opsz" 36; }
+.decision-item__body { font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: var(--ink-mid); }
+.takeaway { padding: var(--s-5) var(--s-6); background: var(--pixel-red-soft); border-left: 2px solid var(--pixel-red); }
+.takeaway__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-2); }
+.takeaway__body { font-family: var(--font-display); font-size: 18px; font-weight: 400; font-style: italic; line-height: 1.5; color: var(--plastic-charcoal); font-variation-settings: "opsz" 36; }
+.draft-wrap { position: relative; border: 2px dashed var(--pixel-red); border-radius: 4px; padding: var(--s-5); background: rgba(232, 81, 61, 0.03); margin: 0; }
+.draft-wrap::before { content: 'DRAFT · REPLACE WITH YOUR WORDS'; position: absolute; top: -12px; left: var(--s-4); font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.15em; color: var(--pixel-red); background: var(--plastic-cream); padding: 2px 8px; border: 1px solid var(--pixel-red); border-radius: 2px; }
+.tools { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
+.tool-chip { display: inline-flex; align-items: center; padding: 6px var(--s-3); border: 1px solid var(--ink-hairline); border-radius: 2px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-mid); transition: border-color 0.2s ease, color 0.2s ease; }
+.tool-chip:hover { border-color: var(--ink-faint); color: var(--plastic-charcoal); }
+.foot { padding: var(--s-9) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-5); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 24px; font-weight: 400; line-height: 1.1; color: var(--plastic-charcoal); font-variation-settings: "opsz" 48; transition: color 0.2s ease; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot__nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+.template-note { max-width: 880px; margin: var(--s-5) auto 0; padding: var(--s-4) var(--s-5); background: rgba(232, 81, 61, 0.06); border-left: 2px solid var(--pixel-red); font-family: var(--font-mono); font-size: 12px; line-height: 1.5; color: var(--ink-mid); }
+.template-note strong { color: var(--pixel-red); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; font-size: 10px; display: block; margin-bottom: 4px; }
+
+/* IMAGE SLOT */
+.image-slot { margin: var(--s-7) 0 var(--s-5); display: flex; flex-direction: column; gap: var(--s-3); }
+.image-slot__frame { aspect-ratio: 16 / 9; background: var(--plastic-cream-deep); border: 1px dashed var(--ink-hairline); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: var(--s-2); position: relative; overflow: hidden; }
+.image-slot__frame::before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translate(-50%, -50%); background-image: linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)), linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)); background-size: 10px 10px; background-position: 0 0, 5px 5px; border-radius: 50%; opacity: 0.4; }
+.image-slot__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); text-align: center; z-index: 1; padding: var(--s-2) var(--s-4); background: var(--plastic-cream-deep); position: relative; }
+.image-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.image-slot__caption .number { color: var(--pixel-red); font-weight: 500; }
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+
+/* SUBTLE HERO BACKGROUND — dot field / threads at 30% opacity */
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-bg-canvas canvas,
+.hero-bg-canvas > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.header { position: relative; }
+.header > *:not(.hero-bg-canvas) { position: relative; z-index: 1; }
+.image-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin: var(--s-7) 0 var(--s-5); width: 100%; }
+.image-pair__item { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.image-pair__item .image-slot__frame { overflow: hidden; border-radius: 4px; }
+.image-pair__item .image-slot__frame img { width: 100%; height: auto; display: block; object-fit: contain; }
+.image-pair__item .image-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.image-pair__item .image-slot__caption .number { color: var(--pixel-red); font-weight: 500; }
+@media (max-width: 720px) { .image-pair { grid-template-columns: 1fr; gap: var(--s-5); } }
+
+/* Override fixed aspect-ratio - let real images set their own height */
+.image-slot__frame:has(img) { aspect-ratio: unset; background: transparent; border: none; display: block; overflow: visible; }
+.image-slot__frame:has(img) img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.image-pair__item .image-slot__frame { aspect-ratio: unset; background: transparent; border: none; display: block; overflow: visible; }
+.image-pair__item .image-slot__frame img { width: 100%; height: auto; display: block; object-fit: unset; border-radius: 4px; }
+
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <ul class="nav__links"><li><a href="../index.html#beyond" class="nav__back">← Back to beyond the four</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="../game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+  </div>
+</nav>
+<header class="header">
+  <div class="hero-bg-canvas" data-subtle="true" aria-hidden="true"></div>
+  <div class="container">
+    <div class="header__breadcrumb">
+      <a href="../index.html">Work</a>
+      <span class="header__breadcrumb-sep">/</span>
+      <a href="../index.html#beyond">Beyond the four</a>
+      <span class="header__breadcrumb-sep">/</span>
+      <span>Traveller</span>
+    </div>
+
+    <h1 class="header__title">Traveller</h1>
+    <p class="header__subtitle">Mobile app helping co-passengers socialize during travel downtime. Essential destination guidelines and information, in-context.</p>
+
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="meta-cell__label">Company</div><div class="meta-cell__value">Traveller App</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Year</div><div class="meta-cell__value">2015-2016</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Role</div><div class="meta-cell__value">Lead Designer</div></div>
+      <div class="meta-cell"><div class="meta-cell__label">Users</div><div class="meta-cell__value">Travelers in transit</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="body">
+  <div class="container">
+
+    <div class="image-slot">
+      <div class="image-slot__frame">
+        <img src="../images/traveller-showcase.png" alt="Traveller journey overview">
+      </div>
+      <div class="image-slot__caption"><span class="number">Fig. 01</span> · Shared context beats shared interest - discovery surfaced around the journey itself.</div>
+    </div>
+
+
+    <div class="block block--context">
+      <div class="block__label">Context</div>
+      <div class="block__content">
+        <p>Long-haul journeys on trains, buses, and flights generate hours of idle time in which passengers rarely interact with the people seated nearby. Traveller was conceived as a mobile app for that specific window: a lightweight social layer that surfaced nearby co-passengers, highlighted common ground, and offered optional destination context so trips could feel more like shared experiences than dead time. Privacy safeguards, consent, and ultra-low-friction onboarding were non-negotiable constraints.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Goal</div>
+      <div class="block__content">
+        <ul>
+          <li>Develop a mobile app to help co-passengers socialize during travel downtime.</li>
+          <li>Provide essential destination guidelines and information within the app.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">My role</div>
+      <div class="block__content">
+        <ul>
+          <li>Translated the initial business concept into a clear problem statement.</li>
+          <li>Conducted market and user research to shape product features and user flows.</li>
+          <li>Provided the core design and insights for the initial product version.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Key decisions</div>
+      <div class="block__content">
+        <div class="decision-list">
+          <div class="decision-item">
+            <div class="decision-item__title">Consent-first discovery with user-controlled visibility</div>
+            <div class="decision-item__body">The product could only succeed if passengers could discover one another, yet any perception of forced exposure would erode trust immediately. I designed discovery as opt-in from the outset, with granular controls over what each user shared - interests, route segments, destination - and when that information was visible. This balance aimed to support serendipitous connections without compromising individual comfort.</div>
+          </div>
+          <div class="decision-item">
+            <div class="decision-item__title">Centering the journey, not the profile</div>
+            <div class="decision-item__body">Early concepts revolved around profile cards, treating Traveller like another interest-based social network. User research showed that travelers were more comfortable initiating conversations around shared circumstances - same route, same layover, same destination - than around static personal interests. I reoriented the default view around journey context, with personal profiles appearing as a secondary layer once that shared context was established.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Impact</div>
+      <div class="block__content">
+        <ul>
+          <li>Established a solid foundation for all future product enhancements.</li>
+          <li>Impressed the client, leading to a larger budget for the project's next phase.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Takeaway</div>
+      <div class="block__content">
+        <div class="takeaway">
+          <div class="takeaway__label">What I took forward</div>
+          <div class="takeaway__body">Traveller reinforced that in social products involving strangers, shared context is often more powerful than shared interest; people find it easier to connect around where they are and what they are experiencing than around abstract profile traits.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__label">Tools &amp; methods</div>
+      <div class="block__content">
+        <div class="tools">
+          <span class="tool-chip">Photoshop</span>
+          <span class="tool-chip">Invision App</span>
+          <span class="tool-chip">Design Thinking</span>
+          <span class="tool-chip">Competitive Analysis</span>
+          <span class="tool-chip">User Interviews</span>
+          <span class="tool-chip">Persona Creation</span>
+          <span class="tool-chip">Customer Journey Mapping</span>
+          <span class="tool-chip">Wireframe & Hi-Fis</span>
+          <span class="tool-chip">Prototyping</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-pair">
+      <div class="image-pair__item">
+        <div class="image-slot__frame">
+          <img src="../images/traveller-destination-overview.png" alt="Traveller destination overview">
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 02</span> · Passenger discovery based on shared journey context.</div>
+      </div>
+      <div class="image-pair__item">
+        <div class="image-slot__frame">
+          <img src="../images/traveller-journey-overview.png" alt="Traveller journey overview">
+        </div>
+        <div class="image-slot__caption"><span class="number">Fig. 03</span> · Consent-first messaging between co-passengers.</div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<section class="foot">
+  <div class="container">
+    <div class="foot__nav">
+      <a href="../also-pages/07-purple-style.html" class="foot-link">
+        <div class="foot-link__label">← Previous</div>
+        <div class="foot-link__title">Purple Style Labs</div>
+      </a>
+      <a href="../index.html#beyond" class="foot-link foot-link--next">
+        <div class="foot-link__label">Back →</div>
+        <div class="foot-link__title">Beyond the four</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>Also — 08 / 08</div>
+  </div>
+</footer>
+
+<script src="../shared/theme.js"></script>
+<script src="../shared/hero-backgrounds.js"></script>
+</body>
+</html>

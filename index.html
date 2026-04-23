@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prashant Kashyap - Senior UX, enterprise software</title>
+<meta name="description" content="Prashant Kashyap - Senior UX Designer at Oracle Communications. Thirteen years designing for the people who sit inside complex systems.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="shared/tokens.css">
+
+<style>
+:root {
+  --plastic-cream: #FAF7F0;
+  --plastic-cream-deep: #F2EEE4;
+  --plastic-charcoal: #1A1814;
+  --ink-mid: #4A4640;
+  --ink-muted: #7A756D;
+  --ink-faint: #9E998F;
+  --ink-hairline: rgba(26, 24, 20, 0.10);
+  --ink-rule: rgba(26, 24, 20, 0.06);
+
+  --pixel-red: #E8513D;
+  --pixel-red-hover: #D1462F;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 160px; --s-12: 192px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--plastic-cream);
+  color: var(--plastic-charcoal);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--s-8);
+}
+
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: var(--s-5) 0;
+  background: rgba(250, 247, 240, 0.85);
+  backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.nav.scrolled { border-bottom-color: var(--ink-hairline); }
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__wordmark {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--plastic-charcoal);
+  text-decoration: none;
+  padding: var(--s-1) 0;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--s-6);
+  list-style: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.nav__link {
+  color: var(--ink-mid);
+  text-decoration: none;
+  padding: var(--s-1) 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav__link:hover {
+  color: var(--plastic-charcoal);
+  border-bottom-color: var(--pixel-red);
+}
+
+@media (max-width: 520px) {
+  .nav__links { gap: var(--s-4); font-size: 12px; }
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--s-11) 0 var(--s-9);
+  position: relative;
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: var(--s-7);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.hero__eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--ink-muted);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 10vw, 128px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--plastic-charcoal);
+  max-width: 14ch;
+  margin-bottom: var(--s-6);
+  font-variation-settings: "opsz" 144;
+}
+
+.hero__title .em { font-style: italic; font-weight: 400; }
+
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.5;
+  color: var(--ink-mid);
+  max-width: 58ch;
+  margin-bottom: var(--s-5);
+}
+
+.hero__easter-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  margin-bottom: 10px;
+}
+.hero__easter-hint kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  background: transparent;
+  border: 1px solid var(--pixel-red);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--pixel-red);
+  min-width: 18px;
+  text-align: center;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.hero__easter-hint:hover kbd {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .hero__easter-hint kbd { font-size: 9px; padding: 1px 5px; }
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: var(--s-8);
+  left: var(--s-8);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.hero__scroll-cue:hover { color: var(--plastic-charcoal); }
+
+.hero__scroll-cue__arrow { animation: gentle-bob 2.2s ease-in-out infinite; }
+
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@media (max-width: 720px) {
+  .hero__scroll-cue { left: var(--s-5); bottom: var(--s-6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-cue__arrow { animation: none; }
+}
+
+/* SECTION */
+.section {
+  padding: var(--s-10) 0;
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s-8);
+  padding-bottom: var(--s-4);
+}
+
+.section__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.section__count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+
+/* MAIN CASE STUDY CARDS */
+.work { display: flex; flex-direction: column; }
+
+.case {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+  padding: var(--s-9) 0;
+  border-top: 1px solid var(--ink-hairline);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.case:last-child { border-bottom: 1px solid var(--ink-hairline); }
+
+.case::after {
+  content: '';
+  position: absolute;
+  left: 0; top: -1px;
+  width: 0; height: 1px;
+  background: var(--pixel-red);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case:hover::after { width: 100%; }
+.case:hover .case__title { color: var(--pixel-red); }
+.case:hover .case__arrow { transform: translateX(6px); color: var(--pixel-red); }
+
+.case__left { display: flex; flex-direction: column; gap: var(--s-4); }
+
+.case__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.case__meta-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  flex-shrink: 0;
+}
+
+.case__meta-dot.active {
+  background: var(--pixel-red);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 81, 61, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(232, 81, 61, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case__meta-dot.active { animation: none; }
+}
+
+.case__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--plastic-charcoal);
+  font-variation-settings: "opsz" 144;
+  transition: color 0.3s ease;
+}
+
+.case__title .em { font-style: italic; font-weight: 400; }
+
+.case__tagline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-top: var(--s-2);
+}
+
+.case__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: var(--s-3);
+  gap: var(--s-7);
+}
+
+.case__summary {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  max-width: 54ch;
+}
+
+.case__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4) var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.case__detail { display: flex; flex-direction: column; gap: 2px; }
+
+.case__detail-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.case__detail-value {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--plastic-charcoal);
+  line-height: 1.4;
+}
+
+.case__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--ink-hairline);
+  gap: var(--s-4);
+}
+
+.case__cta-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--plastic-charcoal);
+}
+
+.case__arrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--plastic-charcoal);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+}
+
+@media (max-width: 860px) {
+  .case { grid-template-columns: 1fr; gap: var(--s-5); padding: var(--s-7) 0; }
+  .case__right { padding-top: 0; }
+}
+
+@media (max-width: 520px) {
+  .case__details { grid-template-columns: 1fr; gap: var(--s-3); }
+}
+
+/* BEYOND THE FOUR */
+.beyond {
+  padding: var(--s-9) 0 var(--s-7);
+  border-top: 1px solid var(--ink-hairline);
+}
+
+.beyond__intro {
+  max-width: 54ch;
+  margin-bottom: var(--s-8);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-mid);
+}
+
+.also-list { display: flex; flex-direction: column; }
+
+.also {
+  display: grid;
+  grid-template-columns: 110px 1.3fr 1.7fr 40px;
+  align-items: baseline;
+  gap: var(--s-5);
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--ink-hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.also:last-child { border-bottom: 1px solid var(--ink-hairline); }
+
+.also:hover { padding-left: var(--s-4); }
+
+.also:hover .also__title { color: var(--pixel-red); }
+.also:hover .also__arrow { transform: translateX(4px); color: var(--pixel-red); }
+
+.also__year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.also__title-wrap { display: flex; flex-direction: column; gap: 2px; }
+
+.also__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--plastic-charcoal);
+  transition: color 0.3s ease;
+  font-variation-settings: "opsz" 48;
+}
+
+.also__title .em { font-style: italic; }
+
+.also__company {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.also__description {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+
+.also__arrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-muted);
+  text-align: right;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+}
+
+@media (max-width: 860px) {
+  .also { grid-template-columns: 100px 1fr 30px; gap: var(--s-4); }
+  .also__description { grid-column: 2 / 3; font-size: 14px; }
+}
+
+@media (max-width: 520px) {
+  .also { grid-template-columns: 1fr 30px; gap: var(--s-3); padding: var(--s-4) 0; }
+  .also__year { grid-column: 1 / 2; grid-row: 1; }
+  .also__title-wrap { grid-column: 1 / 2; grid-row: 2; }
+  .also__description { grid-column: 1 / 2; grid-row: 3; }
+  .also__arrow { grid-column: 2 / 3; grid-row: 1 / 3; }
+}
+
+/* ABOUT */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--s-9);
+  padding: var(--s-9) 0;
+}
+
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--plastic-charcoal);
+  font-variation-settings: "opsz" 96;
+}
+
+.about__body { display: flex; flex-direction: column; gap: var(--s-5); }
+
+.about__body p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  max-width: 62ch;
+}
+
+.about__body p.lead {
+  color: var(--plastic-charcoal);
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.about__contact {
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--ink-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.about__contact-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.about__contact-links {
+  display: flex;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.about__contact-link {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--plastic-charcoal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-hairline);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.about__contact-link:hover {
+  color: var(--pixel-red);
+  border-bottom-color: var(--pixel-red);
+}
+
+.deep-cta {
+  margin-top: var(--s-6);
+  padding: var(--s-5) var(--s-6);
+  background: var(--plastic-charcoal);
+  color: var(--plastic-cream);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  text-decoration: none;
+  transition: background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.deep-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--pixel-red);
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 0;
+}
+.deep-cta:hover::before { transform: translateX(0); }
+.deep-cta > * { position: relative; z-index: 1; }
+.deep-cta__text { display: flex; flex-direction: column; gap: var(--s-1); }
+.deep-cta__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.6);
+  font-weight: 500;
+}
+.deep-cta__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--plastic-cream);
+  font-variation-settings: "opsz" 48;
+}
+.deep-cta__title .em { font-style: italic; }
+.deep-cta__subtitle {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(250, 247, 240, 0.7);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.deep-cta__arrow {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--plastic-cream);
+  line-height: 1;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.deep-cta:hover .deep-cta__arrow { transform: translateX(6px); }
+@media (max-width: 520px) {
+  .deep-cta { padding: var(--s-4) var(--s-5); }
+  .deep-cta__arrow { font-size: 22px; }
+}
+
+@media (max-width: 860px) {
+  .about { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--ink-hairline);
+  padding: var(--s-7) 0;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.footer__left {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.footer__right {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.footer__right a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__right a:hover { color: var(--plastic-charcoal); }
+
+@media (max-width: 520px) {
+  .footer__inner { flex-direction: column; align-items: flex-start; gap: var(--s-3); }
+}
+
+/* EASTER HINT EXPLANATORY LINE */
+.hero__easter-hint-line {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--pixel-red);
+  margin-top: 0;
+  margin-bottom: var(--s-9);
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* Show only the matching hint line based on unlock state */
+.hero__easter-hint-line[data-state="unlocked"] { display: none; }
+html[data-unlocked="true"] .hero__easter-hint-line[data-state="locked"] { display: none; }
+html[data-unlocked="true"] .hero__easter-hint-line[data-state="unlocked"] { display: block; }
+
+/* DEV CONTROLS — floating Replay + Reset panel bottom-right */
+.dev-controls {
+  position: fixed;
+  bottom: var(--s-4);
+  right: var(--s-4);
+  z-index: 500;
+  display: flex;
+  gap: var(--s-2);
+  padding: 6px;
+  background: rgba(242, 238, 228, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ink-hairline);
+  border-radius: 3px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0.3;
+  transition: opacity 0.25s ease;
+}
+.dev-controls:hover { opacity: 1; }
+.dev-controls__btn {
+  background: var(--plastic-charcoal);
+  color: var(--plastic-cream);
+  border: none;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+.dev-controls__btn:hover { background: var(--pixel-red); }
+.dev-controls__btn--secondary {
+  background: transparent;
+  color: var(--plastic-charcoal);
+  border: 1px solid var(--ink-hairline);
+}
+.dev-controls__btn--secondary:hover {
+  border-color: var(--pixel-red);
+  color: var(--pixel-red);
+  background: transparent;
+}
+html[data-theme="terminal"] .dev-controls {
+  background: rgba(18, 24, 26, 0.92);
+  border-color: rgba(127, 219, 168, 0.2);
+}
+html[data-theme="terminal"] .dev-controls__btn {
+  background: var(--terminal-fg);
+  color: var(--terminal-bg);
+}
+html[data-theme="terminal"] .dev-controls__btn:hover { background: var(--terminal-red); }
+html[data-theme="terminal"] .dev-controls__btn--secondary {
+  background: transparent;
+  color: var(--terminal-fg);
+  border-color: rgba(127, 219, 168, 0.2);
+}
+
+51%, 100% { opacity: 0; }
+}
+
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+</style>
+</head>
+
+<body class="pk-landing">
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+      <ul class="nav__links">
+        <li><a href="#work" class="nav__link">Work</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="cv.html" class="nav__link">CV</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero__canvas-container" id="pkHeroCanvas" aria-hidden="true"></div>
+  
+  <div class="container">
+    <div class="hero__eyebrow">Pune · Designing since 2012</div>
+    <h1 class="hero__title">
+      Senior <span class="em">UX</span>,<br>
+      enterprise software.
+    </h1>
+    <p class="hero__subtitle">
+      Thirteen years designing for the people who sit inside complex systems - customer service, network ops, operations, classrooms.
+    </p>
+    <p class="hero__easter-hint">
+      <kbd>↑</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd><kbd>←</kbd><kbd>→</kbd><kbd>B</kbd><kbd>A</kbd>
+    </p>
+    <p class="hero__easter-hint-line" data-state="locked">Play the game to unlock Terminal mode.</p>
+    <p class="hero__easter-hint-line" data-state="unlocked">Terminal mode unlocked. Hit the Konami to replay Snake.</p>
+    <a href="#work" class="hero__scroll-cue">
+      <span>Selected work</span>
+      <span class="hero__scroll-cue__arrow">↓</span>
+    </a>
+  </div>
+</header>
+
+<section class="section" id="work">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__label">Selected work</div>
+      <div class="section__count">04 / 04</div>
+    </div>
+    <div class="work">
+
+      <a href="case-studies/asap.html" class="case">
+        <div class="case__left">
+          <div class="case__meta"><span class="case__meta-dot active"></span><span>Oracle · Current</span></div>
+          <h2 class="case__title">ASAP</h2>
+          <div class="case__tagline">Automated Service Activation Platform</div>
+        </div>
+        <div class="case__right">
+          <p class="case__summary">Moved Oracle's twenty-year-old service-activation platform onto the Redwood design system. Sole UX across three personas on a team that had never worked with a UX process before.</p>
+          <div class="case__details">
+            <div class="case__detail"><div class="case__detail-label">Role</div><div class="case__detail-value">Sole UX Designer</div></div>
+            <div class="case__detail"><div class="case__detail-label">Timeline</div><div class="case__detail-value">4-6 months · In engineering</div></div>
+            <div class="case__detail"><div class="case__detail-label">Scope</div><div class="case__detail-value">3 personas · 4 signature flows</div></div>
+            <div class="case__detail"><div class="case__detail-label">Target</div><div class="case__detail-value">CSR task time: 90s → 30s</div></div>
+          </div>
+          <div class="case__cta"><span class="case__cta-label">Read case study</span><span class="case__arrow">→</span></div>
+        </div>
+      </a>
+
+      <a href="case-studies/unified-assurance.html" class="case">
+        <div class="case__left">
+          <div class="case__meta"><span class="case__meta-dot active"></span><span>Oracle · Current</span></div>
+          <h2 class="case__title">Unified <span class="em">Assurance</span></h2>
+          <div class="case__tagline">Network service assurance for telco NOCs</div>
+        </div>
+        <div class="case__right">
+          <p class="case__summary">Redwood modernization of Oracle's service assurance platform. Sole UX designer on a team new to UX. Device Discovery shipped; Vision, Dashboard, Event Management UX-complete in dev.</p>
+          <div class="case__details">
+            <div class="case__detail"><div class="case__detail-label">Role</div><div class="case__detail-value">Sole UX Designer</div></div>
+            <div class="case__detail"><div class="case__detail-label">Timeline</div><div class="case__detail-value">Jun 2025 - present</div></div>
+            <div class="case__detail"><div class="case__detail-label">Scope</div><div class="case__detail-value">6 surfaces · 1 suite-wide nav pattern</div></div>
+            <div class="case__detail"><div class="case__detail-label">Signature move</div><div class="case__detail-value">"Ask Oracle" global assistant nav</div></div>
+          </div>
+          <div class="case__cta"><span class="case__cta-label">Read case study</span><span class="case__arrow">→</span></div>
+        </div>
+      </a>
+
+      <a href="case-studies/project-xd.html" class="case">
+        <div class="case__left">
+          <div class="case__meta"><span class="case__meta-dot"></span><span>McDermott · 2019</span></div>
+          <h2 class="case__title">Project <span class="em">XD</span></h2>
+          <div class="case__tagline">Oil &amp; gas project tracking platform</div>
+        </div>
+        <div class="case__right">
+          <p class="case__summary">Global project tracking for offshore oil &amp; gas operations. Replaced Excel-driven workflows for executives, engineers, and field managers. Sole UX; shipped globally; 5× task speedup in usability testing.</p>
+          <div class="case__details">
+            <div class="case__detail"><div class="case__detail-label">Role</div><div class="case__detail-value">Sole UX Designer</div></div>
+            <div class="case__detail"><div class="case__detail-label">Timeline</div><div class="case__detail-value">~6 months · Shipped</div></div>
+            <div class="case__detail"><div class="case__detail-label">Scope</div><div class="case__detail-value">3 personas · Global rollout</div></div>
+            <div class="case__detail"><div class="case__detail-label">Outcome</div><div class="case__detail-value">5× task speedup, usability testing</div></div>
+          </div>
+          <div class="case__cta"><span class="case__cta-label">Read case study</span><span class="case__arrow">→</span></div>
+        </div>
+      </a>
+
+      <a href="case-studies/kexplora.html" class="case">
+        <div class="case__left">
+          <div class="case__meta"><span class="case__meta-dot"></span><span>Kexplora · 2014-2015</span></div>
+          <h2 class="case__title">Kexplora</h2>
+          <div class="case__tagline">EdTech platform for parents, teachers, students</div>
+        </div>
+        <div class="case__right">
+          <p class="case__summary">Founding designer at a 7-person EdTech startup. Brought parents, teachers, and students onto one platform via classroom projector and tablet. Selected among NDTV's Top 20 Hottest Startups in India, 2015.</p>
+          <div class="case__details">
+            <div class="case__detail"><div class="case__detail-label">Role</div><div class="case__detail-value">Founding Designer</div></div>
+            <div class="case__detail"><div class="case__detail-label">Timeline</div><div class="case__detail-value">Oct 2014 - Apr 2015</div></div>
+            <div class="case__detail"><div class="case__detail-label">Scope</div><div class="case__detail-value">Brand · Product · Marketing</div></div>
+            <div class="case__detail"><div class="case__detail-label">Recognition</div><div class="case__detail-value">NDTV Top 20 Startups, 2015</div></div>
+          </div>
+          <div class="case__cta"><span class="case__cta-label">Read case study</span><span class="case__arrow">→</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="beyond" id="beyond">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__label">Beyond the four</div>
+      <div class="section__count">08 projects</div>
+    </div>
+    <p class="beyond__intro">Eight more projects across Oracle, telecom, fintech, EdTech, fashion, and public sector. Happy to talk through any of them.</p>
+    <div class="also-list">
+
+      <a href="also-pages/01-launchx.html" class="also">
+        <div class="also__year">2022-2024</div>
+        <div class="also__title-wrap"><div class="also__title">LaunchX</div><div class="also__company">Oracle</div></div>
+        <div class="also__description">Product Offering Management Platform. Automated the end-to-end lifecycle of telecom product offerings across five personas.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/02-brm-sms.html" class="also">
+        <div class="also__year">2022-2024</div>
+        <div class="also__title-wrap"><div class="also__title">BRM-SMS</div><div class="also__company">Oracle · Suspense Management System</div></div>
+        <div class="also__description">Enterprise system to manage and resolve suspended Call Detail Records. Reduced CDR resolution time from 4 hours to under 2.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/03-afcs.html" class="also">
+        <div class="also__year">2022-2024</div>
+        <div class="also__title-wrap"><div class="also__title">AFCS</div><div class="also__company">Oracle · Accounting Foundation Cloud Service</div></div>
+        <div class="also__description">Financial reporting platform unifying data from numerous sources. Redesigned the Data Catalog UX using Oracle Redwood.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/04-siemens-element.html" class="also">
+        <div class="also__year">2020-2021</div>
+        <div class="also__title-wrap"><div class="also__title">Siemens Element <span class="em">DS</span></div><div class="also__company">Siemens · Design System</div></div>
+        <div class="also__description">Component work on Siemens' Element Design System - progress indicators, spinners, file uploaders - harmonizing UX across SI BP products.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/05-krystal-ai.html" class="also">
+        <div class="also__year">2019-2020</div>
+        <div class="also__title-wrap"><div class="also__title">Krystal <span class="em">AI</span></div><div class="also__company">Sales &amp; Contract Intelligence Platform</div></div>
+        <div class="also__description">AI-powered tool giving sales teams actionable recommendations. Sole designer, end-to-end UX through interactive prototypes for dev.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/06-kenya-police.html" class="also">
+        <div class="also__year">2016-2017</div>
+        <div class="also__title-wrap"><div class="also__title">Kenya Police</div><div class="also__company">Digital Transformation App</div></div>
+        <div class="also__description">Digitized the operations of the Kenya Police force. Centralized workflow automation, reporting, and management.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/07-purple-style.html" class="also">
+        <div class="also__year">2015-2016</div>
+        <div class="also__title-wrap"><div class="also__title">Purple Style Labs</div><div class="also__company">The Stylist · Luxury Fashion</div></div>
+        <div class="also__description">Digital platform for a luxury fashion house. First-ever working prototype; positioned the product as selling a lifestyle, not just products.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+      <a href="also-pages/08-traveller.html" class="also">
+        <div class="also__year">2015-2016</div>
+        <div class="also__title-wrap"><div class="also__title">Traveller</div><div class="also__company">Connecting Co-Passengers</div></div>
+        <div class="also__description">Mobile app helping co-passengers socialize during travel downtime. Established a design foundation that earned the project a larger next-phase budget.</div>
+        <div class="also__arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section__header">
+      <div class="section__label">About</div>
+    </div>
+    <div class="about">
+      <div>
+        <h2 class="about__title">About<br>the work.</h2>
+      </div>
+      <div class="about__body">
+        <p class="lead">I'm a product designer based in Pune. For thirteen years I've worked inside enterprise software - oil and gas, telecom, EdTech - designing tools for operators, engineers, and managers who live inside complex systems every day.</p>
+        <p>Most of what I do starts in the same place: watching how someone actually gets their job done, then asking what a product could look like if it respected the shape of that work instead of fighting it. The case studies above go deep on four of those projects, including two in-flight modernizations at Oracle Communications.</p>
+        <p>I'm not actively looking right now, but I'm always up for a good conversation about design, enterprise UX, or the specific problem of bringing a UX process to a team that's never had one.</p>
+        <div class="about__contact">
+          <div class="about__contact-label">Reach out</div>
+          <div class="about__contact-links">
+            <a href="mailto:prashantkashyap91@outlook.com" class="about__contact-link">prashantkashyap91@outlook.com</a>
+            <a href="https://www.linkedin.com/in/kashyaprashant/" class="about__contact-link" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+          <a href="pursuits.html" class="deep-cta">
+            <div class="deep-cta__text">
+              <div class="deep-cta__label">Beyond the work</div>
+              <div class="deep-cta__title">Pursuits <span class="em">→</span></div>
+              <div class="deep-cta__subtitle">A nutrition brand that served IPL, an animal-education platform, a tech news channel, and a publication on AI &amp; UX</div>
+            </div>
+            <div class="deep-cta__arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__left">Prashant Kashyap · Pune · 2026</div>
+      <div class="footer__right">© 2026 · Pune, India</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Dev/test controls — replay animation without opening DevTools -->
+<div class="dev-controls" id="pkDevControls">
+  <button type="button" class="dev-controls__btn" onclick="localStorage.removeItem('pk-loaded-once'); window.__pkReplayLoad && window.__pkReplayLoad();">↻ Replay animation</button>
+</div>
+
+<script>
+  // Nav scroll state (adds .scrolled class for subtle border)
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+
+<script src="shared/theme.js"></script>
+<script src="shared/animations.js"></script>
+<script src="shared/hero-backgrounds.js"></script>
+</body>
+</html>

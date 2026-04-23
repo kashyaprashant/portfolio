@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pursuits - Prashant Kashyap</title>
+<meta name="description" content="Things I make outside client work. Exaltic Nutrition, Prajati, Tube Stage, and a publication on AI & UX.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/tokens.css">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+body { background: var(--plastic-cream); color: var(--plastic-charcoal); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+.container { max-width: 980px; margin: 0 auto; padding: 0 var(--s-8); }
+@media (max-width: 720px) { .container { padding: 0 var(--s-5); } }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--s-5) 0; background: rgba(250, 247, 240, 0.85); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--ink-hairline); }
+.nav__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 720px) { .nav__inner { padding: 0 var(--s-5); } }
+.nav__wordmark { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--plastic-charcoal); text-decoration: none; }
+.nav__links { display: flex; gap: var(--s-5); align-items: center; list-style: none; }
+.nav__link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s ease; }
+.nav__link:hover { color: var(--pixel-red); }
+.nav__link--active { color: var(--pixel-red); }
+
+.page-header { padding: var(--s-11) 0 var(--s-8); }
+.page-header__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pixel-red); font-weight: 500; margin-bottom: var(--s-4); }
+.page-header__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.035em; color: var(--plastic-charcoal); margin-bottom: var(--s-5); font-variation-settings: "opsz" 144; }
+.page-header__title .em { font-style: italic; }
+.page-header__intro { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.3; color: var(--ink-mid); max-width: 52ch; margin-bottom: var(--s-6); font-variation-settings: "opsz" 72; }
+.page-header__sub { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink-mid); max-width: 58ch; }
+
+/* PURSUIT CARD — each section */
+.pursuit { padding: var(--s-10) 0; border-top: 1px solid var(--ink-hairline); }
+.pursuit__meta { display: flex; align-items: baseline; gap: var(--s-5); flex-wrap: wrap; margin-bottom: var(--s-5); }
+.pursuit__number { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.15em; }
+.pursuit__tag { display: inline-flex; align-items: center; gap: var(--s-2); padding: 4px 10px; border: 1px solid var(--ink-hairline); border-radius: 2px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); }
+.pursuit__tag--current { border-color: var(--pixel-red); color: var(--pixel-red); }
+.pursuit__tag--current::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--pixel-red); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(232, 81, 61, 0.5); } 50% { box-shadow: 0 0 0 4px rgba(232, 81, 61, 0); } }
+.pursuit__dates { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); letter-spacing: 0.05em; }
+
+.pursuit__title { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.03em; color: var(--plastic-charcoal); margin-bottom: var(--s-4); font-variation-settings: "opsz" 96; }
+.pursuit__title .em { font-style: italic; }
+.pursuit__subtitle { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(18px, 2vw, 22px); line-height: 1.4; color: var(--ink-mid); max-width: 52ch; margin-bottom: var(--s-7); font-variation-settings: "opsz" 72; }
+
+.pursuit__layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-8); align-items: start; }
+@media (max-width: 720px) { .pursuit__layout { grid-template-columns: 1fr; gap: var(--s-6); } }
+
+.pursuit__prose p { font-family: var(--font-body); font-size: 17px; line-height: 1.7; color: var(--ink-mid); margin-bottom: var(--s-4); }
+.pursuit__prose p:last-child { margin-bottom: 0; }
+.pursuit__prose strong { color: var(--plastic-charcoal); font-weight: 500; }
+
+/* Image slot styled for each pursuit - pursuits get taller aspect ratios for visual variety */
+.pursuit__media { display: flex; flex-direction: column; gap: var(--s-3); }
+.pursuit__media-frame { aspect-ratio: 4 / 5; background: var(--plastic-cream-deep); border: 1px dashed var(--ink-hairline); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.pursuit__media-frame::before { content: ''; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; transform: translate(-50%, -50%); background-image: linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)), linear-gradient(45deg, var(--ink-hairline) 25%, transparent 25%, transparent 75%, var(--ink-hairline) 75%, var(--ink-hairline)); background-size: 10px 10px; background-position: 0 0, 5px 5px; border-radius: 50%; opacity: 0.4; }
+.pursuit__media-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); text-align: center; z-index: 1; padding: var(--s-2) var(--s-3); background: var(--plastic-cream-deep); position: relative; }
+.pursuit__media-caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-muted); line-height: 1.5; }
+
+.pursuit__links { margin-top: var(--s-6); display: flex; gap: var(--s-5) var(--s-6); flex-wrap: wrap; padding-top: var(--s-5); border-top: 1px solid var(--ink-hairline); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; color: var(--ink-mid); }
+.pursuit__links a { color: var(--ink-mid); text-decoration: none; border-bottom: 1px solid var(--ink-hairline); padding-bottom: 2px; transition: color 0.2s ease, border-color 0.2s ease; }
+.pursuit__links a:hover { color: var(--pixel-red); border-bottom-color: var(--pixel-red); }
+
+/* FOOT */
+.foot { padding: var(--s-10) 0 var(--s-8); border-top: 1px solid var(--ink-hairline); }
+.foot__intro { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: var(--s-5); }
+.foot-nav { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.foot-link { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-6); border: 1px solid var(--ink-hairline); text-decoration: none; color: inherit; transition: border-color 0.3s ease, background-color 0.3s ease; }
+.foot-link:hover { border-color: var(--pixel-red); background-color: var(--plastic-cream-deep); }
+.foot-link__meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+.foot-link__title { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.05; color: var(--plastic-charcoal); font-variation-settings: "opsz" 72; letter-spacing: -0.02em; transition: color 0.2s ease; }
+.foot-link__title .em { font-style: italic; }
+.foot-link:hover .foot-link__title { color: var(--pixel-red); }
+.foot-link--next { text-align: right; }
+@media (max-width: 520px) { .foot-nav { grid-template-columns: 1fr; } .foot-link--next { text-align: left; } }
+
+.footer { border-top: 1px solid var(--ink-hairline); padding: var(--s-6) 0; }
+.footer__inner { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-8); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-muted); }
+@media (max-width: 720px) { .footer__inner { padding: 0 var(--s-5); } }
+
+51%, 100% { opacity: 0; }
+}
+
+
+/* NAV WORDMARK PERIOD DOT — continuity thread from load animation */
+.nav__wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+.nav__wordmark .dot {
+  color: #E8513D;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1;
+}
+html[data-theme="terminal"] .nav__wordmark .dot {
+  color: #FF5F5F;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__wordmark">Prashant Kashyap<span class="dot">.</span></a>
+    <ul class="nav__links">
+      <li><a href="index.html#work" class="nav__link">Work</a></li>
+      <li><a href="about.html" class="nav__link">About</a></li>
+      <li><a href="cv.html" class="nav__link">CV</a></li>
+      <li><a id="pkThemeBtn" class="nav__theme-btn" href="game.html"><span class="nav__theme-blink">▮</span><span class="nav__theme-label">Terminal</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="page-header">
+    <div class="page-header__label">Pursuits</div>
+    <h1 class="page-header__title">Things I <span class="em">also make</span>.</h1>
+    <p class="page-header__intro">Four ventures alongside the design work. Two still running, one in the rear-view, one just beginning.</p>
+    <p class="page-header__sub">These aren't client projects. They're the things I've built because I wanted to - a sports nutrition brand co-founded with friends, an educational platform celebrating animal science, a YouTube channel about technology, and a short book about AI and design. They don't live in the case studies because they aren't UX work in the narrow sense. They live here because, taken together, they say something about how I work and what I care about.</p>
+  </header>
+</div>
+
+<!-- PURSUIT 01 — EXALTIC NUTRITION -->
+<section class="pursuit">
+  <div class="container">
+    <div class="pursuit__meta">
+      <span class="pursuit__number">01 / 04</span>
+      <span class="pursuit__tag">Co-founded venture</span>
+      <span class="pursuit__dates">Sep 2016 — Dec 2019</span>
+    </div>
+    <h2 class="pursuit__title">Exaltic <span class="em">Nutrition</span></h2>
+    <p class="pursuit__subtitle">A sports nutrition brand for athletes who don't want to taste their protein.</p>
+
+    <div class="pursuit__layout">
+      <div class="pursuit__prose">
+        <p>In 2016, two friends and I co-founded Shredz Sports Nutrition. The brand, Exaltic Nutrition, was built for active individuals and competitive athletes — people who cared about stamina, muscle development, and recovery, and who were tired of flavourless supplements that tasted like chalk.</p>
+        <p>Over three and a half years we built a product line, developed strategic partnerships with <strong>IPL teams and Indian State-level cricket players</strong>, and ran the operations end to end. I wore every hat in turn — marketing, technical operator, developer, salesperson, accountant. I ran Exaltic concurrently with my full-time design role at InfoBeans. Doing both at once is what taught me what a shipped product actually costs.</p>
+        <p>We closed the business at the end of 2019. The lessons stayed.</p>
+      </div>
+
+      <div class="pursuit__media">
+        <div class="pursuit__media-frame">
+          <div class="pursuit__media-label">Product · Exaltic branding</div>
+        </div>
+        <div class="pursuit__media-caption">Replace with product shot, team photo, or IPL partnership image.</div>
+      </div>
+    </div>
+
+    <div class="pursuit__links">
+      <span>Tags:</span>
+      <span>Co-founder</span>
+      <span>Sports nutrition</span>
+      <span>IPL partnerships</span>
+      <span>3 yrs 4 mos</span>
+    </div>
+  </div>
+</section>
+
+<!-- PURSUIT 02 — PRAJATI -->
+<section class="pursuit">
+  <div class="container">
+    <div class="pursuit__meta">
+      <span class="pursuit__number">02 / 04</span>
+      <span class="pursuit__tag pursuit__tag--current">Currently active</span>
+      <span class="pursuit__dates">Jul 2018 — Present</span>
+    </div>
+    <h2 class="pursuit__title">Prajati · <span class="em">Know Species</span></h2>
+    <p class="pursuit__subtitle">An educational platform celebrating animal science, emotion, and biodiversity.</p>
+
+    <div class="pursuit__layout">
+      <div class="pursuit__prose">
+        <p>Prajati started as an Instagram page in 2018. The premise was simple — share accurate, fascinating, emotionally honest information about species from across the planet. Not just what an animal looks like, but how it behaves, why it matters, and what its inner life might be.</p>
+        <p>Seven years later, it's a <strong>multi-channel platform</strong> — Instagram, YouTube, and a podcast — with conversations featuring people like <strong>Anish Andheria, the President and CEO of the Wildlife Conservation Trust</strong>. Episodes explore snow leopards, wildlife conservation, the emotional intelligence of species most people never think about.</p>
+        <p>Prajati is the longest-running thing I've made. It's taught me how to sustain a small audience-led project over years, how to keep a brand consistent while the format evolves, and what it takes to produce educational content that actually teaches.</p>
+      </div>
+
+      <div class="pursuit__media">
+        <div class="pursuit__media-frame">
+          <div class="pursuit__media-label">Prajati · Instagram grid</div>
+        </div>
+        <div class="pursuit__media-caption">Replace with Instagram grid screenshot or podcast artwork.</div>
+      </div>
+    </div>
+
+    <div class="pursuit__links">
+      <span>Find Prajati:</span>
+      <a href="https://www.instagram.com/weprajati/" target="_blank" rel="noopener">@weprajati on Instagram ↗</a>
+      <span>Podcast · YouTube · Articles</span>
+    </div>
+  </div>
+</section>
+
+<!-- PURSUIT 03 — TUBE STAGE -->
+<section class="pursuit">
+  <div class="container">
+    <div class="pursuit__meta">
+      <span class="pursuit__number">03 / 04</span>
+      <span class="pursuit__tag pursuit__tag--current">Currently active</span>
+      <span class="pursuit__dates">Sep 2025 — Present</span>
+    </div>
+    <h2 class="pursuit__title">Tube <span class="em">Stage</span></h2>
+    <p class="pursuit__subtitle">Tech news for people who have twelve minutes between meetings.</p>
+
+    <div class="pursuit__layout">
+      <div class="pursuit__prose">
+        <p>Tube Stage is the newest of these pursuits. It started in September 2025 — a YouTube channel that takes complex technology news (AI breakthroughs, autonomous vehicle launches, policy changes) and translates it into <strong>concise, high-energy video summaries</strong> for busy professionals.</p>
+        <p>The format is weekly: top ten essential tech stories, no bloat, watchable in a coffee break. Each episode ends with a curated recommendation — another educational channel worth your time. The premise is that good information should be fast, clear, and community-generative.</p>
+        <p>It's early — three months in at the time of writing. If you want to see what a designer thinks the tech-news format should look like, this is where I'm experimenting with it.</p>
+      </div>
+
+      <div class="pursuit__media">
+        <div class="pursuit__media-frame">
+          <div class="pursuit__media-label">Tube Stage · thumbnails</div>
+        </div>
+        <div class="pursuit__media-caption">Replace with channel banner or episode grid.</div>
+      </div>
+    </div>
+
+    <div class="pursuit__links">
+      <span>Find Tube Stage:</span>
+      <span>YouTube · weekly episodes</span>
+      <span>Content strategy · social media</span>
+    </div>
+  </div>
+</section>
+
+<!-- PURSUIT 04 — ECHOES OF INNOVATION -->
+<section class="pursuit">
+  <div class="container">
+    <div class="pursuit__meta">
+      <span class="pursuit__number">04 / 04</span>
+      <span class="pursuit__tag">Publication</span>
+      <span class="pursuit__dates">Dec 2023</span>
+    </div>
+    <h2 class="pursuit__title">Echoes of <span class="em">Innovation</span></h2>
+    <p class="pursuit__subtitle">A short book about AI, UX, and a town called Digiville.</p>
+
+    <div class="pursuit__layout">
+      <div class="pursuit__prose">
+        <p>"Echoes Of Innovation: AI &amp; UX Synergy - Chronicles of Digiville Town" is a short narrative I wrote in late 2023. It's framed as a story about a fictional town undergoing digital transformation — and underneath that narrative, it's an argument about how AI and UX should be thought of together, not as separate disciplines.</p>
+        <p>Writing it was a way of thinking out loud about where AI was heading and what designers ought to be paying attention to. Some of the ideas in it showed up later in how I approached the AI features on Unified Assurance at Oracle. Some of them were wrong. Both were useful.</p>
+        <p>It's available if you want to read it.</p>
+      </div>
+
+      <div class="pursuit__media">
+        <div class="pursuit__media-frame">
+          <div class="pursuit__media-label">Echoes of Innovation · cover</div>
+        </div>
+        <div class="pursuit__media-caption">Replace with book cover artwork.</div>
+      </div>
+    </div>
+
+    <div class="pursuit__links">
+      <span>Publication:</span>
+      <span>Self-published · Dec 6, 2023</span>
+      <span>AI · UX · narrative fiction</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOT -->
+<section class="foot">
+  <div class="container">
+    <div class="foot__intro">Keep reading →</div>
+    <div class="foot-nav">
+      <a href="index.html#work" class="foot-link">
+        <div class="foot-link__meta">← Selected work</div>
+        <div class="foot-link__title">Back to <span class="em">case studies</span></div>
+      </a>
+      <a href="cv.html" class="foot-link foot-link--next">
+        <div class="foot-link__meta">Next →</div>
+        <div class="foot-link__title">Full <span class="em">CV</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>Prashant Kashyap · Pune · 2026</div>
+    <div>Pursuits · 04 projects</div>
+  </div>
+</footer>
+
+<script src="shared/theme.js"></script>
+</body>
+</html>
