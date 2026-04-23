@@ -1,423 +1,498 @@
 # Portfolio Project — Handoff Document
+## Session 7 Update · April 23, 2026
 
-**For: continuing work in a new Claude conversation, or for Prashant himself months from now.**
+**For: continuing work in a new Claude conversation.**
 
-This document captures everything needed to understand and continue the portfolio project without loss of context.
-
----
-
-## 1. Who this is for
-
-**Prashant "Gappu" Kashyap** — Senior UX Designer at Oracle Communications, Pune, India. 13 years experience. Preferred shortname "Gappu."
-
-**Current positioning:** "Senior UX, enterprise software" (matches actual Oracle title — not over-reaching to Principal).
-
-**Career arc (anchors for content):**
-- QuadNode (2012) → Amura (2013) → Conexstra (2014) → Mobisoft → InfoBeans → Concurrent: Exaltic Nutrition co-founder 2016-2019 → McDermott 2019 → Siemens Smart Buildings 2020-2022 → **Oracle Communications May 2022-present**
-- Also: Prajati (animal education, 2018-present), Tube Stage (tech YouTube, Sep 2025+), "Echoes of Innovation" publication (Dec 2023)
-- Education: BE Electrical (Pune Vidhyarthi Griha's), IxDF UX program 2019-2022, HFI CUA certification 2022
-- Honors: NDTV Top 20 for Kexplora, 3 InfoBeans awards
-- Contact: `prashantkashyap91@outlook.com`, linkedin.com/in/kashyaprashant/
-- Domain: `kashyaprashant.com`
-
-**Goal:** Deploy a polished portfolio at kashyaprashant.com suitable for Senior/Principal UX roles.
+This document supersedes the previous handoff. It carries forward everything from Sessions 1–6 and adds critical learnings from Session 7 (the "Beyond the Four" image integration session).
 
 ---
 
-## 2. What's been built
+## 1. Who This Is For
 
-A complete static HTML portfolio. **Delivered as `portfolio-package.zip` (~125KB).**
+**Prashant "Gappu" Kashyap** — Senior UX Designer at Oracle Communications, Pune, India. 13 years experience.
 
-### Structure (17 pages + shared system)
+**Career arc:**
+QuadNode (2012) → Amura (2013) → Conexstra (2014) → Mobisoft → InfoBeans → Exaltic co-founder 2016–2019 → McDermott 2019 → Siemens Smart Buildings 2020–2022 → **Oracle Communications May 2022–present**
+
+**Also:** Prajati (animal education, 2018–present), Tube Stage (tech YouTube, Sep 2025+), Echoes of Innovation publication (Dec 2023)
+
+**Education:** BE Electrical (Pune Vidhyarthi Griha's), IxDF UX 2019–2022, HFI CUA 2022
+
+**Honors:** NDTV Top 20 for Kexplora, 3 InfoBeans awards
+
+**Contact:** prashantkashyap91@outlook.com · linkedin.com/in/kashyaprashant/ · kashyaprashant.com
+
+**Goal:** Polished portfolio at kashyaprashant.com for Senior/Principal UX roles.
+
+---
+
+## 2. What Was Built in Session 7
+
+Session 7 was entirely about the **8 "Beyond the Four" also-pages** — replacing DRAFT placeholder blocks with real content, integrating real UI screenshots, and establishing image layout patterns across all pages.
+
+### The final package is `portfolio-package-final.zip` (~24MB)
+
+The size increase from the original 125KB zip is entirely images (28 UI screenshots).
+
+---
+
+## 3. File Structure (unchanged from Session 6)
 
 ```
 portfolio-package/
-├── README.md
-├── index.html                     ← landing (has load animation + hero BG)
-├── about.html                     ← practice-focused direction (locked)
-├── cv.html                        ← full CV, Print→PDF for cv.pdf
-├── pursuits.html                  ← Exaltic · Prajati · Tube Stage · Echoes
-├── game.html                      ← Snake unlock page
+├── index.html
+├── about.html
+├── cv.html
+├── pursuits.html
+├── game.html
 ├── case-studies/
-│   ├── asap.html                  ← ASAP · Oracle (in engineering)
-│   ├── unified-assurance.html     ← UA · Oracle (in flight)
-│   ├── project-xd.html            ← XD · McDermott (shipped)
-│   └── kexplora.html              ← Kexplora · Conexstra (NDTV Top 20)
-├── also-pages/                    ← 8 "Beyond the four" projects
-│   ├── 01-launchx.html            ← Oracle
-│   ├── 02-brm-sms.html            ← Oracle BRM Suite
-│   ├── 03-afcs.html               ← Oracle AFCS
-│   ├── 04-siemens-element.html    ← Siemens Smart Buildings
-│   ├── 05-krystal-ai.html         ← Krystal AI
-│   ├── 06-kenya-police.html       ← Public sector
-│   ├── 07-purple-style.html       ← Purple Style Labs
-│   └── 08-traveller.html          ← Mobisoft
+│   ├── asap.html
+│   ├── unified-assurance.html
+│   ├── project-xd.html          ← NEW: Figma link button added
+│   └── kexplora.html
+├── also-pages/
+│   ├── 01-launchx.html
+│   ├── 02-brm-sms.html
+│   ├── 03-afcs.html
+│   ├── 04-siemens-element.html
+│   ├── 05-krystal-ai.html
+│   ├── 06-kenya-police.html
+│   ├── 07-purple-style.html
+│   └── 08-traveller.html
+├── images/                       ← NEW FOLDER (28 images)
 └── shared/
-    ├── tokens.css                 ← Atelier + Terminal tokens + load overlay CSS
-    ├── theme.js                   ← theme state + Konami + Snake overlay
-    ├── animations.js              ← first-visit load animation
-    └── hero-backgrounds.js        ← DotField (Atelier) + Threads (Terminal)
+    ├── tokens.css
+    ├── theme.js
+    ├── animations.js
+    └── hero-backgrounds.js
 ```
 
 ---
 
-## 3. Design system (locked)
+## 4. Also-Pages: Content Status (ALL DRAFT FLAGS REMOVED)
 
-### Atelier theme (default)
-| Token | Value | Purpose |
-|---|---|---|
-| `--plastic-cream` | `#FAF7F0` | background |
-| `--plastic-cream-deep` | `#F2EEE4` | panels, cards |
-| `--plastic-charcoal` | `#1A1814` | primary text |
-| `--ink-mid` | `#4A4640` | secondary text |
-| `--ink-muted` | `#7A756D` | tertiary text |
-| `--ink-faint` | `#9E998F` | hints |
-| `--pixel-red` | `#E8513D` | accent |
-| Display | Fraunces (variable, opsz+italic) | headlines |
-| Body | Inter | paragraphs |
-| Mono | JetBrains Mono | metadata, labels |
+All 8 also-pages now have verified content. DRAFT flags are gone. Here's what was finalized:
 
-### Terminal theme (unlockable via Snake)
-| Token | Value | Purpose |
-|---|---|---|
-| bg | `#0A0E0B` | phosphor-tube black |
-| bg-deep | `#12181A` | panels |
-| text primary | `#7FDBA8` | phosphor-green |
-| text secondary | `#5A9873` | muted phosphor |
-| accent | `#FF5F5F` | terminal-red |
-| All typography | JetBrains Mono | |
-| CRT scanline | opacity 0.03 | subtle overlay |
+### 01 · LaunchX (Oracle)
+- **Context:** Telecom operators launching offerings across fragmented tools. LaunchX = single end-to-end platform for Product Managers.
+- **Key decisions:** Unified workflow, role-aware surfaces (5 personas); journey-based navigation not menu-based.
+- **Takeaway:** Strong enterprise workflow aligns product structure with how users think about the job to be done.
 
-### Load animation stage palettes
+### 02 · BRM-SMS (Oracle BRM Suite)
+- **Context:** BRM suspended records system — CSRs drowning in undifferentiated queues, no priority signals.
+- **Key decisions:** Status-driven worklist with urgency signals; bulk actions for batch resolution.
+- **Takeaway:** Worklist design = implicit communication of what matters most.
 
-**Atelier (5-stage warm earth gradient):**
-- Stage 0: bg `#1A1410` + dot `#E8513D` (pixel-red)
-- Stage 1: bg `#2D1B13` + dot `#C95A3C` (dark cocoa)
-- Stage 2: bg `#5A3A28` + dot `#E8513D` (terracotta)
-- Stage 3: bg `#FAF7F0` + dot `#E8513D` (plastic-cream — matches landing)
-- Reveal: same as stage 3, seamless transition
+### 03 · AFCS (Oracle AFCS)
+- **Context:** Financial close system — finance teams manually tracking reconciliation status across email threads and spreadsheets.
+- **Key decisions:** Data Catalog as navigational spine; trust signals (source, lineage, freshness) as first-class UI.
+- **Takeaway:** Financial data without provenance is untrustworthy. Transparency is the product.
 
-**Terminal (5-stage phosphor journey):**
-- Stage 0: bg `#0A0E0B` + dot `#7FDBA8` (phosphor)
-- Stage 1: bg `#0F1A14` + dot `#5A9873` (deep phosphor)
-- Stage 2: bg `#1A2B22` + dot `#7FDBA8` (forest-dark)
-- Stage 3: bg `#0A0E0B` + dot `#FF5F5F` (terminal-red as period)
-- Reveal: stays on `#0A0E0B` (Terminal landing)
+### 04 · Siemens Element DS
+- **Context:** Wide Siemens portfolio had grown with each team designing own components — inconsistent UX within same customer account.
+- **Key decisions:** Progress as a behavior family (Spinner/Skeleton/Progress Bar); File Uploader with failure as a first-class state.
+- **Takeaway:** Design system components need defensible opinions to survive reinterpretation.
 
-### Spacing scale
-4px base — `--s-1` through `--s-12` (4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 160, 192).
+### 05 · Krystal AI
+- **Context:** AI-driven sales intelligence platform — sales leaders couldn't act on data fast enough.
+- **Key decisions:** Explicit "why" for every AI recommendation; built for 5-minute skimming.
+- **Takeaway:** AI without explainability gets ignored.
+
+### 06 · Kenya Police
+- **Context:** Paper-and-radio police operations → mobile digitization. Low-end Android, intermittent connectivity, low digital literacy.
+- **Key decisions:** Offline-first as core assumption (not exception); icon+label navigation after user testing proved icons alone insufficient.
+- **Takeaway:** Design must meet users at their actual digital literacy floor, not the hoped-for floor.
+
+### 07 · Purple Style Labs
+- **Context:** Luxury fashion house wanting mobile personal styling. Needed editorial feel, not transactional.
+- **Key decisions:** Lifestyle framing over product catalog; editorial pacing over e-commerce rhythms.
+- **Takeaway:** Positioning is a design decision before it's a marketing one.
+
+### 08 · Traveller (Mobisoft)
+- **Context:** Long-haul travel social app — connecting co-passengers during idle transit time.
+- **Key decisions:** Consent-first discovery (opt-in with granular controls); journey as primary context (not user profiles).
+- **Takeaway:** In social products with strangers, shared context beats shared interest.
 
 ---
 
-## 4. The animation system (detailed)
+## 5. Image System — Everything You Need To Know
 
-Three JS modules in `shared/`. Each is self-contained and initializes on DOMContentLoaded.
+### 5.1 Image folder
 
-### `animations.js` — First-visit load animation
+All images live in `portfolio-package/images/`. Referenced from also-pages as `../images/filename.png`.
 
-**Trigger:** Only runs when `<body>` has class `pk-landing` (index.html only).
+### 5.2 Final image mapping (by page)
 
-**Phases:**
-1. **Fall** (600ms) — dot drops from top, gravity ease
-2. **3 bounces** (~800ms) — each bounce: squash (90/80/70ms) → up (180/130/70ms) → down (140/100/60ms). Heights diminish: 48%, 23%, 8% of fall distance. Color shift on each squash moment.
-3. **Cursor transform** (200ms) — dot becomes tall thin blinking cursor (4px wide, 62% of name height)
-4. **Typing** (~1s) — cursor moves right 75ms per letter position, blinks 70ms at each pause. Letter appears at 40% of each move.
-5. **Period settle** (~300ms) — cursor morphs back to round dot at end of name, breath-pulses once (scale 1 → 1.3 → 1, 280ms)
-6. **Tuck to nav** (750ms) — whole stage translates + scales to nav wordmark. Background fades to landing color at 55% through tuck.
+| Page | Fig 01 | Fig 02 | Fig 03 |
+|------|--------|--------|--------|
+| LaunchX | `launchx-dashboard.png` | `PM_Initiative-Offerings_Summary.png` | — |
+| BRM-SMS | `brm-sms-worklist.png` | `brm-sms-settings.png` | — |
+| AFCS | `afcs-catalog.png` | `afcs-inbox.png` | `afcs-issue-detail.png` |
+| Siemens Element | `element-theme.png` | `element-file-uploader.png` | `element-spinner.png` |
+| Krystal AI | `krystal-dashboard.png` | `2187883B-D55C-417D-9E27-E606048C789E.png` | — |
+| Kenya Police | `kenya-showcase.png` | `kenya-assigned-job.png` | `kenya-job-detail.png` |
+| Purple Style | `purple-showcase.png` | `purple-showcase-detail2.png` | `purple-member-visit.png` |
+| Traveller | `traveller-showcase.png` | `traveller-destination-overview.png` | `traveller-journey-overview.png` |
 
-**Palette source:** Reads `localStorage.getItem('pk-theme')` at start. Uses Atelier or Terminal palette accordingly.
+**Additional images in the folder (not currently displayed but present):**
+- `profile-photo.png` — Prashant's profile photo (transparent bg), ready for About page
+- `afcs-profile-admin.png` — AFCS admin screen (available to add)
+- `kenya-complaint.png` — Kenya complaint form
+- `traveller-passengers.png`, `traveller-chat.png` — extra Traveller screens
+- `purple-style-prefs.png`, `purple-wardrobe.png` — extra Purple screens
+- Pursuits images: `Tube Stage Image.png`, `Exaltic.png`, `Prajati.png`
 
-**Cache:** After first successful run, sets `localStorage.setItem('pk-loaded-once', 'true')`. Subsequent page loads skip animation.
+### 5.3 Image backgrounds
 
-**Manual replay:** `window.__pkReplayLoad()` from console.
+- Images with **transparent backgrounds** (device mockups): Kenya, Purple, Traveller showcase images, profile photo. Use as-is — the page background (#FAF7F0) shows through.
+- Images with **solid content** (UI screenshots): BRM-SMS, AFCS, Krystal AI, Element DS. These are direct screen captures with no device frame.
+- **DO NOT** run ImageMagick `-fuzz` background removal on device mockup images. It corrupts the mockup (learned the hard way in this session — removes dark parts of device body too).
 
-**Reduced motion:** If `prefers-reduced-motion: reduce`, skips animation entirely.
+### 5.4 Image layout patterns (CRITICAL — read carefully)
 
-### `hero-backgrounds.js` — Hero background renderer
+There are **three distinct layout patterns** used across pages. Each has its own CSS class. Getting these mixed up causes the major layout bugs we spent hours fixing.
 
-**Trigger:** Only runs when `#pkHeroCanvas` element exists (index.html only).
-
-**Atelier (dot field):** Ported verbatim from reactbits DotField.
-- 1.5px dots on 14px spacing grid
-- Cursor radius 500px (large reach)
-- Bulge strength 67 (position shift toward cursor, not velocity)
-- **Engagement-gated:** dots only react when cursor moves fast enough. `mouse.speed/5` targetEngagement with 0.06 lerp-in. Slow cursor = zero reaction.
-- Warm cream/white radial glow (`rgba(255, 252, 245, 0.55)`) under cursor, opacity tied to engagement
-- Linear gradient fill (plastic-charcoal 0.55 → ink-mid 0.45) for dot visibility
-
-**Terminal (Threads):** Actual reactbits Threads shader, loaded via dynamic import.
-- OGL library from `cdn.jsdelivr.net/npm/ogl@1.0.11/+esm`
-- Fragment shader: 40 horizontal lines, Perlin noise perturbation, mouse-interactive
-- Phosphor-green color `(0.498, 0.859, 0.659)`
-- If OGL fails to load → falls back to DotField gracefully
-
-**Swap:** `window.__pkSwapHeroBackground(theme)` tears down current and builds new. Called by theme.js on toggle.
-
-### `theme.js` — Theme state + Snake game
-
-**Finds** hardcoded `#pkThemeBtn` in every page's nav (except game.html). Wires click handler.
-
-**Before Snake win:**
-- Button label: "▮ Terminal" with blinking cursor
-- Click action: navigate to `game.html` (relative path, resolves from any page depth)
-
-**After Snake win:**
-- Button label toggles "Atelier" / "Terminal"
-- Click action: swap theme + call `__pkSwapHeroBackground`
-- Blinking animation stops (unlocked state)
-
-**Konami code** listener active on every page: `↑↑↓↓←→←→BA` → opens Snake overlay.
-
-**Snake game (shared logic between overlay + `game.html`):**
-- 4 case-study pellets: ASAP (red), UA (coral), XD (green), KEXP (amber)
-- Arrow keys + touch swipe
-- Eat all 4 → unlock Terminal
-- Speed increases with each pellet
-
-**localStorage keys:**
-- `pk-loaded-once` — load animation cache
-- `pk-terminal-unlocked` — Snake win flag
-- `pk-theme` — current theme choice (`'atelier'` or `'terminal'`)
-
----
-
-## 5. Content anti-fabrication protocol
-
-**CRITICAL:** Any content Claude drafted without solid source has a DRAFT flag (dashed red border + "DRAFT · REPLACE WITH YOUR WORDS" label).
-
-### DRAFT blocks (need Prashant's replacement)
-
-All 8 Also pages have three DRAFT sections each: **Context, Key Decisions, Takeaway.** ~24 DRAFT blocks total.
-
-### Unverified claims (need verification, NOT flagged as DRAFT)
-
-These are reflections Claude drafted that Prashant didn't explicitly confirm:
-
-1. **case-studies/project-xd.html** — "What I got wrong" section claims Prashant ignored engineers for 6 weeks
-2. **case-studies/kexplora.html** — "Stay longer" reflection about what he'd change
-3. **case-studies/unified-assurance.html** — "Start with sales, not PM" reflection
-4. **pursuits.html (Exaltic)** — says "two friends and I co-founded" — Prashant's LinkedIn just says "co-founded"
-5. **pursuits.html (Echoes)** — claims ideas from the publication "showed up in UA Ask Oracle" work
-
-### Verified content (from LinkedIn/screenshots, safe)
-
-- All 10 role tenures and dates
-- NDTV Top 20 for Kexplora (2015)
-- 3 InfoBeans awards
-- IxDF UX program (2019-2022)
-- HFI CUA certification
-- IPL partnership claim for Exaltic (directly from Prashant's LinkedIn job description)
-- Prajati podcast with Anish Andheria (verified)
-
----
-
-## 6. Design decisions locked across 5 sessions
-
-### Session 1-2: Structure
-- Direction A "practice-focused" About page (vs 3 other drafts)
-- 4 main case studies + 8 Also pages layout
-- Pursuits page with 4 ventures (Exaltic, Prajati, Tube Stage, Echoes)
-- Oracle Communications listed as current employer, not Principal-level framing
-
-### Session 3: Theme system
-- Terminal = Level 1 skin (palette + font swap, same layouts), not a full redesign
-- Konami code primary unlock path
-- Snake game as earning mechanic
-- 4 case-study pellets color-coded
-
-### Session 4: Nav + discoverability
-- Theme toggle **hardcoded HTML in every nav**, not dynamically injected (this was a bug fix)
-- Before unlock: button navigates to `game.html`
-- After unlock: button toggles themes
-- Pursuits **removed** from top nav of every page — only reachable via landing CTA
-- Pursuits on landing = prominent `.deep-cta` button (not inline link)
-- Beyond the four CTA **removed** from About page — only CV CTA remains
-
-### Session 5: Animations (5 iterations)
-- **v1-v2:** Claude's guesses at reactbits behavior (wrong)
-- **v3:** Real spring physics but too bouncy
-- **v4:** Close but still wrong tuning
-- **v5:** Prashant pasted actual reactbits DotField + Threads source — Claude ported verbatim. **This is what works.**
-- Load animation: Flow A (bounce → cursor typing) with warm-earth palette (dark → cocoa → terracotta → cream)
-- Cursor typing: hybrid movement (smooth between letters, blinks at pauses)
-- Dot field glow: warm near-white (NOT dark charcoal — that was a bug)
-- Dot field visibility: ramped up gradient opacity to 0.55/0.45 (was too faint at 0.22/0.16)
-- Atelier stage 3 background: plastic-cream (was dusty-brown which broke cohesion)
-
----
-
-## 7. What's pending (Prashant's work)
-
-### Priority 1: Content on 8 Also pages
-Each has 3 DRAFT sections. Open each, replace with his real writing. Order suggestion:
-
-1. `also-pages/01-launchx.html` (Oracle — has context from his day job)
-2. `also-pages/02-brm-sms.html` (Oracle)
-3. `also-pages/03-afcs.html` (Oracle)
-4. `also-pages/04-siemens-element.html` (Siemens, 2020-2022)
-5. `also-pages/05-krystal-ai.html`
-6. `also-pages/06-kenya-police.html` (2016-2017)
-7. `also-pages/07-purple-style.html` (2015-2016)
-8. `also-pages/08-traveller.html` (Mobisoft)
-
-### Priority 2: Verify unverified reflections (section 5 above)
-
-### Priority 3: Add real images (~40 slots)
-All image placeholders use dashed borders. Priority:
-1. Prashant's photo on About
-2. ASAP screenshots (targeting table is the signature visual)
-3. UA screenshots (6-surface architecture diagram)
-4. XD screenshots (before/after split — Excel vs globe view)
-5. Kexplora screenshots (5-event timeline 2014-2015)
-6. Pursuits visuals: Exaltic product, Prajati Instagram grid, Tube Stage banner, Echoes cover
-
-### Priority 4: Export CV PDF
-Open `cv.html` → Print → Save as PDF → save as `cv.pdf` in package root. "Download PDF" button links to `/cv.pdf`.
-
-### Priority 5: Deploy
-Static host: Netlify drop, Vercel CLI, Cloudflare Pages, or GitHub Pages. Point `kashyaprashant.com` at it.
-
----
-
-## 8. Known gotchas + architectural notes
-
-**OGL CDN dependency:** Terminal Threads imports from `cdn.jsdelivr.net`. If blocked, graceful fallback to DotField. For production robustness, vendor OGL locally (copy `ogl.min.js` to `shared/` and change import path).
-
-**localStorage state doesn't survive "clear site data":** This is browser security by design. If user clears everything, theme unlock resets, load animation runs again. Claude explored workarounds (cookies, etc.) — none are reliable. Accept it.
-
-**Load animation only runs on landing:** `pk-landing` body class gates this. Intentional — don't run on every page.
-
-**Theme button is hardcoded, not JS-injected:** This was a Session 4 fix after Prashant noticed the button wasn't reliably appearing. Do not go back to dynamic injection.
-
-**Integration scripts in `.build-scripts/`:** Excluded from the shipped zip. Not needed at runtime.
-
-**Relative paths:** All internal links use relative paths (`case-studies/asap.html`, `../index.html` etc.). Works offline, works on static hosts, will need updating if/when migrating to Next.js routing.
-
-**Contact email:** `prashantkashyap91@outlook.com` (NOT `hello@kashyaprashant.com` — that's a Claude hallucination from early sessions).
-
-**No GitHub link** on landing — Prashant has no public portfolio repo. Don't add one back.
-
----
-
-## 9. How to continue the work (for new Claude conversation)
-
-### If you're Prashant pulling this into Claude Code:
-
-First prompt for Claude Code:
-> "Read the README.md and this handoff document. Then walk me through the file structure. I want to understand how shared/ works before making changes."
-
-Then:
-> "Start a local dev server so I can preview the portfolio."
-
-For content work (iterate per page):
-> "Open also-pages/01-launchx.html. Show me the three DRAFT sections. I'm going to paste my real content for Context, Key Decisions, and Takeaway. Replace those exactly, keep everything else untouched."
-
-For image work:
-> "I have screenshots at ./screenshots/. Walk me through integrating real images into the ASAP case study — replace the dashed placeholder frames with real `<img>` tags pointing to my files."
-
-When ready to deploy:
-> "Deploy this to Cloudflare Pages (or Netlify, or Vercel). Walk me through the CLI flow."
-
-### If you're a new Claude conversation with Prashant:
-
-1. Read this entire handoff document first
-2. Verify you understand the animation system by reading `shared/animations.js` and `shared/hero-backgrounds.js`
-3. Do NOT rebuild the animation system. It took 5 iterations to get right and is now faithful to reactbits.
-4. Do NOT add features without asking. Snake, Terminal theme, dual animations — this portfolio has plenty. More features = more surfaces to break.
-5. DO help with: content replacement on DRAFT blocks, image integration, deployment, Next.js migration if requested.
-6. Respect the anti-fabrication protocol. Any content you draft must be flagged DRAFT. Never invent claims about Prashant's work or intent.
-7. Prashant appreciates: honest flags, admitted mistakes, concrete recommendations, proportional scope.
-8. Prashant dislikes: over-engineering, feature creep, ambiguous answers, half-done work.
-
----
-
-## 10. Session-by-session summary (what happened)
-
-**Session 1** — Identity, positioning, About page drafts (4 directions), Direction A locked, Atelier tokens locked.
-
-**Session 2** — Case study narratives: ASAP, UA, XD, Kexplora. Also pages 01-08 built with DRAFT flags. Landing page assembled.
-
-**Session 3** — Terminal theme designed. tokens.css + theme.js + Snake game. All 14 pages Terminal-enabled. First zip delivered.
-
-**Session 4** — Navigation cleanup: hardcoded theme button (bug fix), removed Pursuits from top nav, added Pursuits CTA button on landing, removed Beyond CTA from About. Email updated. GitHub link removed. All absolute paths rewritten to relative.
-
-**Session 5** — Animation system built across 5 iterations (v1-v5). Load animation with warm-earth palette + cursor typing. Reactbits DotField (Atelier) + Threads (Terminal) integrated. Final integration pass on all 17 pages. Zip rebuilt.
-
-**Session 6 (current)** — This handoff document.
-
----
-
-## 11. Things to definitely NOT do
-
-### CRITICAL GOTCHA #1 — Theme state must be guarded
-
-**The #1 recurring bug in this project:** the theme button lets you toggle to Terminal without first playing Snake, because `pk-theme` in localStorage gets out of sync with `pk-terminal-unlocked`.
-
-**The guard that MUST stay in `theme.js`:**
-```js
-(function enforceThemeGuard() {
-  const unlocked = localStorage.getItem(STORAGE_KEYS.unlocked) === 'true';
-  const savedTheme = localStorage.getItem(STORAGE_KEYS.theme);
-  if (savedTheme === 'terminal' && !unlocked) {
-    localStorage.setItem(STORAGE_KEYS.theme, 'atelier');
-  }
-})();
-applyTheme(getTheme());
-```
-
-This runs on every page load, wrapped in an IIFE so it executes immediately before `applyTheme()`. If a user has `pk-theme=terminal` but not `pk-terminal-unlocked=true`, it forces theme back to atelier. DO NOT remove this guard.
-
-Related bug: old inline `<script>` blocks from Session 1 had duplicate Konami handlers that interfered with `theme.js`. If any page shows weird theme behavior, grep for `const konami` or `konami-armed` in the HTML — that's stale code and must be removed.
-
-### CRITICAL GOTCHA #2 — `.nav__theme-btn` CSS MUST live in `shared/tokens.css`
-
-**Do NOT inject `.nav__theme-btn` CSS into individual page `<style>` blocks.** An earlier attempt did this and broke because case studies (using `.nav__back`) and also-pages have different nav CSS contexts than the landing page. Some pages got the styling, others didn't — button appeared as a blue underlined link in Safari on case studies.
-
-The rule:
-- `.nav__theme-btn`, `.nav__theme-blink`, `@keyframes nav-blink`, and the `html[data-theme="terminal"]` overrides for these MUST live in `shared/tokens.css` — one source of truth.
-- Every page automatically gets the styling because every page links `tokens.css`.
-- If you ever notice the theme button looks wrong on a specific page, check `tokens.css` has these rules, don't add them to the page's inline CSS.
-
-### CRITICAL GOTCHA #3 — `cv.pdf` doesn't exist until Prashant creates it
-
-**The CV page's primary button must use `window.print()`, NOT link to `cv.pdf`.** The `cv.pdf` file is something Prashant generates himself via browser print. Until he does that, any `<a href="cv.pdf">` link is broken. The working pattern:
+#### Pattern A: `image-slot` (full-width, single image)
+Used for Fig 01 on every page. Always above Context block.
 
 ```html
-<button onclick="window.print()" class="header-btn header-btn--primary">
-  <span class="header-btn__icon">↓</span>
-  <span>Save as PDF</span>
-</button>
+<div class="image-slot">
+  <div class="image-slot__frame">
+    <img src="../images/filename.png" alt="description">
+  </div>
+  <div class="image-slot__caption"><span class="number">Fig. 01</span> · Caption text.</div>
+</div>
 ```
 
-Browser print dialog lets users save as PDF themselves — works on every OS, no file needed.
+#### Pattern B: `image-pair` (two images side by side, each with own caption)
+Used for Fig 02 + Fig 03 on Kenya, Purple, Traveller. Each image gets its OWN caption underneath — captions never span across both columns.
 
-### DON'T:
+```html
+<div class="image-pair">
+  <div class="image-pair__item">
+    <div class="image-slot__frame">
+      <img src="../images/fig02.png" alt="description">
+    </div>
+    <div class="image-slot__caption"><span class="number">Fig. 02</span> · Caption for fig 02 only.</div>
+  </div>
+  <div class="image-pair__item">
+    <div class="image-slot__frame">
+      <img src="../images/fig03.png" alt="description">
+    </div>
+    <div class="image-slot__caption"><span class="number">Fig. 03</span> · Caption for fig 03 only.</div>
+  </div>
+</div>
+```
 
-1. **Don't rebuild the animation system.** It's faithful to reactbits. If something feels off, tune parameters, don't rewrite.
-2. **Don't add new easter eggs.** Snake + Konami + Terminal theme + two hero animations is already a lot.
-3. **Don't remove the DRAFT flags** without replacing with verified content.
-4. **Don't invent content.** If Prashant hasn't verified a claim, it stays DRAFT or gets removed.
-5. **Don't migrate to Next.js without asking.** Static HTML works. Migration is optional future work.
-6. **Don't add more pages.** 17 is the right number.
-7. **Don't change the theme unlock mechanic.** Snake-to-win is locked as a design decision.
-8. **Don't revert hardcoded theme button back to dynamic injection.**
-9. **Don't change case study reflection claims** that Prashant marked unverified without asking him.
-10. **Don't recommend deployment services he's not asked about.** Netlify / Vercel / Cloudflare Pages are the three good options.
+#### Pattern C: `image-row` (two images side by side)
+Used for Fig 02 + Fig 03 on Siemens Element DS only. Uses `image-slot--half` modifier.
+
+```html
+<div class="image-row">
+  <div class="image-slot image-slot--half">
+    <div class="image-slot__frame">
+      <img src="../images/fig02.png" alt="description">
+    </div>
+    <div class="image-slot__caption"><span class="number">Fig. 02</span> · Caption.</div>
+  </div>
+  <div class="image-slot image-slot--half">
+    <div class="image-slot__frame">
+      <img src="../images/fig03.png" alt="description">
+    </div>
+    <div class="image-slot__caption"><span class="number">Fig. 03</span> · Caption.</div>
+  </div>
+</div>
+```
+
+### 5.5 Standard page structure (also-pages)
+
+The correct block order inside `<div class="container">`:
+
+```
+1. image-slot (Fig 01) ← ABOVE Context, always
+2. block block--context
+3. block (Goal)
+4. block (My role)
+5. block (Key decisions)
+6. image-pair OR image-row (Fig 02 + 03) ← AFTER Key decisions, BEFORE Impact
+7. block (Impact)
+8. block (Takeaway)
+9. block (Tools & methods)
+```
+
+**CRITICAL:** The `image-pair` and `image-row` blocks MUST be inside `<div class="container">`. If they end up outside the container (a frequent bug from automated edits), they stretch to full viewport width and break all alignment below them.
 
 ---
 
-## 12. Final file locations
+## 6. CSS Rules for Images — Critical Overrides
 
-**Canonical deliverable:** `portfolio-package.zip` (~125KB)
+### 6.1 The `aspect-ratio: 16/9` problem
 
-**Source of truth after unzip:** `portfolio-package/` folder
+The base `.image-slot__frame` CSS on some also-pages includes `aspect-ratio: 16/9`. This **crops images** because it forces a fixed height regardless of the actual image dimensions.
 
-**Individual file copies in outputs:** Duplicates of files already in the zip. Safe to ignore/delete. They exist only because I copied them for quick inspection.
+**The fix** (in place on Kenya, Purple, Traveller):
+```css
+/* Override fixed aspect-ratio - let real images set their own height */
+.image-slot__frame:has(img) { aspect-ratio: unset; background: transparent; border: none; display: block; overflow: visible; }
+.image-slot__frame:has(img) img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.image-pair__item .image-slot__frame { aspect-ratio: unset; background: transparent; border: none; display: block; overflow: visible; }
+.image-pair__item .image-slot__frame img { width: 100%; height: auto; display: block; object-fit: unset; border-radius: 4px; }
+```
 
-**Animation test files (v1 through v5):** Historical drafts from Session 5 iteration. Not needed for production. The final logic is already integrated into `shared/animations.js` and `shared/hero-backgrounds.js`.
+If any page shows cropped images, add this CSS block before `</style>`.
+
+### 6.2 Image-pair CSS (Kenya, Purple, Traveller)
+
+```css
+.image-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin: var(--s-7) 0 var(--s-5); width: 100%; }
+.image-pair__item { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.image-pair__item .image-slot__frame { overflow: hidden; border-radius: 4px; }
+.image-pair__item .image-slot__frame img { width: 100%; height: auto; display: block; object-fit: contain; }
+.image-pair__item .image-slot__caption { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.image-pair__item .image-slot__caption .number { color: var(--pixel-red); font-weight: 500; }
+@media (max-width: 720px) { .image-pair { grid-template-columns: 1fr; gap: var(--s-5); } }
+```
+
+### 6.3 Image-row CSS (Element DS only)
+
+```css
+.image-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); margin: var(--s-7) 0 var(--s-5); width: 100%; align-items: start; }
+.image-slot--half { margin: 0; min-width: 0; }
+.image-slot--half .image-slot__frame { aspect-ratio: unset; background: transparent; border: none; display: block; overflow: visible; }
+.image-slot--half .image-slot__frame img { width: 100%; height: auto; display: block; border-radius: 4px; }
+@media (max-width: 720px) { .image-row { grid-template-columns: 1fr; gap: var(--s-5); margin: var(--s-6) 0; } }
+```
+
+### 6.4 Spotlight hover effect (on all image frames)
+
+All also-pages have this mouse-tracking spotlight effect:
+
+```css
+.image-slot__frame { position: relative; border-radius: 4px; --mouse-x: 50%; --mouse-y: 50%; --spotlight-color: rgba(232, 81, 61, 0.12); }
+.image-slot__frame::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle 400px at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 80%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 1; }
+.image-slot__frame:hover::before { opacity: 1; }
+```
+
+```js
+const spotlightFrames = document.querySelectorAll('.image-slot__frame');
+spotlightFrames.forEach(frame => {
+  frame.addEventListener('mousemove', (e) => {
+    const rect = frame.getBoundingClientRect();
+    frame.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    frame.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  });
+});
+```
 
 ---
 
-*Handoff doc written April 23, 2026 after five sessions totaling roughly 40 hours of collaborative design and code work. The portfolio is now a polished specification ready for content completion and deployment.*
+## 7. Figma Link Button (Project XD Case Study)
 
-*— Claude, ending Session 6*
+A "View detailed process in Figma" button was added to `case-studies/project-xd.html` for use during interviews.
+
+**Location:** After the meta-grid (Role/Team/Timeline/Platform/Status), before the quick-map stats section.
+
+**URL:** `https://www.figma.com/proto/64KGt6giqA9bsp2BFGAVbl/Portfolio?node-id=25822-1506&t=BYvf4vGQwRfBChri-0&scaling=contain&content-scaling=fixed&starting-point-node-id=25822%3A1506`
+
+**Button CSS:**
+```css
+.case-actions { margin-top: var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-hairline); }
+.case-btn { display: inline-flex; align-items: center; gap: var(--s-3); padding: var(--s-4) var(--s-5); text-decoration: none; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s ease; background: var(--plastic-charcoal); color: var(--plastic-cream); border: 1px solid var(--plastic-charcoal); }
+.case-btn:hover { background: var(--pixel-red); border-color: var(--pixel-red); color: var(--plastic-cream); }
+```
+
+**Button HTML:**
+```html
+<div class="case-actions">
+  <a href="[FIGMA_URL]" target="_blank" rel="noopener noreferrer" class="case-btn">
+    <span class="case-btn__icon">→</span>
+    <span>View detailed process in Figma</span>
+  </a>
+</div>
+```
+
+If Prashant has Figma links for other case studies, the same pattern applies.
+
+---
+
+## 8. Profile Photo
+
+`profile-photo.png` is in `portfolio-package/images/` — transparent background, ready to use.
+
+It has NOT been integrated into `about.html` yet. The About page has a placeholder for it. When adding:
+- Use as `<img src="../images/profile-photo.png">` from about.html (which is at root level, so just `images/profile-photo.png`)
+- The spotlight hover CSS should be applied to it as well (same `.image-slot__frame` pattern)
+
+---
+
+## 9. Lessons Learned the Hard Way This Session
+
+These are mistakes made and fixed — don't repeat them.
+
+### 9.1 NEVER use ImageMagick `-fuzz -transparent black` on device mockups
+
+**What happened:** We tried to auto-remove black backgrounds from device mockup images (laptop, phone). ImageMagick's fuzz setting also removed dark parts of the device body (keyboard keys turned transparent, device borders disappeared).
+
+**The right approach:** If an image has a black background that needs removing, the user must do it manually in Figma/Photoshop. Accept transparent PNG files from the user, use them directly without any processing.
+
+**Images Prashant manually edited** (have clean transparent backgrounds, use as-is):
+- `launchx-dashboard.png`, `brm-sms-worklist.png`, `afcs-catalog.png`, `kenya-showcase.png`, `purple-showcase.png`, `traveller-showcase.png`
+
+### 9.2 NEVER add any background color to transparent PNG images
+
+User explicitly requested: if an image has transparent background, render it on the page background (#FAF7F0) — no color fill added by code.
+
+**What went wrong:** We added `#F2EEE4` fill via Python PIL, and then ImageMagick color replacement, both of which broke the transparent mockups.
+
+### 9.3 The container closing too early bug
+
+**The most common and damaging bug in this session.** When automated Python regex edits insert or move content, they sometimes close `</div>` for `.container` early. Then subsequent elements (image-row, image-pair, block divs) land outside the container and render full-width.
+
+**Symptom:** Images stretch to full viewport width. Impact/Takeaway/Tools sections lose their left label column and collapse.
+
+**How to detect:** In browser DevTools, inspect the broken image. If its parent chain goes `body > div.image-row` (skipping `.container`), the container closed early.
+
+**How to fix:** Read the HTML with `view` tool, find the stray `</div>`, remove it, ensure image layout is INSIDE the container.
+
+**Prevention:** Always `view` the file before and after automated edits. Never trust a Python regex edit without verifying the resulting HTML structure.
+
+### 9.4 Duplicate captions from iterative edits
+
+Multiple rounds of Python scripts inserting image slots caused duplicate Fig. 02 and Fig. 03 caption lines. 
+
+**Prevention:** Always search for existing image-slot blocks before inserting new ones. Use `grep -n "Fig\. 0"` to check.
+
+### 9.5 `aspect-ratio: 16/9` is on some base `.image-slot__frame` definitions
+
+Some also-pages were built from a template that included `aspect-ratio: 16/9` on `.image-slot__frame`. This crops any image that isn't 16:9. The fix is the `:has(img)` CSS override. Check for this if images appear cropped.
+
+### 9.6 image-pair captions must NOT span columns
+
+**Wrong** (single caption for both images):
+```html
+<div class="image-slot__caption">
+  <span class="number">Fig. 02</span> · Left caption &nbsp;·&nbsp; <span class="number">Fig. 03</span> · Right caption
+</div>
+```
+This stretches the caption text under the wrong image. Looks terrible.
+
+**Right** (each image-pair__item has its own caption, which naturally constrains to that column's width):
+```html
+<div class="image-pair__item">
+  <img ...>
+  <div class="image-slot__caption"><span class="number">Fig. 02</span> · Caption only for this image.</div>
+</div>
+```
+
+### 9.7 Read the actual HTML before making changes
+
+Many bugs in this session came from Claude making assumptions about file structure based on earlier edits. After any modification, always `view` the affected section of the file before making the next change. Stale mental models of file content = broken HTML.
+
+---
+
+## 10. What Prashant Wants / How He Works
+
+Learned from working together this session:
+
+- **He catches everything.** Don't cut corners on visual quality — he will screenshot and show you exactly what's wrong.
+- **Screenshots are his primary feedback mechanism.** When something's wrong, he'll send a screenshot. Match what you see in the screenshot to the HTML to diagnose.
+- **He knows exactly what he wants.** When he says "Fig 02 and Fig 03 side by side", he means visually side by side with proper layout, not a hack.
+- **Cropped images are unacceptable.** Images must show at their natural dimensions. Never force a fixed-height container on a content image.
+- **Caption width = image width.** A caption must never be wider than the image it describes.
+- **He will not accept half-baked work.** If something isn't right, fix it completely.
+- **He tests locally.** He opens the HTML files directly in his browser and screenshots what he sees.
+- **He is patient but tracks mistakes.** He kept a mental count of recurring issues. Don't repeat the same mistake twice.
+- **He responds well to honesty.** When Claude admits a mistake clearly and fixes it, that's better than deflecting.
+
+---
+
+## 11. Remaining Work
+
+### Profile photo integration (about.html)
+`profile-photo.png` exists in images folder but isn't placed in about.html yet. The about page has a sidebar column that's the right place for it.
+
+### Pursuits page images
+Three images exist in the images folder: `Tube Stage Image.png`, `Exaltic.png`, `Prajati.png`. These haven't been integrated into `pursuits.html` yet.
+
+### AFCS third image
+`afcs-profile-admin.png` (Administration functions page) is in the images folder but not currently displayed. Could replace or supplement `afcs-inbox.png` as Fig 02.
+
+### CV PDF
+`cv.html` uses `window.print()` for PDF export. The `cv.pdf` file doesn't exist until Prashant prints to PDF from his browser. The Download PDF button works correctly as-is.
+
+### Deployment
+Static site, ready to deploy to Netlify / Vercel / Cloudflare Pages. Point `kashyaprashant.com` at it.
+
+---
+
+## 12. Design System (unchanged — carried forward from Session 6)
+
+### Atelier theme (default)
+| Token | Value |
+|-------|-------|
+| `--plastic-cream` | `#FAF7F0` (background) |
+| `--plastic-cream-deep` | `#F2EEE4` (panels) |
+| `--plastic-charcoal` | `#1A1814` (primary text) |
+| `--ink-mid` | `#4A4640` |
+| `--ink-muted` | `#7A756D` |
+| `--pixel-red` | `#E8513D` (accent) |
+| Display | Fraunces |
+| Body | Inter |
+| Mono | JetBrains Mono |
+
+### Terminal theme (unlocked via Snake game)
+| Token | Value |
+|-------|-------|
+| bg | `#0A0E0B` |
+| text | `#7FDBA8` (phosphor green) |
+| accent | `#FF5F5F` |
+| All type | JetBrains Mono |
+
+### Critical CSS gotchas (from Session 6, still apply)
+1. `.nav__theme-btn` CSS must live in `shared/tokens.css` only — never in page `<style>` blocks
+2. Theme guard must stay in `theme.js` (prevents Terminal access before Snake win)
+3. Theme button is hardcoded HTML in every nav — not dynamically injected
+
+---
+
+## 13. Session History Summary
+
+| Session | What happened |
+|---------|--------------|
+| 1 | Identity, positioning, About page directions, Atelier tokens |
+| 2 | Case study narratives (4), Also pages (8) built with DRAFT flags |
+| 3 | Terminal theme, tokens.css, theme.js, Snake game |
+| 4 | Nav cleanup, hardcoded theme button, relative paths |
+| 5 | Animation system (5 iterations), reactbits DotField + Threads |
+| 6 | Handoff document written |
+| 7 | DRAFT flags removed from all 8 also-pages, 28 UI images integrated, image layout system built, Figma button on Project XD |
+
+---
+
+## 14. How To Continue In A New Chat
+
+### First message to new Claude:
+> "I'm continuing work on my portfolio. Read this handoff document first, then tell me you understand the image layout system — specifically the difference between image-slot, image-pair, and image-row, and why the container must never close early."
+
+### If making any also-page edits:
+1. `view` the file first
+2. Make one change at a time
+3. `view` the changed section to verify
+4. Never trust a Python regex to get HTML nesting right without checking
+
+### If adding more images:
+1. Accept them as transparent PNGs from Prashant — don't process backgrounds
+2. Copy to `portfolio-package/images/`
+3. Reference as `../images/filename.png` from also-pages
+4. Use the correct layout pattern (image-slot for single, image-pair for side-by-side)
+5. Override `aspect-ratio: 16/9` if the page's base CSS has it
+
+### If Prashant reports full-width image stretching:
+The container closed early. Open the HTML, find where `</div>` closed `.container` before the image block, remove the stray closing tag.
+
+### If Prashant reports cropped images:
+The `aspect-ratio: 16/9` is constraining the frame. Add the `:has(img)` override CSS (Section 6.1).
+
+---
+
+*Handoff written April 23, 2026 after Session 7. Portfolio is content-complete for the Beyond the Four section. Core case studies (ASAP, UA, XD, Kexplora) remain the primary showcase.*
